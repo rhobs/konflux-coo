@@ -4,3 +4,7 @@
 [submodule "prometheus"]
 	path = prometheus
 	url = https://github.com/prometheus/prometheus.git
+[submodule "obo-prometheus-operator"]
+	path = obo-prometheus-operator
+	url = https://github.com/rhobs/obo-prometheus-operator
+	branch = rhobs-rel-0.77.1-rhobs1
