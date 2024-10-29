@@ -11,23 +11,3 @@
 [submodule "observability-operator"]
 	path = observability-operator
 	url = https://github.com/rhobs/observability-operator
-[submodule "ui-logging"]
-	path = ui-logging
-	url = https://github.com/openshift/logging-view-plugin.git
-	branch = main
-[submodule "ui-dashboards"]
-	path = ui-dashboards
-	url = https://github.com/openshift/console-dashboards-plugin.git
-	branch = main
-[submodule "ui-troubleshooting-panel"]
-	path = ui-troubleshooting-panel
-	url = https://github.com/openshift/troubleshooting-panel-console-plugin.git
-	branch = main
-[submodule "ui-distributed-tracing"]
-	path = ui-distributed-tracing
-	url = https://github.com/openshift/distributed-tracing-console-plugin.git
-	branch = main
-[submodule "ui-monitoring"]
-	path = ui-monitoring
-	url = https://github.com/openshift/monitoring-plugin.git
-	branch = main
