@@ -6,11 +6,8 @@ metadata:
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: "3"
-    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch == "main" &&
-      (".tekton/dashboards-console-plugin-0-3-pull-request.yaml".pathChanged() ||
-      ".tekton/dashboards-console-plugin-0-3-push.yaml".pathChanged() ||
-      "Dockerfile.ui-dashboards".pathChanged() ||
-      "ui-dashboards".pathChanged())
+    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch
+      == "main"
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-0
