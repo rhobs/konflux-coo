@@ -30,7 +30,7 @@ yq -i '.metadata.labels += {"operatorframework.io/arch.ppc64le": "supported"}' "
 yq -i '.metadata.labels += {"operatorframework.io/arch.s390x": "supported"}' "$csv_file"
 
 COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-container@sha256:3bc7c7d06c15d6af604bf36510c0025acc42f94e83b5d23bb23dacb94c143fdb"
-COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator-prometheus-config-reloader@sha256:ba40a32ea841d37aaac7579f5c5e08575e82b6e434e35b37b249d83514a6ec34"
+COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator-prometheus-config-reloader@sha256:76f68f4b8d82779fc73fe6743f63c34c067eafd4b0ed0638dff0171c5f7ab85e"
 COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/alertmanager@sha256:af5a524a56ad16d8c387e718c6d8aae9770d02809b8d373256211573c895d419"
 COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/prometheus@sha256:48196a96b1ac4e67040d9c45777bb0ebc012c2e725b0f01ff2a77c94cbf20931"
 COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/thanos@sha256:3f6cf95433123b6a7788b481f093ca4c9bc181595e4d5fa6995389bc0d70c335"
