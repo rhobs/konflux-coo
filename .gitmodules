@@ -1,7 +1,7 @@
 [submodule "alertmanager"]
 	path = alertmanager
 	url = https://github.com/prometheus/alertmanager
-        branch = release-0.28
+        branch = release-0.27
 [submodule "prometheus"]
 	path = prometheus
 	url = https://github.com/prometheus/prometheus.git
@@ -37,7 +37,3 @@
 	path = thanos
 	url = https://github.com/thanos-io/thanos.git
         branch = release-0.36
-[submodule "korrel8r"]
-        path = korrel8r
-        url = https://github.com/korrel8r/korrel8r.git
-        branch = v0.7
