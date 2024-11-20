@@ -1,7 +1,9 @@
-ARG ARCH=amd64
-ARG OS=linux
-ARG GOLANG_BUILDER=1.23
-FROM quay.io/prometheus/golang-builder:${GOLANG_BUILDER}-base as builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.22 AS builder
+
+RUN dnf module install -y nodejs:16/development
+
+ENV NPM_CONFIG_NODEDIR=/usr
+
 WORKDIR /workspace
 
 # Copy source files
@@ -31,7 +33,7 @@ CMD        [ "--config.file=/etc/alertmanager/alertmanager.yml", \
 
 LABEL com.redhat.component="coo-alertmanager" \
       name="Alertmanager" \
-      version="v0.27.0" \
+      version="v0.28.0" \
       summary="Alertmanager for Cluster Observability Operator" \
       io.openshift.tags="openshift,monitoring" \
       io.k8s.display-name="Alertmanager" \
