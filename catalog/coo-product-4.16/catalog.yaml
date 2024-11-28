@@ -1,0 +1,312 @@
+---
+defaultChannel: stable
+description: |
+  Cluster Observability Operator to manage observability components.
+icon:
+  base64data: PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0idXVpZC1kMWI4NDIzOC0wYzgxLTQ5MjctOGQ4Mi03OTcyN2Y5OGZjYWMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDM4IDM4Ij4KPHRpdGxlPkNsdXN0ZXIgb2JzZXJ2YWJpbGl0eTwvdGl0bGU+CjxkZXNjPmNsb3VkPC9kZXNjPgo8bWV0YWRhdGE+PD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOC4wLWMwMDEgMS4wMDAwMDAsIDAwMDAvMDAvMDAtMDA6MDA6MDAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOnRpZmY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vdGlmZi8xLjAvIgogICAgICAgICAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iPgogICAgICAgICA8IS0tIG1ldGFkYXRhIGZpZWxkcyAtLT4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cjw/eHBhY2tldCBlbmQ9InciPz48L21ldGFkYXRhPgo8ZGVmcz48c3R5bGU+LnV1aWQtMjRiMGQ5N2ItNjgxZS00ZGE2LWExYzctNzY3MWFlNTc1MzJhe2ZpbGw6I2UwZTBlMDt9LnV1aWQtMjRiMGQ5N2ItNjgxZS00ZGE2LWExYzctNzY3MWFlNTc1MzJhLC51dWlkLTk3YzFlYzg0LTliODEtNDU2ZS05OWFhLTcxMzc1MGViNjllMCwudXVpZC1mMDMyMTc4ZS1iZDUwLTRkZTctYjc3My02NjViZmQ1YzViYjgsLnV1aWQtNGJlZjgyMGItNTZjOS00N2U3LTgyYTMtMmRiOGQ4YzdiMTEye3N0cm9rZS13aWR0aDowcHg7fS51dWlkLTk3YzFlYzg0LTliODEtNDU2ZS05OWFhLTcxMzc1MGViNjllMHtmaWxsOiMwMDA7fS51dWlkLWYwMzIxNzhlLWJkNTAtNGRlNy1iNzczLTY2NWJmZDVjNWJiOHtmaWxsOiNlMDA7fS51dWlkLTRiZWY4MjBiLTU2YzktNDdlNy04MmEzLTJkYjhkOGM3YjExMntmaWxsOiNmZmY7fTwvc3R5bGU+PC9kZWZzPgo8cmVjdCBjbGFzcz0idXVpZC00YmVmODIwYi01NmM5LTQ3ZTctODJhMy0yZGI4ZDhjN2IxMTIiIHg9IjEiIHk9IjEiIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgcng9IjkiIHJ5PSI5Ii8+CjxwYXRoIGNsYXNzPSJ1dWlkLTI0YjBkOTdiLTY4MWUtNGRhNi1hMWM3LTc2NzFhZTU3NTMyYSIgZD0iTTI4LDIuMjVjNC4yNzM0LDAsNy43NSwzLjQ3NjYsNy43NSw3Ljc1djE4YzAsNC4yNzM0LTMuNDc2Niw3Ljc1LTcuNzUsNy43NUgxMGMtNC4yNzM0LDAtNy43NS0zLjQ3NjYtNy43NS03Ljc1VjEwYzAtNC4yNzM0LDMuNDc2Ni03Ljc1LDcuNzUtNy43NWgxOE0yOCwxSDEwQzUuMDI5NCwxLDEsNS4wMjk0LDEsMTB2MThjMCw0Ljk3MDYsNC4wMjk0LDksOSw5aDE4YzQuOTcwNiwwLDktNC4wMjk0LDktOVYxMGMwLTQuOTcwNi00LjAyOTQtOS05LTloMFoiLz4KPHBhdGggY2xhc3M9InV1aWQtZjAzMjE3OGUtYmQ1MC00ZGU3LWI3NzMtNjY1YmZkNWM1YmI4IiBkPSJNMjEuMzc1LDE5YzAsLjM0NTIuMjgwMy42MjUuNjI1LjYyNXMuNjI1LS4yNzk4LjYyNS0uNjI1YzAtMS45OTktMS42MjYtMy42MjUtMy42MjUtMy42MjUtLjM0NDcsMC0uNjI1LjI3OTgtLjYyNS42MjVzLjI4MDMuNjI1LjYyNS42MjVjMS4zMDk2LDAsMi4zNzUsMS4wNjU0LDIuMzc1LDIuMzc1WiIvPgo8cGF0aCBjbGFzcz0idXVpZC1mMDMyMTc4ZS1iZDUwLTRkZTctYjc3My02NjViZmQ1YzViYjgiIGQ9Ik0xOSwxMy4zNzVjLS43ODIyLDAtMS41MzkxLjE1NzctMi4yNS40NjgzLS4zMTY0LjEzODItLjQ2MDkuNTA2OC0uMzIyMy44MjMyLjEzNzcuMzE2NC41MDc4LjQ1ODUuODIyMy4zMjIzLjU1MjctLjI0MTIsMS4xNDE2LS4zNjM4LDEuNzUtLjM2MzgsMi40MTIxLDAsNC4zNzUsMS45NjI0LDQuMzc1LDQuMzc1cy0xLjk2MjksNC4zNzUtNC4zNzUsNC4zNzUtNC4zNzUtMS45NjI0LTQuMzc1LTQuMzc1YzAtLjYwODkuMTIyMS0xLjE5NzMuMzYzMy0xLjc0OTUuMTM4Ny0uMzE2NC0uMDA1OS0uNjg1MS0uMzIyMy0uODIzMi0uMzE0NS0uMTM5Mi0uNjgzNi4wMDU0LS44MjIzLjMyMjMtLjMxMTUuNzExNC0uNDY4OCwxLjQ2ODMtLjQ2ODgsMi4yNTA1LDAsMy4xMDE2LDIuNTIzNCw1LjYyNSw1LjYyNSw1LjYyNXM1LjYyNS0yLjUyMzQsNS42MjUtNS42MjUtMi41MjM0LTUuNjI1LTUuNjI1LTUuNjI1WiIvPgo8cGF0aCBjbGFzcz0idXVpZC05N2MxZWM4NC05YjgxLTQ1NmUtOTlhYS03MTM3NTBlYjY5ZTAiIGQ9Ik0zMC40NjY4LDE4LjczODhjLTIuMDU2Ni00LjQ3MzEtNi41NTc2LTcuMzYzOC0xMS40NjY4LTcuMzYzOHMtOS40MTAyLDIuODkwNi0xMS40NjY4LDcuMzYzOGMtLjA3NTIuMTY2LS4wNzUyLjM1NjQsMCwuNTIyNSwyLjA1NjYsNC40NzMxLDYuNTU3Niw3LjM2MzgsMTEuNDY2OCw3LjM2MzhzOS40MTAyLTIuODkwNiwxMS40NjY4LTcuMzYzOGMuMDc1Mi0uMTY2LjA3NTItLjM1NjQsMC0uNTIyNVpNMTksMjUuMzc1Yy00LjMyNjIsMC04LjMwMDgtMi40OTI3LTEwLjIwNjEtNi4zNzUsMS45MDUzLTMuODgyMyw1Ljg3OTktNi4zNzUsMTAuMjA2MS02LjM3NXM4LjMwMDgsMi40OTI3LDEwLjIwNjEsNi4zNzVjLTEuOTA1MywzLjg4MjMtNS44Nzk5LDYuMzc1LTEwLjIwNjEsNi4zNzVaIi8+CjxwYXRoIGNsYXNzPSJ1dWlkLTk3YzFlYzg0LTliODEtNDU2ZS05OWFhLTcxMzc1MGViNjllMCIgZD0iTTE1LjQ0MjQsMTQuNTU4MWMtLjI0NDEtLjI0NDEtLjY0MDYtLjI0NDEtLjg4NDgsMC0uMjQzMi4yNDQxLS4yNDMyLjYzOTYsMCwuODgzOGw0LDRjLjEyMjEuMTIyMS4yODIyLjE4MzEuNDQyNC4xODMxcy4zMjAzLS4wNjEuNDQyNC0uMTgzMWMuMjQzMi0uMjQ0MS4yNDMyLS42Mzk2LDAtLjg4MzhsLTQtNFoiLz4KPC9zdmc+Cg==
+  mediatype: image/svg+xml
+name: cluster-observability-operator
+schema: olm.package
+---
+entries:
+- name: cluster-observability-operator.v1.0.0
+name: stable
+package: cluster-observability-operator
+schema: olm.channel
+---
+image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-bundle@sha256:5ac754afa1281e570a375c5fb780c0638772e41014d406ffdd28d1eadc36a460
+name: cluster-observability-operator.v1.0.0
+package: cluster-observability-operator
+properties:
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: Alertmanager
+    version: v1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: AlertmanagerConfig
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: MonitoringStack
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: PodMonitor
+    version: v1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: Probe
+    version: v1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: Prometheus
+    version: v1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: PrometheusAgent
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: PrometheusRule
+    version: v1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: ScrapeConfig
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: ServiceMonitor
+    version: v1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: ThanosQuerier
+    version: v1alpha1
+- type: olm.gvk
+  value:
+    group: monitoring.rhobs
+    kind: ThanosRuler
+    version: v1
+- type: olm.gvk
+  value:
+    group: observability.openshift.io
+    kind: UIPlugin
+    version: v1alpha1
+- type: olm.package
+  value:
+    packageName: cluster-observability-operator
+    version: 1.0.0
+- type: olm.csv.metadata
+  value:
+    annotations:
+      alm-examples: |-
+        [
+          {
+            "apiVersion": "monitoring.rhobs/v1alpha1",
+            "kind": "MonitoringStack",
+            "metadata": {
+              "labels": {
+                "mso": "example"
+              },
+              "name": "sample-monitoring-stack"
+            },
+            "spec": {
+              "logLevel": "debug",
+              "resourceSelector": {
+                "matchLabels": {
+                  "app": "demo"
+                }
+              },
+              "retention": "1d"
+            }
+          },
+          {
+            "apiVersion": "monitoring.rhobs/v1alpha1",
+            "kind": "ThanosQuerier",
+            "metadata": {
+              "name": "example-thanos"
+            },
+            "spec": {
+              "selector": {
+                "matchLabels": {
+                  "mso": "example"
+                }
+              }
+            }
+          }
+        ]
+      capabilities: Basic Install
+      categories: Monitoring
+      certified: "false"
+      containerImage: observability-operator:0.4.2
+      createdAt: "2024-11-20T09:07:06Z"
+      description: A Go based Kubernetes operator to setup and manage highly available
+        Monitoring Stack using Prometheus, Alertmanager and Thanos Querier.
+      features.operators.openshift.io/cnf: "false"
+      features.operators.openshift.io/cni: "false"
+      features.operators.openshift.io/csi: "false"
+      features.operators.openshift.io/disconnected: "true"
+      features.operators.openshift.io/fips-compliant: "false"
+      features.operators.openshift.io/proxy-aware: "false"
+      features.operators.openshift.io/tls-profiles: "false"
+      features.operators.openshift.io/token-auth-aws: "false"
+      features.operators.openshift.io/token-auth-azure: "false"
+      features.operators.openshift.io/token-auth-gcp: "false"
+      olm.skipRange: '>=..0 <1.0.0'
+      operatorframework.io/cluster-monitoring: "true"
+      operatorframework.io/suggested-namespace: openshift-cluster-observability-operator
+      operators.openshift.io/valid-subscription: '["OpenShift Kubernetes Engine",
+        "OpenShift Container Platform", "OpenShift Platform Plus"]'
+      operators.operatorframework.io/builder: operator-sdk-v1.37.0
+      operators.operatorframework.io/internal-objects: |-
+        [
+          "prometheuses.monitoring.rhobs",
+          "alertmanagers.monitoring.rhobs",
+          "thanosrulers.monitoring.rhobs",
+          "prometheusagents.monitoring.rhobs"
+        ]
+      operators.operatorframework.io/project_layout: unknown
+      repository: https://github.com/rhobs/observability-operator
+      support: Cluster Observability (https://issues.redhat.com/projects/COO/)
+    apiServiceDefinitions: {}
+    crdDescriptions:
+      owned:
+      - description: AlertmanagerConfig configures the Prometheus Alertmanager, specifying
+          how alerts should be grouped, inhibited and notified to external systems
+        displayName: AlertmanagerConfig
+        kind: AlertmanagerConfig
+        name: alertmanagerconfigs.monitoring.rhobs
+        version: v1alpha1
+      - description: Alertmanager describes an Alertmanager cluster
+        displayName: Alertmanager
+        kind: Alertmanager
+        name: alertmanagers.monitoring.rhobs
+        version: v1
+      - description: MonitoringStack is the Schema for the monitoringstacks API
+        displayName: MonitoringStack
+        kind: MonitoringStack
+        name: monitoringstacks.monitoring.rhobs
+        version: v1alpha1
+      - description: PodMonitor defines monitoring for a set of pods
+        displayName: PodMonitor
+        kind: PodMonitor
+        name: podmonitors.monitoring.rhobs
+        version: v1
+      - description: Probe defines monitoring for a set of static targets or ingresses
+        displayName: Probe
+        kind: Probe
+        name: probes.monitoring.rhobs
+        version: v1
+      - description: PrometheusAgent defines a Prometheus agent deployment
+        displayName: PrometheusAgent
+        kind: PrometheusAgent
+        name: prometheusagents.monitoring.rhobs
+        version: v1alpha1
+      - description: Prometheus defines a Prometheus deployment
+        displayName: Prometheus
+        kind: Prometheus
+        name: prometheuses.monitoring.rhobs
+        version: v1
+      - description: PrometheusRule defines recording and alerting rules for a Prometheus
+          instance
+        displayName: PrometheusRule
+        kind: PrometheusRule
+        name: prometheusrules.monitoring.rhobs
+        version: v1
+      - description: ScrapeConfig defines a namespaced Prometheus scrape_config to
+          be aggregated across multiple namespaces into the Prometheus configuration
+        displayName: ScrapeConfig
+        kind: ScrapeConfig
+        name: scrapeconfigs.monitoring.rhobs
+        version: v1alpha1
+      - description: ServiceMonitor defines monitoring for a set of services
+        displayName: ServiceMonitor
+        kind: ServiceMonitor
+        name: servicemonitors.monitoring.rhobs
+        version: v1
+      - description: ThanosQuerier outlines the Thanos querier components, managed
+          by this stack
+        displayName: ThanosQuerier
+        kind: ThanosQuerier
+        name: thanosqueriers.monitoring.rhobs
+        version: v1alpha1
+      - description: ThanosRuler defines a ThanosRuler deployment
+        displayName: ThanosRuler
+        kind: ThanosRuler
+        name: thanosrulers.monitoring.rhobs
+        version: v1
+      - description: UIPlugin defines a console plugin for observability
+        displayName: UIPlugin
+        kind: UIPlugin
+        name: uiplugins.observability.openshift.io
+        version: v1alpha1
+    description: |+
+      Cluster Observability Operator is a Go based Kubernetes operator to setup and manage highly available Monitoring stack using Prometheus, Alertmanager and Thanos Querier.
+      ### Supported Features
+      - Setup multiple Highly Available Monitoring stack using Prometheus, Alertmanager and Thanos Querier
+      - Customizable configuration for managing Prometheus deployments
+      - Customizable configuration for managing Alertmanager deployments
+      - Customizable configuration for managing Thanos Querier deployments
+      ### Documentation
+      - **[Documentation](https://github.com/rhobs/observability-operator/tree/main/docs)**
+      - **[Developer Docs](https://github.com/rhobs/observability-operator/blob/main/docs/developer.md)**
+      ### Contributing
+      **[See Contribution Guidelines](https://github.com/rhobs/observability-operator/blob/main/docs/developer.md#contributions)** to contribute to the project by
+      - Raising Bugs and Feature Requests
+      - Fixing Issues by opening a Pull Request
+      - Improving Documentation
+      ###  License
+      Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+    displayName: Cluster Observability Operator
+    installModes:
+    - supported: false
+      type: OwnNamespace
+    - supported: false
+      type: SingleNamespace
+    - supported: false
+      type: MultiNamespace
+    - supported: true
+      type: AllNamespaces
+    keywords:
+    - observability
+    - monitoring
+    - prometheus
+    - thanos
+    labels:
+      operatorframework.io/arch.amd64: supported
+      operatorframework.io/arch.arm64: supported
+      operatorframework.io/arch.ppc64le: supported
+      operatorframework.io/arch.s390x: supported
+    links:
+    - name: GitHub
+      url: https://github.com/rhobs/observability-operator
+    maintainers:
+    - email: jfajersk@redhat.com
+      name: Jan Fajerski
+    - email: spasquie@redhat.com
+      name: Simon Pasquier
+    maturity: alpha
+    provider:
+      name: Red Hat
+relatedImages:
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/alertmanager@sha256:976c64f2a45fe5bbb4de1b14036bf1eacf42a9bf069e987ef753c997e3cef682
+  name: alertmanager
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/dashboards-console-plugin-0-3@sha256:113c3b644822f853ce62845d07974dfbc55c9353cf031309cb58262995638f76
+  name: ui-dashboards
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/distributed-tracing-console-plugin-0-3@sha256:93401be05380242923bb7683cc22aee798c8c06d4933a8881b60395f3bc7a546
+  name: ui-tracing
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/korrel8r@sha256:d6e5baf728c0c82f1efb3dcdd6c0b928b66cb2364a55f654afff6359c1a1fd3c
+  name: korrel8r
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/logging-console-plugin-6-0@sha256:7f1cd14cdd6232cb26240fa8df3b5e807d140c5cd1d2d1fc8455550152b7ad98
+  name: ui-logging
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/monitoring-console-plugin-0-3@sha256:2a1d0cf8198ddd4b69aa3173d25cb0ce0c7b743ea4e740a02584450b4b729f1e
+  name: ui-monitoring
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/prometheus@sha256:81b37e86f5cf1b16b86ee65cc9f8df7e23775c44a621b77b399f828bb67aeefa
+  name: prometheus
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/thanos@sha256:2d58e4752581d454dc766b6847d37ecb24bf2567aad5bde21b8c7be0feba3f19
+  name: thanos
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/troubleshooting-panel-console-plugin-0-3@sha256:cc45667df49a79c16bc548e914f137f76306aee194866770e22a3e3782fd374e
+  name: ui-troubleshooting
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-bundle@sha256:5ac754afa1281e570a375c5fb780c0638772e41014d406ffdd28d1eadc36a460
+  name: ""
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-container@sha256:1f9fd6dfed54e704dbd97a121736f8cde74ddf72d09006a52f7a62997f6f08b3
+  name: cluster-observability-operator
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator-admission-webhook@sha256:defe64ca4d679589d4a53ec6341952e534e306a81237184f53cc3b7ee939990d
+  name: prometheus-operator-admission-webhook
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator-prometheus-config-reloader@sha256:85c95dfcf4a2eaa719ff129abd5cccd5edf8a5e81d247ae706b178414bf967ff
+  name: prometheus-config-reloader
+- image: quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator@sha256:93bfc2efa3680eb5f94bf48cfb7e25f9ff142c1d65cb2ce0b0b853aa9db01a5c
+  name: prometheus-operator
+schema: olm.bundle
