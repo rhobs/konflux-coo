@@ -52,3 +52,5 @@ LABEL com.redhat.component="coo-troubleshooting-panel-console-plugin" \
       io.k8s.description="OpenShift console plugin to troubleshoot by correlating observability signals" \
       maintainer="Observability UI Team <team-observability-ui@redhat.com>" \
       description="OpenShift console plugin to troubleshoot by correlating observability signals"
+
+# trigger panel
