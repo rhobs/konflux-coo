@@ -9,7 +9,7 @@
 [submodule "obo-prometheus-operator"]
 	path = obo-prometheus-operator
 	url = https://github.com/rhobs/obo-prometheus-operator
-	branch = rhobs-rel-0.77.1-rhobs1
+	branch = rhobs-rel-0.78.1-rhobs1
 [submodule "observability-operator"]
 	path = observability-operator
 	url = https://github.com/rhobs/observability-operator
