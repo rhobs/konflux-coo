@@ -7,6 +7,7 @@ CMD ["serve", "/configs", "--cache-dir=/tmp/cache"]
 
 COPY catalog/coo-product /configs/cluster-observability-operator
 
+
 RUN ["/bin/opm", "serve", "/configs", "--cache-dir=/tmp/cache", "--cache-only"]
 
 # Core bundle labels.
