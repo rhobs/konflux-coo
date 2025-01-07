@@ -17,6 +17,9 @@ COPY /observability-operator/bundle/ bundle
 COPY /observability-operator/LICENSE LICENSE
 COPY /bundle-patches/render_templates .
 
+# cluster-observability-operator-bundle-push pipeline overrides this with the
+# prod registry registry.redhat.io
+ARG REGISTRY=quay.io/redhat-user-workloads
 RUN mv bundle/manifests/observability-operator.clusterserviceversion.yaml bundle/manifests/cluster-observability-operator.clusterserviceversion.yaml
 RUN ./render_templates bundle/manifests/cluster-observability-operator.clusterserviceversion.yaml bundle/metadata/annotations.yaml
 
