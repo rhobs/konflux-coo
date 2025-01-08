@@ -35,25 +35,25 @@ COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-
 
 COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/alertmanager@sha256:99429fb7e8dbc79e4b231c7137cf17ebd8f7ad81ee93f7d3e3f3f749879ef8bf"
 
-COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/prometheus@sha256:1cd4939db6efb0b2de54f9ad69dcb4467eff5e7d1019bc65f0d111903d47e214"
+COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/prometheus@sha256:1cd4939db6efb0b2de54f9ad69dcb4467eff5e7d1019bc65f0d111903d47e214"
 
-COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/thanos@sha256:dc047e3ffe72076cc4b5219edfe60f0ee3d026d634766e97a80da8fde52ba40a"
+COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/thanos@sha256:dc047e3ffe72076cc4b5219edfe60f0ee3d026d634766e97a80da8fde52ba40a"
 
 COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator-admission-webhook@sha256:448d362c6bac544182da7a6d70d2ccc224c82399713d3339a4002952a6488ba3"
 
 COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator@sha256:0cb47c7e7d85a7856abea48cb360b80801d4760df96964f029a26bd8ac5dbe9d"
 
-COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/dashboards-console-plugin-0-3@sha256:637f0ce4fb03f829dedc6f523069aa9417db9f6d01a6cb82d78ea6721bec3926"
+COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/dashboards-console-plugin-0-3@sha256:637f0ce4fb03f829dedc6f523069aa9417db9f6d01a6cb82d78ea6721bec3926"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/distributed-tracing-console-plugin-0-3@sha256:f7fa6e0a6cb7cd3fdf91c4399944eaca52adbf1951f872de5a30f191aaa8d09b"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/distributed-tracing-console-plugin-0-3@sha256:f7fa6e0a6cb7cd3fdf91c4399944eaca52adbf1951f872de5a30f191aaa8d09b"
 
-COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/logging-console-plugin-6-0@sha256:9ef523c96d8bf1dfe5e5e807986c8e6c427d3d1f8025824d9023d6387a7aae60"
+COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/logging-console-plugin-6-0@sha256:9ef523c96d8bf1dfe5e5e807986c8e6c427d3d1f8025824d9023d6387a7aae60"
 
-COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/troubleshooting-panel-console-plugin-0-3@sha256:e3996867f3b7b539731933a14596b9b44c7b107008e041c6509c9a1cfb83f37b"
+COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/troubleshooting-panel-console-plugin-0-3@sha256:e3996867f3b7b539731933a14596b9b44c7b107008e041c6509c9a1cfb83f37b"
 
-COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/monitoring-console-plugin-0-3@sha256:07ccac7309ea8834849cd127875dde08705abdcd69dbbedabb16f4aaf0d53452"
+COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/monitoring-console-plugin-0-3@sha256:07ccac7309ea8834849cd127875dde08705abdcd69dbbedabb16f4aaf0d53452"
 
-COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-1-0/korrel8r@sha256:1b6e0ee0f676c1709d11fbb2738fc77e838bd1843b7f46e7ffd2fff12f03ea16"
+COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/korrel8r@sha256:1b6e0ee0f676c1709d11fbb2738fc77e838bd1843b7f46e7ffd2fff12f03ea16"
 
 # Add related images for disconnected installs
 # First we add an empty list
