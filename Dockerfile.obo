@@ -10,12 +10,17 @@ ENV CGO_ENABLED=1
 # Build
 RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -a -tags netgo,osusergo -o manager cmd/operator/main.go
 
-# Use distroless as minimal base image to package the manager binary
-# Refer to https://github.com/GoogleContainerTools/distroless for more details
+FROM registry.redhat.io/openshift4/ose-cli-rhel9 AS origincli
+
+RUN OC_PATH=$(which oc); \
+    cp $(OC_PATH) /tmp/oc
+
 FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1130
 WORKDIR /
 
 RUN microdnf install -y rsync tar xz
+
+COPY --from=origincli /tmp/oc /usr/bin/oc
 
 COPY --from=builder /workspace/manager .
 COPY --from=builder --chmod=0755 /workspace/must-gather/collection-scripts/* /usr/bin/
