@@ -32,7 +32,7 @@
 [submodule "ui-monitoring"]
 	path = ui-monitoring
 	url = https://github.com/openshift/monitoring-plugin.git
-	branch = main
+	branch = release-coo-1.0
 [submodule "thanos"]
 	path = thanos
 	url = https://github.com/thanos-io/thanos.git
