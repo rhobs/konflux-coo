@@ -3,6 +3,7 @@ FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.23
 WORKDIR /workspace
 
 COPY korrel8r .
+# ReBuild
 
 ENV GOFLAGS='-mod=mod'
 ENV CGO_ENABLED=0

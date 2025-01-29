@@ -16,6 +16,7 @@ FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.22 as go-
 
 WORKDIR /opt/app-root
 
+# Rebuild
 COPY ui-troubleshooting-panel/Makefile Makefile
 COPY ui-troubleshooting-panel/go.mod go.mod
 COPY ui-troubleshooting-panel/go.sum go.sum

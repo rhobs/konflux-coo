@@ -13,6 +13,8 @@ COPY prometheus/ .
 ENV GOFLAGS='-mod=mod'
 ENV CGO_ENABLED=0
 
+# Rebuild
+
 # Download and install promu for the specified OS and Architecture
 ARG TARGETOS TARGETARCH
 RUN wget https://github.com/prometheus/promu/releases/download/v0.17.0/promu-0.17.0.${TARGETOS}-${TARGETARCH}.tar.gz \
