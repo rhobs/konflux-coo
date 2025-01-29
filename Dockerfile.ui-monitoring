@@ -15,6 +15,7 @@ COPY ui-monitoring/scripts/update-plugin-name.sh scripts/update-plugin-name.sh
 RUN make update-plugin-name
 ENV I18N_NAMESPACE="plugin__monitoring-console-plugin"
 RUN make build-frontend
+# Rebuild
 
 FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.22 as go-builder
 

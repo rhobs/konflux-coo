@@ -10,7 +10,7 @@ WORKDIR /workspace
 # Copy source files
 COPY alertmanager/ .
 
-# Build
+# ReBuild
 ENV NO_DOCKER=true
 RUN make build
 
