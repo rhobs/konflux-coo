@@ -4,7 +4,7 @@ FROM registry.redhat.io/openshift4/ose-operator-registry:v4.12
 ENTRYPOINT ["/bin/opm"]
 CMD ["serve", "/configs", "--cache-dir=/tmp/cache"]
 
-COPY catalog/coo-product-4.16 /configs/cluster-observability-operator
+COPY catalog/coo-product-4.17 /configs/cluster-observability-operator
 
 RUN ["/bin/opm", "serve", "/configs", "--cache-dir=/tmp/cache", "--cache-only"]
 
