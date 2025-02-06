@@ -1,0 +1,22 @@
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.22 as build-env
+
+RUN apk add --update --no-cache make bash mailcap
+
+WORKDIR /app
+
+COPY perses-operator/ .
+
+RUN make build
+
+FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1130
+
+LABEL maintainer="The Perses Authors <perses-team@googlegroups.com>"
+
+USER nobody
+
+COPY --from=build-env --chown=nobody:nobody /app/bin/manager  /bin/manager
+COPY --chown=nobody:nobody LICENSE                            /LICENSE
+COPY --from=build-env --chown=nobody:nobody                   /etc/mime.types /etc/mime.types
+
+EXPOSE     8080
+ENTRYPOINT [ "/bin/manager" ]
