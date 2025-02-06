@@ -7,7 +7,7 @@ COPY observability-operator/ .
 ENV GOFLAGS='-mod=mod'
 ENV CGO_ENABLED=1
 
-# Build
+# ReBuild
 RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -a -tags netgo,osusergo -o manager cmd/operator/main.go
 
 FROM registry.redhat.io/openshift4/ose-cli-rhel9 AS origincli
