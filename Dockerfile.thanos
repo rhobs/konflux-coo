@@ -8,6 +8,7 @@ ENV GOFLAGS='-mod=mod'
 ENV CGO_ENABLED=0
 
 # Install promu and build thanos
+# Rebuild
 ARG TARGETOS TARGETARCH
 RUN wget https://github.com/prometheus/promu/releases/download/v0.17.0/promu-0.17.0.${TARGETOS}-${TARGETARCH}.tar.gz \
     && tar -xzf promu-0.17.0.${TARGETOS}-${TARGETARCH}.tar.gz -C /usr/local/bin \
