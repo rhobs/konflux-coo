@@ -11,6 +11,8 @@ generate-catalog: $(OPM)
 	$(OPM) alpha render-template basic --output yaml --migrate-level bundle-object-to-csv-metadata catalog/catalog-template.yaml > catalog/coo-product/catalog.yaml
 	# pre 4.17 the catalog should have bundle-object
 	$(OPM) alpha render-template basic --output yaml catalog/catalog-template.yaml > catalog/coo-product-4.16/catalog.yaml
+	# FBC repo issues shown here https://gitlab.cee.redhat.com/konflux/docs/users/-/merge_requests/189/diffs
+	sed -i 's|quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-bundle|registry.redhat.io/cluster-observability-operator-bundle|g' catalog/coo-product/catalog.yaml
 
 .PHONY: lint
 lint: lint-pipelines
