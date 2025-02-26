@@ -46,3 +46,7 @@
 	path = perses-operator
 	url = https://github.com/perses/perses-operator
 	branch = release-coo-1.1
+[submodule "cluster-health-analyzer"]
+	path = cluster-health-analyzer
+	url = https://github.com/openshift/cluster-health-analyzer
+	branch = release-0.3
