@@ -11,9 +11,6 @@ COPY pkg pkg
 COPY main.go main.go
 
 ENV GOOS=${TARGETOS:-linux}
-# GOARCH has no default, so the binary builds for the host. On Apple M1, BUILDPLATFORM is set to 
-# linux/arm64; on Apple x86, it's linux/amd64. Leaving it empty ensures the container and binary 
-# match the host platform.
 ENV GOARCH=${TARGETARCH}
 ENV CGO_ENABLED=1
 ENV GOFLAGS=-mod=readonly
@@ -27,3 +24,13 @@ COPY --from=builder /bin/cluster-health-analyzer /bin/cluster-health-analyzer
 USER 65532:65532
 
 ENTRYPOINT ["/bin/cluster-health-analyzer", "serve"]
+
+LABEL com.redhat.component="coo-cluster-health-analyzer" \
+      name="openshift/cluster-health-analyzer" \
+      version="v0.3.0" \
+      summary="OpenShift Cluster Health Analyzer" \
+      io.openshift.tags="openshift,observability,metrics,alerts,incidents" \
+      io.k8s.display-name="COO Cluster Health Analyzer" \
+      io.k8s.description="The Cluster Health Analyzer analyzes alerts and health signals, grouping related ones" \
+      maintainer="Observability Intelligence Analytics Team <obsint-analytics@redhat.com>" \
+      description="The Cluster Health Analyzer analyzes alerts and health signals, grouping related ones"
