@@ -27,7 +27,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator-admission-webhook:on-pr-{{revision}}
+    value: quay.io/redhat-user-workloads/cluster-observability-operator/obo-prometheus-rhel8-operator-admission-webhook:on-pr-{{revision}}
   - name: image-expires-after
     value: 5d
   - name: build-platforms

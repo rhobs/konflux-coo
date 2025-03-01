@@ -26,7 +26,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/logging-console-plugin-6-0:{{revision}}
+    value: quay.io/redhat-user-workloads/cluster-observability-operator/logging-console-plugin-6-0-rhel9:{{revision}}
   - name: build-platforms
     value:
     - linux/x86_64

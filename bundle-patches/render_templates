@@ -35,46 +35,46 @@ yq -i '.metadata.labels += {"operatorframework.io/arch.arm64": "supported"}' "$c
 yq -i '.metadata.labels += {"operatorframework.io/arch.ppc64le": "supported"}' "$csv_file"
 yq -i '.metadata.labels += {"operatorframework.io/arch.s390x": "supported"}' "$csv_file"
 
-COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator-container@sha256:3fec7abad7c547a9409d5a1f1098b82955b1d24aa3dae74017b75ada448eb6ef"
+COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/cluster-observability-rhel8-operator@sha256:3fec7abad7c547a9409d5a1f1098b82955b1d24aa3dae74017b75ada448eb6ef"
 
-COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator-prometheus-config-reloader@sha256:e5d846203e6af0c7a432b325b2ea5f723bf0ba1bdca2a7bb2bd3a4cbed733afb"
+COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/obo-prometheus-rhel8-operator-prometheus-config-reloader@sha256:e5d846203e6af0c7a432b325b2ea5f723bf0ba1bdca2a7bb2bd3a4cbed733afb"
 
-COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/alertmanager@sha256:3cefd74aa02afd9b79bd949c47091db30cf2e511e276170a9b92172c4cd51615"
+COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/alertmanager-rhel8@sha256:3cefd74aa02afd9b79bd949c47091db30cf2e511e276170a9b92172c4cd51615"
 
-COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/prometheus@sha256:7f76ffe32075465c09de363325b62d4b69def0306584c6d5b02ad9b74ae8bee4"
+COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/prometheus-rhel8@sha256:7f76ffe32075465c09de363325b62d4b69def0306584c6d5b02ad9b74ae8bee4"
 
-COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/thanos@sha256:d1ca863ef7eac591783e64b2b26dbf90780805fac53551665b2b033034ca7990"
+COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/thanos-rhel8@sha256:d1ca863ef7eac591783e64b2b26dbf90780805fac53551665b2b033034ca7990"
 
-COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator-admission-webhook@sha256:9351944d9a16c468b3dd65b5284ccfe107593e244d67eac2697d0bef32491915"
+COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/obo-prometheus-rhel8-operator-admission-webhook@sha256:9351944d9a16c468b3dd65b5284ccfe107593e244d67eac2697d0bef32491915"
 
-COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/obo-prometheus-operator@sha256:0952abd9e73c8c1e81c555ad91f9197ece7981f30d93f909fdc69b900c05cbb6"
+COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/obo-prometheus-rhel8-operator@sha256:0952abd9e73c8c1e81c555ad91f9197ece7981f30d93f909fdc69b900c05cbb6"
 
-COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/dashboards-console-plugin-0-3@sha256:5cadb12e90782c3a58e7543dfa8251da301ddb8035a4d216124e7cf2f0bc1dd5"
+COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/dashboards-console-plugin-0-3-rhel9@sha256:5cadb12e90782c3a58e7543dfa8251da301ddb8035a4d216124e7cf2f0bc1dd5"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/distributed-tracing-console-plugin-0-3@sha256:0ed9bf52447133dabf2f63df6f30e957e9d5481dc78603fadbc147454700e698"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/distributed-tracing-console-plugin-0-3-rhel9@sha256:0ed9bf52447133dabf2f63df6f30e957e9d5481dc78603fadbc147454700e698"
 
-COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/logging-console-plugin-6-0@sha256:c93a476caca5e8edf9ad5c4d34221f0c915c3ca42e8d50b69a9cc676d0007546"
+COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/logging-console-plugin-6-0-rhel9@sha256:c93a476caca5e8edf9ad5c4d34221f0c915c3ca42e8d50b69a9cc676d0007546"
 
-COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/troubleshooting-panel-console-plugin-0-3@sha256:64061474ffe7831e55cb021f859bbf8ce2cd6455b3ce92a0b539ef0129b6ec8f"
+COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/troubleshooting-panel-console-plugin-0-3-rhel9@sha256:64061474ffe7831e55cb021f859bbf8ce2cd6455b3ce92a0b539ef0129b6ec8f"
 
-COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/monitoring-console-plugin-0-3@sha256:1f1ba1ddc18df5e638078493e6f3610d65797271d0ca8a083499236f48a7628b"
+COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/monitoring-console-plugin-0-3-rhel9@sha256:1f1ba1ddc18df5e638078493e6f3610d65797271d0ca8a083499236f48a7628b"
 
-COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/korrel8r@sha256:20d107770d7584bfed99aa5168e450681d3fdd265fe0dff272b80741196e64ee"
+COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observability-operator/korrel8r-rhel8@sha256:20d107770d7584bfed99aa5168e450681d3fdd265fe0dff272b80741196e64ee"
 
 if [[ $REGISTRY == "registry.redhat.io"  || $REGISTRY == "registry.stage.redhat.io" ]]; then
-    COO_IMAGE_URL="$REGISTRY/cluster-observability-operator/cluster-observability-rhel8-operator@sha256:${COO_IMAGE_URL:(-64)}"
-    COO_CONF_RELOADER_IMAGE_URL="$REGISTRY/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel8@sha256:${COO_CONF_RELOADER_IMAGE_URL:(-64)}"
-    COO_ALERTMANAGER_IMAGE_URL="$REGISTRY/cluster-observability-operator/alertmanager-rhel8@sha256:${COO_ALERTMANAGER_IMAGE_URL:(-64)}"
-    COO_PROMETHEUS_IMAGE_URL="$REGISTRY/cluster-observability-operator/prometheus-rhel8@sha256:${COO_PROMETHEUS_IMAGE_URL:(-64)}"
-    COO_THANOS_IMAGE_URL="$REGISTRY/cluster-observability-operator/thanos-rhel8@sha256:${COO_THANOS_IMAGE_URL:(-64)}"
-    COO_ADMISSION_WEBHOOK_IMAGE_URL="$REGISTRY/cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel8@sha256:${COO_ADMISSION_WEBHOOK_IMAGE_URL:(-64)}"
-    COO_PO_IMAGE_URL="$REGISTRY/cluster-observability-operator/obo-prometheus-rhel8-operator@sha256:${COO_PO_IMAGE_URL:(-64)}"
-    COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="$REGISTRY/cluster-observability-operator/dashboards-console-plugin-0-3-rhel9@sha256:${COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL:(-64)}"
-    COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="$REGISTRY/cluster-observability-operator/distributed-tracing-console-plugin-0-3-rhel9@sha256:${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL:(-64)}"
-    COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="$REGISTRY/cluster-observability-operator/logging-console-plugin-6-0-rhel9@sha256:${COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL:(-64)}"
-    COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="$REGISTRY/cluster-observability-operator/troubleshooting-panel-console-plugin-0-3-rhel9@sha256:${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL:(-64)}"
-    COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="$REGISTRY/cluster-observability-operator/monitoring-console-plugin-0-3-rhel9@sha256:${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL:(-64)}"
-    COO_KORREL8R_IMAGE_URL="$REGISTRY/cluster-observability-operator/korrel8r-rhel8@sha256:${COO_KORREL8R_IMAGE_URL:(-64)}"
+    COO_IMAGE_URL="$REGISTRY/${COO_IMAGE_URL:30}"
+    COO_CONF_RELOADER_IMAGE_URL="$REGISTRY/${COO_CONF_RELOADER_IMAGE_URL:30}"
+    COO_ALERTMANAGER_IMAGE_URL="$REGISTRY/${COO_ALERTMANAGER_IMAGE_URL:30}"
+    COO_PROMETHEUS_IMAGE_URL="$REGISTRY/${COO_PROMETHEUS_IMAGE_URL:30}"
+    COO_THANOS_IMAGE_URL="$REGISTRY/${COO_THANOS_IMAGE_URL:30}"
+    COO_ADMISSION_WEBHOOK_IMAGE_URL="$REGISTRY/${COO_ADMISSION_WEBHOOK_IMAGE_URL:30}"
+    COO_PO_IMAGE_URL="$REGISTRY/${COO_PO_IMAGE_URL:30}"
+    COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL:30}"
+    COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL:30}"
+    COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL:30}"
+    COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL:30}"
+    COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL:30}"
+    COO_KORREL8R_IMAGE_URL="$REGISTRY/${COO_KORREL8R_IMAGE_URL:30}"
 fi
 
 
