@@ -49,4 +49,4 @@
 [submodule "cluster-health-analyzer"]
 	path = cluster-health-analyzer
 	url = https://github.com/openshift/cluster-health-analyzer
-	branch = release-0.3
+	branch = release-0.4

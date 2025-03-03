@@ -27,7 +27,7 @@ ENTRYPOINT ["/bin/cluster-health-analyzer", "serve"]
 
 LABEL com.redhat.component="coo-cluster-health-analyzer" \
       name="openshift/cluster-health-analyzer" \
-      version="v0.3.0" \
+      version="v0.4.0" \
       summary="OpenShift Cluster Health Analyzer" \
       io.openshift.tags="openshift,observability,metrics,alerts,incidents" \
       io.k8s.display-name="COO Cluster Health Analyzer" \
