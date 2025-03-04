@@ -1,0 +1,24 @@
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.23 AS build-env
+
+USER root
+
+RUN dnf install -y mailcap && dnf clean all && rm -rf /var/cache/dnf
+
+WORKDIR /app
+
+COPY perses-operator/ .
+
+RUN make bin
+
+FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1130
+
+LABEL maintainer="Observability UI team <team-observability-ui@redhat.com>"
+
+USER nobody
+
+COPY --from=build-env --chown=nobody:nobody /app/bin/manager  /bin/manager
+COPY --from=build-env --chown=nobody:nobody /app/LICENSE      /LICENSE
+COPY --from=build-env --chown=nobody:nobody /etc/mime.types   /etc/mime.types
+
+EXPOSE     8080
+ENTRYPOINT [ "/bin/manager" ]
