@@ -35,7 +35,7 @@ yq -i '.metadata.labels += {"operatorframework.io/arch.arm64": "supported"}' "$c
 yq -i '.metadata.labels += {"operatorframework.io/arch.ppc64le": "supported"}' "$csv_file"
 yq -i '.metadata.labels += {"operatorframework.io/arch.s390x": "supported"}' "$csv_file"
 
-COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel8-operator@sha256:60476ef0d7e18614743f79eff0c82aefb2152f76d668d7ae29c85ecb8ae25d92"
+COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel8-operator@sha256:5ce1c04c74e436e27928e327859e74ede765b72af2512008fe469345623202b8"
 
 COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel8@sha256:a6618e6f11c415415b86ccc60075ab8e214e942816038971c895a7186b3ab96b"
 
