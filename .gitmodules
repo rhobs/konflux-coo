@@ -17,23 +17,23 @@
 [submodule "ui-logging"]
 	path = ui-logging
 	url = https://github.com/openshift/logging-view-plugin.git
-	branch = release-6.0
+	branch = release-6.1
 [submodule "ui-dashboards"]
 	path = ui-dashboards
 	url = https://github.com/openshift/console-dashboards-plugin.git
-	branch = release-0.3
+	branch = release-0.4
 [submodule "ui-troubleshooting-panel"]
 	path = ui-troubleshooting-panel
 	url = https://github.com/openshift/troubleshooting-panel-console-plugin.git
-	branch = release-0.3
+	branch = release-0.4
 [submodule "ui-distributed-tracing"]
 	path = ui-distributed-tracing
 	url = https://github.com/openshift/distributed-tracing-console-plugin.git
-	branch = release-0.3
+	branch = release-0.4
 [submodule "ui-monitoring"]
 	path = ui-monitoring
 	url = https://github.com/openshift/monitoring-plugin.git
-	branch = release-coo-1.0
+	branch = release-coo-1.1
 [submodule "thanos"]
 	path = thanos
 	url = https://github.com/openshift/thanos.git
