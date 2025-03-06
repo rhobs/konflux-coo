@@ -61,6 +61,8 @@ COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-o
 
 COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/korrel8r-rhel8@sha256:ea2bdfd29a86a13cef796945f9557a1326a02a3d9a0d2ea371552d0597660cb2"
 
+COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-0-4-rhel8@sha256:35f4b82f6530dd9fc723d02920dfe94ff419626cd4a35dc41db1d3f14a90e470"
+
 if [[ $REGISTRY == "registry.redhat.io"  || $REGISTRY == "registry.stage.redhat.io" ]]; then
     COO_IMAGE_URL="$REGISTRY/${COO_IMAGE_URL:(58)}"
     COO_CONF_RELOADER_IMAGE_URL="$REGISTRY/${COO_CONF_RELOADER_IMAGE_URL:(58)}"
@@ -75,6 +77,7 @@ if [[ $REGISTRY == "registry.redhat.io"  || $REGISTRY == "registry.stage.redhat.
     COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL:(58)}"
     COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL:(58)}"
     COO_KORREL8R_IMAGE_URL="$REGISTRY/${COO_KORREL8R_IMAGE_URL:(58)}"
+    COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="$REGISTRY/${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL:(58)}"
 fi
 
 
@@ -94,6 +97,7 @@ VALUE="${COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [
 VALUE="${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-troubleshooting", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-monitoring", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_KORREL8R_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"korrel8r", "image": strenv(VALUE)}])' "$csv_file"
+VALUE="${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"cluster-health-analyzer", "image": strenv(VALUE)}])' "$csv_file"
 
 # Replace quay.io/rhobs image urls with registry-proxy.engineering.redhat.com/
 # urls to get brew builds to pass
@@ -159,6 +163,9 @@ VALUE="${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL}" yq -i '(.spec.install.spec.de
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=korrel8r=$(RELATED_IMAGE_KORREL8R)"]' "$csv_file"
 VALUE="${COO_KORREL8R_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_KORREL8R", "value": strenv(VALUE)}]' "$csv_file"
+
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=health-analyzer=$(RELATED_IMAGE_CLUSTER_HEALTH_ANALYZER)"]' "$csv_file"
+VALUE="${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CLUSTER_HEALTH_ANALYZER", "value": strenv(VALUE)}]' "$csv_file"
 
 # set openshift.enabled feature gate
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) += ["--openshift.enabled=true"]' "$csv_file"
