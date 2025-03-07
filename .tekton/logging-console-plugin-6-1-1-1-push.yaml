@@ -42,7 +42,7 @@ spec:
     - name: hermetic
       value: "true"
     - name: prefetch-input
-      value: '[{"type": "gomod", "path": "."}, {"type": "npm", "path":"./web"}]'
+      value: '[{"type": "gomod", "path": "./ui-logging"}, {"type": "npm", "path":"./ui-logging/web"}]'
     - name: build-source-image
       value: "true"
   pipelineSpec:
