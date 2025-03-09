@@ -39,6 +39,10 @@ spec:
       value: Dockerfile.ui-dashboards
     - name: path-context
       value: .
+    - name: hermetic
+      value: "true"
+    - name: prefetch-input
+      value: '[{"type": "gomod", "path": "./ui-dashboards"}, {"type": "npm", "path":"./ui-dashboards/web"}]'
     - name: build-source-image
       value: "true"
   pipelineSpec:
