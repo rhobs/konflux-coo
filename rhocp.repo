@@ -1,6 +1,0 @@
-[rhocp-4.18-for-rhel-9-rpms]
-nane = rhocp 4.18 repo
-baseurl = https://rhsm-pulp.corp.redhat.com/content/dist/layered/rhel9/$basearch/rhocp/4.18/os/
-enabled = 1
-gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
-gpgcheck = 1

@@ -4,21 +4,18 @@ WORKDIR /workspace
 
 COPY thanos .
 
-ENV GOFLAGS='-mod=mod'
+ENV GOFLAGS='-mod=mod -a'
 ENV CGO_ENABLED=0
 
-# Install promu and build thanos
+# Build Thanos directly using Go
 ARG TARGETOS TARGETARCH
-RUN wget https://github.com/prometheus/promu/releases/download/v0.17.0/promu-0.17.0.${TARGETOS}-${TARGETARCH}.tar.gz \
-    && tar -xzf promu-0.17.0.${TARGETOS}-${TARGETARCH}.tar.gz -C /usr/local/bin \
-    && rm promu-0.17.0.${TARGETOS}-${TARGETARCH}.tar.gz \
-    && /usr/local/bin/promu-0.17.0.${TARGETOS}-${TARGETARCH}/promu -v build --prefix /go/bin/
+RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build -tags -netgo $GOFLAGS -o /go/bin/thanos ./cmd/thanos
 
 FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1130
 WORKDIR /
 
 COPY --from=builder /go/bin/thanos /bin/thanos
-COPY --from=builder /workspace/LICENSE      /licenses/.
+COPY --from=builder /workspace/LICENSE /licenses/.
 
 USER nobody
 ENTRYPOINT [ "/bin/thanos" ]
