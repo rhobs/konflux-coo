@@ -7,7 +7,7 @@ COPY perses/ui ui
 
 USER 0
 
-RUN make build-ui
+RUN cd ./ui && npm install --ignore-scripts && npm run build
 
 FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.23 AS build-env
 USER root
