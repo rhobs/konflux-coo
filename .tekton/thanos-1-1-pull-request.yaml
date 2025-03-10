@@ -28,6 +28,10 @@ spec:
       value: '{{source_url}}'
     - name: revision
       value: '{{revision}}'
+    - name: prefetch-input
+      value: '[{"type": "gomod", "path": "./thanos"}]'
+    - name: hermetic
+      value: "true"
     - name: output-image
       value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/thanos-rhel8:on-pr-{{revision}}
     - name: image-expires-after
@@ -94,10 +98,6 @@ spec:
       - default: "false"
         description: Execute the build with network isolation
         name: hermetic
-        type: string
-      - default: "true"
-        description: Enable dev-package-managers in prefetch task
-        name: prefetch-dev-package-managers-enabled
         type: string
       - default: ""
         description: Build dependencies to be prefetched by Cachi2
@@ -197,8 +197,6 @@ spec:
             value: $(params.output-image).prefetch
           - name: ociArtifactExpiresAfter
             value: $(params.image-expires-after)
-          - name: dev-package-managers
-            value: $(params.prefetch-dev-package-managers-enabled)
         runAfter:
           - clone-repository
         taskRef:
