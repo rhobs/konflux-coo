@@ -17,7 +17,7 @@ COPY --from=web-builder /workspace/ .
 ENV GOFLAGS='-mod=mod'
 ENV CGO_ENABLED=0
 ENV NO_DOCKER=true
-RUN make common-build
+RUN make assets common-build
 
 FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 

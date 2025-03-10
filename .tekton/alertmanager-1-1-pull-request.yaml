@@ -45,7 +45,7 @@ spec:
     - name: hermetic
       value: "true"
     - name: prefetch-input
-      value: '[{"type": "gomod", "path": "./alertmanager"}]'
+      value: '[{"type": "gomod", "path": "./alertmanager"}, {"type": "npm", "path":"./alertmanager/ui/react-app"}]'
     - name: build-source-image
       value: "true"
   pipelineSpec:
