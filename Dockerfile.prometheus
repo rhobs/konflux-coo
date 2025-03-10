@@ -19,13 +19,8 @@ COPY --from=web-builder /workspace/ .
 ENV GOFLAGS='-mod=mod'
 ENV CGO_ENABLED=0
 ENV SKIP_UI_BUILD=true
-
-# Download and install promu for the specified OS and Architecture
-ARG TARGETOS TARGETARCH
-RUN wget https://github.com/prometheus/promu/releases/download/v0.17.0/promu-0.17.0.${TARGETOS}-${TARGETARCH}.tar.gz \
-    && tar -xzf promu-0.17.0.${TARGETOS}-${TARGETARCH}.tar.gz -C /usr/local/bin \
-    && rm promu-0.17.0.${TARGETOS}-${TARGETARCH}.tar.gz \
-    && make build
+# Build prometheus directly using Go
+RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./prometheus ./cmd/prometheus
 
 FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 
