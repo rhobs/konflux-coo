@@ -67,6 +67,10 @@ COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenan
 
 COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-0-4-rhel9@sha256:585557e4e9edd1897bddc55eed37b5d0bc2cfdacfddd5e3f2efbdc1b432785d7"
 
+COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-0-50-rhel8@<PLACEHOLDER_FOR_SHA256>"
+
+COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-operator-0-1-rhel8@<PLACEHOLDER_FOR_SHA256>"
+
 if [[ $REGISTRY == "registry.redhat.io"  || $REGISTRY == "registry.stage.redhat.io" ]]; then
     COO_IMAGE_URL="$REGISTRY/${COO_IMAGE_URL:(58)}"
     COO_CONF_RELOADER_IMAGE_URL="$REGISTRY/${COO_CONF_RELOADER_IMAGE_URL:(58)}"
@@ -84,6 +88,8 @@ if [[ $REGISTRY == "registry.redhat.io"  || $REGISTRY == "registry.stage.redhat.
     COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL:(58)}"
     COO_KORREL8R_IMAGE_URL="$REGISTRY/${COO_KORREL8R_IMAGE_URL:(58)}"
     COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="$REGISTRY/${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL:(58)}"
+    COO_PERSES_IMAGE_URL="$REGISTRY/${COO_PERSES_IMAGE_URL:(58)}"
+    COO_PERSES_OPERATOR_IMAGE_URL="$REGISTRY/${COO_PERSES_OPERATOR_IMAGE_URL:(58)}"
 fi
 
 
@@ -106,6 +112,8 @@ VALUE="${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL}" yq -i '(.spec.rela
 VALUE="${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-monitoring", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_KORREL8R_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"korrel8r", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"cluster-health-analyzer", "image": strenv(VALUE)}])' "$csv_file"
+VALUE="${COO_PERSES_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"perses", "image": strenv(VALUE)}])' "$csv_file"
+VALUE="${COO_PERSES_OPERATOR_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"perses-operator", "image": strenv(VALUE)}])' "$csv_file"
 
 # Replace quay.io/rhobs image urls with registry-proxy.engineering.redhat.com/
 # urls to get brew builds to pass
@@ -180,6 +188,12 @@ VALUE="${COO_KORREL8R_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | sel
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=health-analyzer=$(RELATED_IMAGE_CLUSTER_HEALTH_ANALYZER)"]' "$csv_file"
 VALUE="${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CLUSTER_HEALTH_ANALYZER", "value": strenv(VALUE)}]' "$csv_file"
+
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=perses=$(RELATED_IMAGE_PERSES)"]' "$csv_file"
+VALUE="${COO_PERSES_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_PERSES", "value": strenv(VALUE)}]' "$csv_file"
+
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=perses-operator=$(RELATED_IMAGE_PERSES_OPERATOR)"]' "$csv_file"
+VALUE="${COO_PERSES_OPERATOR_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_PERSES_OPERATOR", "value": strenv(VALUE)}]' "$csv_file"
 
 # set openshift.enabled feature gate
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) += ["--openshift.enabled=true"]' "$csv_file"
