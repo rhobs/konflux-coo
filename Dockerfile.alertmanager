@@ -1,20 +1,25 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.22 AS builder
+FROM registry.redhat.io/ubi9/nodejs-20:latest AS web-builder
 
-RUN dnf module install -y nodejs:16/development
-
-ENV NPM_CONFIG_NODEDIR=/usr
-ENV GOFLAGS='-mod=mod'
+USER 0
 
 WORKDIR /workspace
 
-# Copy source files
 COPY alertmanager/ .
 
-# Build
-ENV NO_DOCKER=true
-RUN make build
+RUN make build-react-app assets-compress
 
-FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1130
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.22 AS builder
+
+WORKDIR /workspace
+
+COPY --from=web-builder /workspace/ .
+
+ENV GOFLAGS='-mod=mod'
+ENV CGO_ENABLED=0
+ENV NO_DOCKER=true
+RUN make common-build
+
+FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 
 COPY --from=builder workspace/amtool       /bin/amtool
 COPY --from=builder workspace/alertmanager /bin/alertmanager
