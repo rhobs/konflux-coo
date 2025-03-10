@@ -13,7 +13,7 @@ metadata:
               (".tekton/.tekton/prometheus-1-1-pull-request.yaml".pathChanged() ||
               ".tekton/.tekton/prometheus-1-1-push.yaml".pathChanged() ||
               "Dockerfile.prometheus".pathChanged() ||
-              "prometheus".pathChanged()))
+              "prometheus".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
   creationTimestamp: null
   labels:
