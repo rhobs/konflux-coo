@@ -45,7 +45,7 @@
 [submodule "perses-operator"]
 	path = perses-operator
 	url = https://github.com/perses/perses-operator
-	branch = release-coo-1.1
+	branch = release/v0.1
 [submodule "perses"]
 	path = perses
 	url = https://github.com/perses/perses.git
