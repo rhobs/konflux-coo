@@ -161,6 +161,9 @@ VALUE="${COO_PROMETHEUS_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | s
 sed -i -e 's|--images=thanos=.*|"--images=thanos=$(RELATED_IMAGE_THANOS)"|' "$csv_file"
 VALUE="${COO_THANOS_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_THANOS", "value": strenv(VALUE)}]' "$csv_file"
 
+sed -i -e 's|--images=perses=.*|"--images=perses=$(RELATED_IMAGE_PERSES)"|' "$csv_file"
+VALUE="${COO_PERSES_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_PERSES", "value": strenv(VALUE)}]' "$csv_file"
+
 # TODO Once COO-144 is fixed reenable the sed command below and delete lines 150, 153, 156, 159, 162
 # sed -i -e 's|--images=ui-dashboards=.*|"--images=ui-dashboards=$(RELATED_IMAGE_CONSOLE_DASHBOARDS_PLUGIN)"|' "$csv_file"
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-dashboards=$(RELATED_IMAGE_CONSOLE_DASHBOARDS_PLUGIN)"]' "$csv_file"
@@ -189,9 +192,6 @@ VALUE="${COO_KORREL8R_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | sel
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=health-analyzer=$(RELATED_IMAGE_CLUSTER_HEALTH_ANALYZER)"]' "$csv_file"
 VALUE="${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CLUSTER_HEALTH_ANALYZER", "value": strenv(VALUE)}]' "$csv_file"
-
-yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=perses=$(RELATED_IMAGE_PERSES)"]' "$csv_file"
-VALUE="${COO_PERSES_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_PERSES", "value": strenv(VALUE)}]' "$csv_file"
 
 # set openshift.enabled feature gate
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) += ["--openshift.enabled=true"]' "$csv_file"
