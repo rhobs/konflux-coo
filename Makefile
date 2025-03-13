@@ -1,4 +1,10 @@
-## Tools
+.PHONY: all
+all: verify lint
+
+.PHONY: verify
+verify:
+	./hack/verify-render-templates.sh
+
 .PHONY: lint
 lint: lint-pipelines
 
