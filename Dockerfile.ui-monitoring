@@ -7,7 +7,7 @@ USER 0
 ENV HUSKY=0
 COPY ui-monitoring/web/package*.json web/
 COPY ui-monitoring/Makefile Makefile
-RUN make install-frontend-ci
+RUN cd web && npm ci --legacy-peer-deps --omit=optional --ignore-scripts
 
 COPY ui-monitoring/web/ web/
 COPY ui-monitoring/config/ config/
@@ -29,10 +29,13 @@ RUN make install-backend
 COPY ui-monitoring/cmd/ cmd/
 COPY ui-monitoring/pkg/ pkg/
 
+ENV GOOS=${TARGETOS:-linux}
+ENV GOARCH=${TARGETARCH}
 ENV GOEXPERIMENT=strictfipsruntime
+ENV GOFLAGS=-mod=readonly
 ENV CGO_ENABLED=1
 
-RUN make build-backend BUILD_OPTS="-tags strictfipsruntime"
+RUN make build-backend
 
 FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 
