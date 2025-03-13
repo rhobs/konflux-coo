@@ -9,3 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: make --always-make lint
+  verify:
+    name: Run verification steps
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make --always-make verify
