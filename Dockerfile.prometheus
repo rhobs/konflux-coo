@@ -6,7 +6,7 @@ WORKDIR /workspace
 
 COPY prometheus/ .
 
-RUN make assets
+RUN make assets-compress
 
 FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.22 AS builder
 
@@ -16,9 +16,8 @@ WORKDIR /workspace
 
 COPY --from=web-builder /workspace/ .
 
-ENV GOFLAGS='-mod=mod'
+ENV GOFLAGS='-mod=mod -tags=builtinassets,netgo,stringlabels'
 ENV CGO_ENABLED=0
-ENV SKIP_UI_BUILD=true
 # Build prometheus directly using Go
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./prometheus ./cmd/prometheus
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./promtool ./cmd/promtool
