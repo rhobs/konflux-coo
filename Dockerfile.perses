@@ -1,4 +1,4 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.23 AS build-env
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.23 as builder
 USER root
 
 RUN dnf install -y --setopt=tsflags=nodocs mailcap && \
@@ -14,19 +14,19 @@ RUN go mod download
 RUN make build-api 
 RUN make build-cli
 
-FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1130
+FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 
 LABEL maintainer="Observability UI team <team-observability-ui@redhat.com>"
 
 USER 1001
 
-COPY --from=build-env --chown=nobody:nobody /app/bin/perses                         /bin/perses
-COPY --from=build-env --chown=nobody:nobody /app/bin/percli                         /bin/percli
-COPY --from=build-env --chown=nobody:nobody /app/docs/examples/config.docker.yaml   /etc/perses/config.yaml
-COPY --from=build-env --chown=nobody:nobody /app/cue/schemas                        /etc/perses/cue/schemas
-COPY --from=build-env --chown=nobody:nobody /app/cue.mod                            /etc/perses/cue.mod
-COPY --from=build-env --chown=nobody:nobody /app/LICENSE                            /LICENSE
-COPY --from=build-env --chown=nobody:nobody /etc/mime.types                         /etc/mime.types
+COPY --from=builder --chown=nobody:nobody /app/bin/perses                         /bin/perses
+COPY --from=builder --chown=nobody:nobody /app/bin/percli                         /bin/percli
+COPY --from=builder --chown=nobody:nobody /app/docs/examples/config.docker.yaml   /etc/perses/config.yaml
+COPY --from=builder --chown=nobody:nobody /app/cue/schemas                        /etc/perses/cue/schemas
+COPY --from=builder --chown=nobody:nobody /app/cue.mod                            /etc/perses/cue.mod
+COPY --from=builder --chown=nobody:nobody /app/LICENSE                            /LICENSE
+COPY --from=builder --chown=nobody:nobody /etc/mime.types                         /etc/mime.types
 
 WORKDIR /perses
 
