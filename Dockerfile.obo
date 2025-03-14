@@ -1,4 +1,4 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.23 as builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.23 as builder
 
 WORKDIR /workspace
 # Copy the Go Modules manifests
@@ -16,7 +16,7 @@ RUN OC_PATH=$(which oc); \
     echo ${OC_PATH}; \
     cp ${OC_PATH} /tmp/oc
 
-FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1130
+FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 WORKDIR /
 
 # skip, only needed for must gather

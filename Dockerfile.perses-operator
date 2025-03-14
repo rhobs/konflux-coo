@@ -1,4 +1,4 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_8_golang_1.23 AS build-env
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.23 as builder
 
 USER root
 
@@ -12,15 +12,15 @@ COPY perses-operator/ .
 
 RUN make bin
 
-FROM registry.redhat.io/ubi8/ubi-minimal:8.10-1130
+FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 
 LABEL maintainer="Observability UI team <team-observability-ui@redhat.com>"
 
 USER nobody
 
-COPY --from=build-env --chown=nobody:nobody /app/bin/manager  /bin/manager
-COPY --from=build-env --chown=nobody:nobody /app/LICENSE      /LICENSE
-COPY --from=build-env --chown=nobody:nobody /etc/mime.types   /etc/mime.types
+COPY --from=builder --chown=nobody:nobody /app/bin/manager  /bin/manager
+COPY --from=builder --chown=nobody:nobody /app/LICENSE      /LICENSE
+COPY --from=builder --chown=nobody:nobody /etc/mime.types   /etc/mime.types
 
 EXPOSE     8080
 ENTRYPOINT [ "/bin/manager" ]
