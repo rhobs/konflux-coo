@@ -2,6 +2,7 @@ FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.23 as bui
 
 USER root
 
+RUN subscription-manager refresh
 RUN dnf install -y python3 python3-pyyaml
 
 # renovate: datasource=github-releases depName=mikefarah/yq
