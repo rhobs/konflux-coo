@@ -29,7 +29,7 @@ spec:
     - name: revision
       value: '{{revision}}'
     - name: output-image
-      value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-operator-0-1-rhel8:{{revision}}
+      value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-operator-0-1-rhel9:{{revision}}
     - name: build-platforms
       value:
         - linux/x86_64
