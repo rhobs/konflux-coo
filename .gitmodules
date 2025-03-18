@@ -13,7 +13,7 @@
 [submodule "observability-operator"]
 	path = observability-operator
 	url = https://github.com/rhobs/observability-operator
-        branch = release-1.1
+    branch = release-1.1
 [submodule "ui-logging"]
 	path = ui-logging
 	url = https://github.com/openshift/logging-view-plugin.git
@@ -37,7 +37,7 @@
 [submodule "thanos"]
 	path = thanos
 	url = https://github.com/openshift/thanos.git
-        branch = release-4.19
+        branch = release-4.18
 [submodule "korrel8r"]
         path = korrel8r
         url = https://github.com/korrel8r/korrel8r.git
@@ -45,11 +45,11 @@
 [submodule "perses-operator"]
 	path = perses-operator
 	url = https://github.com/perses/perses-operator
-	branch = release/v0.1
+	branch = release-coo-1.1
 [submodule "perses"]
 	path = perses
 	url = https://github.com/perses/perses.git
-	branch = release/v0.50
+	branch = release-0.50.1
 [submodule "cluster-health-analyzer"]
 	path = cluster-health-analyzer
 	url = https://github.com/openshift/cluster-health-analyzer
