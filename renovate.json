@@ -8,5 +8,8 @@
     ],
     "dockerfile": {
         "fileMatch": ["^Dockerfile\\.[a-zA-Z0-9\\.-]+$"]
+    },
+    {
+      "baseBranches": ["$default"]
     }
 }
