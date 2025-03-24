@@ -45,11 +45,11 @@
 [submodule "perses-operator"]
 	path = perses-operator
 	url = https://github.com/perses/perses-operator
-	branch = release-coo-1.1
+	branch = release/v0.1
 [submodule "perses"]
 	path = perses
 	url = https://github.com/perses/perses.git
-	branch = release-0.50.1
+	branch = release/v0.50
 [submodule "cluster-health-analyzer"]
 	path = cluster-health-analyzer
 	url = https://github.com/openshift/cluster-health-analyzer
