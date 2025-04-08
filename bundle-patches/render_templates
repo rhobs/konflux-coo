@@ -4,11 +4,11 @@ set -ex
 
 csv_file="$1"
 annotation_file="$2"
-PRODUCT_VERSION="1.1.0"
+PRODUCT_VERSION="1.1.1"
 X_VERSION="1"
 Y_VERSION="1"
 Z_VERSION="0"
-CSV_REPLACES_VERSION="1.0.0"
+CSV_REPLACES_VERSION="1.1.0"
 
 if [[ -z "$REGISTRY" ]]; then
     echo "Must provide REGISTRY in environment" 1>&2
