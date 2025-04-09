@@ -1,0 +1,28 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: coo-fbc-v4-17-prod-v2
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: coo-fbc-v4-17-prod-release-plan
+  snapshot: coo-fbc-v4-17-p9pxr
+  data:
+    releaseNotes:
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.1.0 release
+      topic: Red Hat build of Cluster Observability Operator 1.1.0 has been released
+      description: |
+        New features and enhancements:
+        * You can now install the monitoring UI plugin. https://issues.redhat.com/browse/COO-262
+
+        * You can enable incident detection in the monitoring UI plugin.https://issues.redhat.com/browse/COO-690
+
+        * TLS support for the Thanos web endpoint has been added. https://issues.redhat.com/browse/COO-222
+      type: RHBA
+      issues:
+        fixed:
+          - id: COO-332
+            source: issues.redhat.com

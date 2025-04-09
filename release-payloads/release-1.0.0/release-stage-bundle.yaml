@@ -1,0 +1,19 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  namespace: cluster-observabilit-tenant
+  name: coo-1.0-test-stage-release-feb17-v3
+spec:
+  releasePlan: cluster-observability-operator-1-0-stage
+  snapshot: cluster-observability-operator-1-0-w44jg
+  data:
+    releaseNotes:
+      type: RHBA
+      topic: "Cluster Observability Operator 1.0.0 release - staging."
+      issues:
+        fixed:
+          - id: COO-530
+            source: issues.redhat.com
+      references:
+        - https://access.redhat.com/security/updates/classification

@@ -1,0 +1,8 @@
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: cluster-observability-operator-1-1-03-24-v2
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: cluster-observability-operator-1-1-stage
+  snapshot: cluster-observability-operator-1-1-t9p9m

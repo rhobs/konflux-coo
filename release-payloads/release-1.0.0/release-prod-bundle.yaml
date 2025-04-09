@@ -1,0 +1,56 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  namespace: cluster-observabilit-tenant
+  name: coo-1.0-prod-release-v1
+spec:
+  releasePlan: cluster-observability-operator-1-0-prod
+  snapshot: cluster-observability-operator-1-0-w44jg
+  data:
+    releaseNotes:
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/4.17/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.0.0 release
+      topic: Red Hat build of Cluster Observability Operator 1.0.0 has been released
+      description: |
+        New features and enhancements:
+
+        * COO is now enabled for OpenShift Container Platform platform monitoring. (COO-476)
+
+          Implements HTTPS support for COO web server. (COO-480)
+
+          Implements authn/authz for COO web server. (COO-481)
+
+          Configures ServiceMonitor resource to collect metrics from COO. (COO-482)
+
+          Adds operatorframework.io/cluster-monitoring=true annotation to the OLM bundle. (COO-483)
+
+          Defines the alerting strategy for COO . (COO-484)
+
+          Configures PrometheusRule for alerting. (COO-485)
+
+        * Support level annotations have been added to the UIPlugin CR when created. The support level is based on the plugin type, with values of DevPreview, TechPreview, or GeneralAvailability. (COO-318)
+
+        * You can now gather debugging information about COO by using the oc adm must-gather CLI command. (COO-194)
+
+        * You can now configure the Alertmanager scheme and tlsConfig fields in the Prometheus CR. (COO-219)
+
+        * You can now install the Monitoring UI plugin using COO. (COO-262)
+      type: RHSA
+      issues:
+        fixed:
+          - id: COO-32
+            source: issues.redhat.com
+          - id: COO-319
+            source: issues.redhat.com
+          - id: COO-558
+            source: issues.redhat.com
+      cves:
+        - key: CVE-2023-26159 
+          component: cluster-observability-operator-container
+        - key: CVE-2024-28849
+          component: cluster-observability-operator-container
+        - key: CVE-2024-45338
+          component: cluster-observability-operator-container
