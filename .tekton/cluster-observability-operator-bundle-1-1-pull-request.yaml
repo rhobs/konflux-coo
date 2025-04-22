@@ -14,6 +14,7 @@ metadata:
       "Dockerfile.bundle".pathChanged() ||
       "bundle-patches/***".pathChanged() ||
       "observability-operator".pathChanged())
+    build.appstudio.openshift.io/build-nudge-files: hack/update-catalog.sh
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-1
