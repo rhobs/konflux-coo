@@ -7,7 +7,7 @@ annotation_file="$2"
 PRODUCT_VERSION="1.1.1"
 X_VERSION="1"
 Y_VERSION="1"
-Z_VERSION="0"
+Z_VERSION="1"
 CSV_REPLACES_VERSION="1.1.0"
 
 if [[ -z "$REGISTRY" ]]; then
