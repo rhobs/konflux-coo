@@ -13,7 +13,7 @@ metadata:
               (".tekton/cluster-health-analyzer-0-4-1-1-pull-request.yaml".pathChanged() ||
               ".tekton/cluster-health-analyzer-0-4-1-1-push.yaml".pathChanged() ||
               "Dockerfile.cluster-health-analyzer".pathChanged() ||
-              "cluster-health-analyzer".pathChanged())
+              "cluster-health-analyzer/***".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
   creationTimestamp: null
   labels:
