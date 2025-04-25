@@ -612,7 +612,8 @@ spec:
         optional: true
       - name: netrc
         optional: true
-  taskRunTemplate: {}
+  taskRunTemplate:
+    serviceAccountName: build-pipeline-thanos-1-1
   workspaces:
     - name: git-auth
       secret:

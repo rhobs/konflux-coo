@@ -610,7 +610,8 @@ spec:
         optional: true
       - name: netrc
         optional: true
-  taskRunTemplate: {}
+  taskRunTemplate:
+    serviceAccountName: build-pipeline-distributed-tracing-console-plugin-0-4-1-1
   workspaces:
     - name: git-auth
       secret:
