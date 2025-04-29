@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
+# run like so:
+# ./hack/image-mirror.sh -idms_stage | -idms | -icsp_stage | -icsp
 
 #Create when testing with bundle/FBC stage release images
 #OCP 4.12 and previous version
