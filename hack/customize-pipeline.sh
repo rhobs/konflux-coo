@@ -1,4 +1,4 @@
-branch="release-1.1"
+branch="release-1.2"
 for file in "$@"
 do
     echo "Processing file $file"
