@@ -1,3 +1,6 @@
+#!/bin/bash
+# run like so:
+# ./hack/customize-pipeline.sh <pipeline file to customize> [more files]
 branch="release-1.2"
 for file in "$@"
 do
