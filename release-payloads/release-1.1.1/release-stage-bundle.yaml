@@ -1,0 +1,21 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  namespace: cluster-observabilit-tenant
+  name: coo-1.1.1-stage-release-bsnrg-04-30-08-44
+spec:
+  releasePlan: cluster-observability-operator-1-1-stage
+  snapshot: cluster-observability-operator-1-1-trcrt
+  data:
+    releaseNotes:
+      type: RHBA
+      topic: "Cluster Observability Operator 1.1.1 release - staging."
+      issues:
+        fixed:
+          - id: COO-784
+            source: issues.redhat.com
+          - id: COO-817
+            source: issues.redhat.com
+      references:
+        - https://access.redhat.com/security/updates/classification
