@@ -1,0 +1,25 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: coo-1-1-1-fbc-v4-18-prod-v1
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: coo-fbc-v4-18-prod-release-plan
+  snapshot: coo-fbc-v4-18-n6gqs
+  data:
+    releaseNotes:
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.1.1 release
+      topic: Red Hat build of Cluster Observability Operator 1.1.1 has been released
+      description: |
+        This is a bug fix release following v1.1.0
+      type: RHBA
+      issues:
+        fixed:
+          - id: COO-784
+            source: issues.redhat.com
+          - id: COO-817
+            source: issues.redhat.com
