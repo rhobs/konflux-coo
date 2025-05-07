@@ -4,7 +4,6 @@ WORKDIR /workspace
 
 COPY thanos .
 
-ENV GOFLAGS='-mod=mod -a'
 ENV CGO_ENABLED=0
 
 # Install promu and build thanos
