@@ -28,6 +28,10 @@ spec:
       value: '{{source_url}}'
     - name: revision
       value: '{{revision}}'
+    - name: prefetch-input
+      value: '[{"type": "gomod", "path": "./thanos"}]'
+    - name: hermetic
+      value: "true"
     - name: output-image
       value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/thanos-rhel9:on-pr-{{revision}}
     - name: image-expires-after
@@ -164,10 +168,6 @@ spec:
             value: $(params.git-url)
           - name: revision
             value: $(params.revision)
-          - name: prefetch-input
-            value: '[{"type": "gomod", "path": "./thanos"}]'
-          - name: hermetic
-            value: "true"
           - name: ociStorage
             value: $(params.output-image).git
           - name: ociArtifactExpiresAfter
