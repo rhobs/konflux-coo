@@ -164,6 +164,10 @@ spec:
             value: $(params.git-url)
           - name: revision
             value: $(params.revision)
+          - name: prefetch-input
+            value: '[{"type": "gomod", "path": "./thanos"}]'
+          - name: hermetic
+            value: "true"
           - name: ociStorage
             value: $(params.output-image).git
           - name: ociArtifactExpiresAfter
