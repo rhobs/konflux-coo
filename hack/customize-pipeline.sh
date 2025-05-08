@@ -16,14 +16,20 @@ do
         \".tekton/$component-push.yaml\".pathChanged() ||
         \"$dockerfile\".pathChanged() ||
         \"bundle-patches/***\".pathChanged() ||
-        \"observability-operator/***\".pathChanged())"
+        \"observability-operator/bundle/***\".pathChanged())"
+        if [[ $action == "push" ]]; then
+            yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "hack/update-catalog.sh"}' "$file"
+            yq -i '.spec.params += [{"name": "build-args", "value": ["REGISTRY=registry.redhat.io"]}]' "$file"
+        fi
     else
         export trigger="event == \"$action\" && target_branch == \"$branch\" &&
         (\".tekton/$component-pull-request.yaml\".pathChanged() ||
         \".tekton/$component-push.yaml\".pathChanged() ||
         \"$dockerfile\".pathChanged() ||
         \"$src/***\".pathChanged())"
-        yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "bundle-patches/render_templates"}' "$file"
+        if [[ $action == "push" ]]; then
+            yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "bundle-patches/render_templates"}' "$file"
+        fi
     fi
     yq -i '.metadata.annotations += {"pipelinesascode.tekton.dev/on-cel-expression": strenv(trigger)}' "$file"
     yq -i '(.spec.params[] | select(.name == "build-platforms").value | select(length == 1)) += ["linux/arm64","linux/ppc64le","linux/s390x"]' "$file"
