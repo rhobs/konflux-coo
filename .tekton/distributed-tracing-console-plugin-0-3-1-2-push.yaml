@@ -41,6 +41,10 @@ spec:
       value: .
     - name: build-source-image
       value: "true"
+    - name: hermetic
+      value: "true"
+    - name: prefetch-input
+      value: '[{"type": "gomod", "path": "./ui-distributed-tracing-pf4"}, {"type": "npm", "path": "./ui-distributed-tracing-pf4/web"}]'
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
