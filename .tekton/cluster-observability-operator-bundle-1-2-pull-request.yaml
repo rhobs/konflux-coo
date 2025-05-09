@@ -14,7 +14,7 @@ metadata:
               ".tekton/cluster-observability-operator-bundle-1-2-push.yaml".pathChanged() ||
               "Dockerfile.bundle".pathChanged() ||
               "bundle-patches/***".pathChanged() ||
-              "observability-operator/***".pathChanged())
+              "observability-operator/bundle/***".pathChanged())
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2

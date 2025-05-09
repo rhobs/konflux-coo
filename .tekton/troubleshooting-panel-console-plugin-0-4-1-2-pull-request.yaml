@@ -14,7 +14,6 @@ metadata:
               ".tekton/troubleshooting-panel-console-plugin-0-4-1-2-push.yaml".pathChanged() ||
               "Dockerfile.ui-troubleshooting-panel".pathChanged() ||
               "ui-troubleshooting-panel/***".pathChanged())
-    build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
