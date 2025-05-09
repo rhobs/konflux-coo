@@ -36,7 +36,7 @@ yq -i '.metadata.labels += {"operatorframework.io/arch.s390x": "supported"}' "$c
 
 COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel9-operator@sha256:9fa6fcd564cc14f6aa0d3c26f4c5b249d90639465e869f81853ab4c0fa4c0447"
 
-COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:3e43d8602acc385067917f4ac6cccba6fa2bbfbeea192d808f20aa8ee8bec783"
+COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:e2419b7e87431b51e7ea970ca943f7c9eea21fd425e09ecbe612859c90f327c5"
 
 COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/alertmanager-rhel9@sha256:e0193ac820e502deb7041bdbfc3f53071f6c529c9580d7d5a164f6025a96dd69"
 
