@@ -1,8 +1,8 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.23 as builder
+FROM registry.redhat.io/ubi9/ubi-minimal@sha256:e1c4703364c5cb58f5462575dc90345bcd934ddc45e6c32f9c162f2b5617681c as builder
 
 USER root
 
-RUN dnf install -y python3 python3-pyyaml
+RUN microdnf install -y python3 python3-pyyaml
 
 # renovate: datasource=github-releases depName=mikefarah/yq
 ARG YQ_VERSION=4.43.1
@@ -25,7 +25,7 @@ RUN ./render_templates bundle/manifests/cluster-observability-operator.clusterse
 
 
 
-FROM registry.redhat.io/rhel9-4-els/rhel:9.4
+FROM scratch
 
 # Core bundle labels.
 LABEL operators.operatorframework.io.bundle.mediatype.v1=registry+v1
