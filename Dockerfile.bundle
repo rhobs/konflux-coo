@@ -44,14 +44,17 @@ LABEL operators.operatorframework.io.test.config.v1=tests/scorecard/
 
 LABEL com.redhat.component="coo-bundle" \
       name="cluster-observability-operator-bundle" \
-      version="v1.1.1" \
+      release="v1.2.0" \
+      version="v1.2.0" \
       com.redhat.openshift.versions="v4.12" \
+      distribution-scope="public" \
       summary="Cluster Observability Operator Bundle" \
       io.openshift.tags="openshift,observability,monitoring" \
       io.k8s.display-name="Cluster Observability Operator Bundle" \
       maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
       description="Cluster Observability Operator Bundle" \
       io.k8s.description="Cluster Observability Operator Bundle" \
+      url="https://github.com/rhobs/observability-operator"\
       vendor="Red Hat, Inc."
 
 # Copy files to locations specified by labels.
