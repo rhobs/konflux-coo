@@ -46,4 +46,4 @@ LABEL com.redhat.component="coo-alertmanager" \
       io.k8s.display-name="Alertmanager" \
       io.k8s.description="Alertmanager handles alerts sent by client applications such as the Prometheus server" \
       maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
-      description="Alertmanager for Cluster Observability Operator" \
+      description="Alertmanager for Cluster Observability Operator"
