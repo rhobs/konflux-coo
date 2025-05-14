@@ -53,7 +53,7 @@
 [submodule "cluster-health-analyzer"]
 	path = cluster-health-analyzer
 	url = https://github.com/openshift/cluster-health-analyzer
-	branch = release-0.4
+	branch = release-0.5
 [submodule "ui-logging-pf4"]
 	path = ui-logging-pf4
 	url = https://github.com/openshift/logging-view-plugin.git

@@ -36,39 +36,39 @@ yq -i '.metadata.labels += {"operatorframework.io/arch.s390x": "supported"}' "$c
 
 COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel9-operator@sha256:9fa6fcd564cc14f6aa0d3c26f4c5b249d90639465e869f81853ab4c0fa4c0447"
 
-COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:3e43d8602acc385067917f4ac6cccba6fa2bbfbeea192d808f20aa8ee8bec783"
+COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:817bd4aad1c6fbcae693e21899743f4175597e873e62d5adb0ba6fdedeca7291"
 
-COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/alertmanager-rhel9@sha256:e0193ac820e502deb7041bdbfc3f53071f6c529c9580d7d5a164f6025a96dd69"
+COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/alertmanager-rhel9@sha256:e0723a192895ed470b98058c8ceca8e3109a8c5cad6f1ebf925e42d5bf06f442"
 
-COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/prometheus-rhel9@sha256:052e0cb8242b971fd96fe09e482ee3d731d116a08a69165546012fa3a7759de9"
+COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/prometheus-rhel9@sha256:c05766e583c8330070ceb94a04a8c83d0729ba448698a01c7f7e4f7de0724b97"
 
-COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/thanos-rhel9@sha256:ef5b462cc97c1393ef3ef5500bb21a7f4f82b160a7b961c13a8b22088076cd5a"
+COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/thanos-rhel9@sha256:09549686768a81a3c9f58d9c433a6d71e1c5c9ca0e5fe5fa6f14ca92d4821e49"
 
-COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel9@sha256:c4bee24f466b89ceb52d29a6e1caf0044892f3ed754170d7c4fcd5cb1460d909"
+COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel9@sha256:ed7c5069bfc1569ec793f33d3a4b9c910552d147ac3563a8d9c4f76f16b0b982"
 
-COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-rhel9-operator@sha256:b7322b5e24bfccf3f841a7451109c042c7b2db206b251a68018afe6f2326b13c"
+COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-rhel9-operator@sha256:b74e8894914f1ceb8159265564a1f705ddfc8cf42edaeeba180d2cc9c5045604"
 
-COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/dashboards-console-plugin-0-4-rhel9@sha256:7a9797ff3c6f2a25f511e793d3a9701f1c8c955ebab91a580f31c9a62308453d"
+COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/dashboards-console-plugin-0-4-rhel9@sha256:53ea77e3d9615a7481d8b489e990fab659f4d48a9532141cfca0ebeb52b1b2b2"
 
 COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-0-4-rhel9@sha256:b8fda6eccaf6f880b1c09a63e07de88f89dccb35f944330eb143de84509733f1"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-0-3-rhel9@sha256:e6af27b27316926a04c8ec5a200f4be26b02955c712a0ae1755a066cb30fc8ef"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-0-3-rhel9@sha256:5ec59bd8cc809c20610ff2d9640bcdd17248a1a4cc46bd697869fe369d6a0c87"
 
-COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-6-1-rhel9@sha256:9b3b54d5ef910836acdfa62d849a4ed4c5e255f6a8d045bfb1578328138fe3c9"
+COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-6-1-rhel9@sha256:373f25896a6d7193d63b759ef829e6acda6e30e64b4be01bf3d7e1d66ac249cf"
 
-COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-6-0-rhel9@sha256:5465a586c702ba8e6ffb87af782bd820c0ee08352b6e6c3767e062dd70d012c0"
+COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-6-0-rhel9@sha256:8aa8edf3bd33c1fdcb9c07fd91ec331bd5c036e54ee1d8cb8bc0790f0e3ed7a6"
 
-COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/troubleshooting-panel-console-plugin-0-4-rhel9@sha256:ef570316c8519aa570478b7f0a4396592eff24f49e085f0a5e104ff88b3a4cf9"
+COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/troubleshooting-panel-console-plugin-0-4-rhel9@sha256:406b82b5b4e6c5f4246e24396c2b602a1808dc7031d5b56afa5c42bcb6e4f7fb"
 
-COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-0-4-rhel9@sha256:839106a36a951ac09970b31f31735b2eed6ceaf0fa9f80edfb4d056c966a8713"
+COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-0-4-rhel9@sha256:e971fe67a04ac794eefe2cd071cff4e17ac324ecb245ea90674e366505a192ca"
 
 COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/korrel8r-rhel9@sha256:f6c560f57a65ceb8879ee03eb0d67e037b934c1c6867c8a1b940569ddd4ee1dd"
 
-COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-0-4-rhel9@sha256:bf8597e7a2f2a15c05d139dbe27394f94987c61e81417cf8ea0bc38fd01d747b"
+COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-rhel9@sha256:f07180535496586e7b29afa1c77346f382135b39e1109a7d5e3d4de5ac4c47da"
 
-COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-0-50-rhel9@sha256:1a5890f8dacdbec3e766c3e7641468a9721ab432d571de065d5b9dbe716798bd"
+COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-0-50-rhel9@sha256:4e4fe7efdebb605a601a9ab083b5e496e80124d668867605b0cdb4e2dac67951"
 
-COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-0-1-rhel9-operator@sha256:c960a529005440157cfaf81cbc8efa22fc831dec59916bcfb07d13bec06bf66c"
+COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-0-1-rhel9-operator@sha256:b3b610933baeeed50b3c7e707b57d116013b58f5fbfdbfb1a75125093b385f87"
 
 if [[ $REGISTRY == "registry.redhat.io"  || $REGISTRY == "registry.stage.redhat.io" ]]; then
     COO_IMAGE_URL="$REGISTRY/${COO_IMAGE_URL:(58)}"
