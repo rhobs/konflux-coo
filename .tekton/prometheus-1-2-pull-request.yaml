@@ -34,7 +34,7 @@ spec:
     - name: build-platforms
       value:
         - linux/x86_64
-        - linux/arm64
+        - linux-mxlarge/arm64
         - linux/ppc64le
         - linux/s390x
     - name: dockerfile
@@ -43,6 +43,10 @@ spec:
       value: .
     - name: build-source-image
       value: "true"
+    - name: hermetic
+      value: "true"
+    - name: prefetch-input
+      value: '[{"type": "gomod", "path": "./prometheus"}, {"type": "npm", "path": "./prometheus/web/ui"}, {"type": "npm", "path": "./prometheus/web/ui/react-app"}]'
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
