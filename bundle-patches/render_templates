@@ -50,7 +50,9 @@ COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/clus
 
 COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/dashboards-console-plugin-0-4-rhel9@sha256:53ea77e3d9615a7481d8b489e990fab659f4d48a9532141cfca0ebeb52b1b2b2"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-0-4-rhel9@sha256:b8fda6eccaf6f880b1c09a63e07de88f89dccb35f944330eb143de84509733f1"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-1-0-rhel9"
+
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-0-4-rhel9@sha256:5ec59bd8cc809c20610ff2d9640bcdd17248a1a4cc46bd697869fe369d6a0c87"
 
 COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-0-3-rhel9@sha256:5ec59bd8cc809c20610ff2d9640bcdd17248a1a4cc46bd697869fe369d6a0c87"
 
@@ -80,6 +82,7 @@ if [[ $REGISTRY == "registry.redhat.io"  || $REGISTRY == "registry.stage.redhat.
     COO_PO_IMAGE_URL="$REGISTRY/${COO_PO_IMAGE_URL:(58)}"
     COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL:(58)}"
     COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL:(58)}"
+    COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL:(58)}"
     COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL:(58)}"
     COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL:(58)}"
     COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL="$REGISTRY/${COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL:(58)}"
@@ -104,6 +107,7 @@ VALUE="${COO_ADMISSION_WEBHOOK_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"nam
 VALUE="${COO_PO_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"prometheus-operator", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-dashboards", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-tracing", "image": strenv(VALUE)}])' "$csv_file"
+VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-tracing-pf5", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-tracing-pf4", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-logging", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-logging-pf4", "image": strenv(VALUE)}])' "$csv_file"
@@ -151,6 +155,9 @@ VALUE="${COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL}" yq -i '(.spec.install.spec.de
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-distributed-tracing=$(RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN)"]' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN", "value": strenv(VALUE)}]' "$csv_file"
+
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-distributed-tracing-pf5=$(RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5)"]' "$csv_file"
+VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5", "value": strenv(VALUE)}]' "$csv_file"
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-distributed-tracing-pf4=$(RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4)"]' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4", "value": strenv(VALUE)}]' "$csv_file"
