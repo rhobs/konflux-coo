@@ -46,7 +46,7 @@ spec:
     - name: prefetch-input
       value: '[{"type": "gomod", "path": "./perses-operator"}, {"type":  "rpm"}]'
     - name: prefetch-dev-package-managers-enabled
-      value: "true"      
+      value: "true"
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
