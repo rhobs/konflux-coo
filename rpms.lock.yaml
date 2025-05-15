@@ -4,69 +4,69 @@ lockfileVendor: redhat
 arches:
 - arch: aarch64
   packages:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/aarch64/baseos/os/Packages/m/mailcap-2.1.48-3.el8.noarch.rpm
-    repoid: ubi-8-for-aarch64-baseos-rpms
-    size: 39708
-    checksum: sha256:b2d5f3c4e187dc8c6f94b551fc021925188ab7675e02a317111aa0b49965f03e
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/os/Packages/m/mailcap-2.1.49-5.el9.noarch.rpm
+    repoid: ubi-9-for-aarch64-baseos-rpms
+    size: 35492
+    checksum: sha256:6c880effa119e3eaf709ba6290a4f6e2b7294de64baf19ee84f672a89e732090
     name: mailcap
-    evr: 2.1.48-3.el8
-    sourcerpm: mailcap-2.1.48-3.el8.src.rpm
+    evr: 2.1.49-5.el9
+    sourcerpm: mailcap-2.1.49-5.el9.src.rpm
   source:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/aarch64/baseos/source/SRPMS/Packages/m/mailcap-2.1.48-3.el8.src.rpm
-    repoid: ubi-8-for-aarch64-baseos-source-rpms
-    size: 41545
-    checksum: sha256:69f964011d33e14100bf07212c9268ba5b61f2237c5bd6da1498b43c3789d91c
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/aarch64/baseos/source/SRPMS/Packages/m/mailcap-2.1.49-5.el9.src.rpm
+    repoid: ubi-9-for-aarch64-baseos-source-rpms
+    size: 36955
+    checksum: sha256:34c34987a363c83bc8583167709b988837b1686e7b4d7faabe0247731321792b
     name: mailcap
-    evr: 2.1.48-3.el8
+    evr: 2.1.49-5.el9
   module_metadata: []
 - arch: ppc64le
   packages:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/ppc64le/baseos/os/Packages/m/mailcap-2.1.48-3.el8.noarch.rpm
-    repoid: ubi-8-for-ppc64le-baseos-rpms
-    size: 39708
-    checksum: sha256:b2d5f3c4e187dc8c6f94b551fc021925188ab7675e02a317111aa0b49965f03e
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/ppc64le/baseos/os/Packages/m/mailcap-2.1.49-5.el9.noarch.rpm
+    repoid: ubi-9-for-ppc64le-baseos-rpms
+    size: 35492
+    checksum: sha256:6c880effa119e3eaf709ba6290a4f6e2b7294de64baf19ee84f672a89e732090
     name: mailcap
-    evr: 2.1.48-3.el8
-    sourcerpm: mailcap-2.1.48-3.el8.src.rpm
+    evr: 2.1.49-5.el9
+    sourcerpm: mailcap-2.1.49-5.el9.src.rpm
   source:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/ppc64le/baseos/source/SRPMS/Packages/m/mailcap-2.1.48-3.el8.src.rpm
-    repoid: ubi-8-for-ppc64le-baseos-source-rpms
-    size: 41545
-    checksum: sha256:69f964011d33e14100bf07212c9268ba5b61f2237c5bd6da1498b43c3789d91c
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/ppc64le/baseos/source/SRPMS/Packages/m/mailcap-2.1.49-5.el9.src.rpm
+    repoid: ubi-9-for-ppc64le-baseos-source-rpms
+    size: 36955
+    checksum: sha256:34c34987a363c83bc8583167709b988837b1686e7b4d7faabe0247731321792b
     name: mailcap
-    evr: 2.1.48-3.el8
+    evr: 2.1.49-5.el9
   module_metadata: []
 - arch: s390x
   packages:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/s390x/baseos/os/Packages/m/mailcap-2.1.48-3.el8.noarch.rpm
-    repoid: ubi-8-for-s390x-baseos-rpms
-    size: 39708
-    checksum: sha256:b2d5f3c4e187dc8c6f94b551fc021925188ab7675e02a317111aa0b49965f03e
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/s390x/baseos/os/Packages/m/mailcap-2.1.49-5.el9.noarch.rpm
+    repoid: ubi-9-for-s390x-baseos-rpms
+    size: 35492
+    checksum: sha256:6c880effa119e3eaf709ba6290a4f6e2b7294de64baf19ee84f672a89e732090
     name: mailcap
-    evr: 2.1.48-3.el8
-    sourcerpm: mailcap-2.1.48-3.el8.src.rpm
+    evr: 2.1.49-5.el9
+    sourcerpm: mailcap-2.1.49-5.el9.src.rpm
   source:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/s390x/baseos/source/SRPMS/Packages/m/mailcap-2.1.48-3.el8.src.rpm
-    repoid: ubi-8-for-s390x-baseos-source-rpms
-    size: 41545
-    checksum: sha256:69f964011d33e14100bf07212c9268ba5b61f2237c5bd6da1498b43c3789d91c
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/s390x/baseos/source/SRPMS/Packages/m/mailcap-2.1.49-5.el9.src.rpm
+    repoid: ubi-9-for-s390x-baseos-source-rpms
+    size: 36955
+    checksum: sha256:34c34987a363c83bc8583167709b988837b1686e7b4d7faabe0247731321792b
     name: mailcap
-    evr: 2.1.48-3.el8
+    evr: 2.1.49-5.el9
   module_metadata: []
 - arch: x86_64
   packages:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/x86_64/baseos/os/Packages/m/mailcap-2.1.48-3.el8.noarch.rpm
-    repoid: ubi-8-for-x86_64-baseos-rpms
-    size: 39708
-    checksum: sha256:b2d5f3c4e187dc8c6f94b551fc021925188ab7675e02a317111aa0b49965f03e
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/m/mailcap-2.1.49-5.el9.noarch.rpm
+    repoid: ubi-9-for-x86_64-baseos-rpms
+    size: 35492
+    checksum: sha256:6c880effa119e3eaf709ba6290a4f6e2b7294de64baf19ee84f672a89e732090
     name: mailcap
-    evr: 2.1.48-3.el8
-    sourcerpm: mailcap-2.1.48-3.el8.src.rpm
+    evr: 2.1.49-5.el9
+    sourcerpm: mailcap-2.1.49-5.el9.src.rpm
   source:
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi8/8/x86_64/baseos/source/SRPMS/Packages/m/mailcap-2.1.48-3.el8.src.rpm
-    repoid: ubi-8-for-x86_64-baseos-source-rpms
-    size: 41545
-    checksum: sha256:69f964011d33e14100bf07212c9268ba5b61f2237c5bd6da1498b43c3789d91c
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/source/SRPMS/Packages/m/mailcap-2.1.49-5.el9.src.rpm
+    repoid: ubi-9-for-x86_64-baseos-source-rpms
+    size: 36955
+    checksum: sha256:34c34987a363c83bc8583167709b988837b1686e7b4d7faabe0247731321792b
     name: mailcap
-    evr: 2.1.48-3.el8
+    evr: 2.1.49-5.el9
   module_metadata: []
