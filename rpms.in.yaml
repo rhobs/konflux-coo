@@ -1,6 +1,6 @@
 contentOrigin:
   repofiles:
-    - ubi8.repo
+    - ubi9.repo
 packages:
   - mailcap
 arches:
