@@ -28,6 +28,10 @@ spec:
       value: '{{source_url}}'
     - name: revision
       value: '{{revision}}'
+    - name: hermetic
+      value: "true"
+    - name: prefetch-input
+      value: '[{"type": "rpm", "path": "./bundle-patches"}]'
     - name: output-image
       value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-operator-bundle:on-pr-{{revision}}
     - name: image-expires-after
@@ -200,6 +204,8 @@ spec:
         params:
           - name: input
             value: $(params.prefetch-input)
+          - name: dev-package-managers
+            value: "true"
         runAfter:
           - clone-repository
         taskRef:
@@ -626,7 +632,7 @@ spec:
             - ReadWriteOnce
           resources:
             requests:
-              storage: 1Gi
+              storage: 2Gi
         status: {}
     - name: git-auth
       secret:

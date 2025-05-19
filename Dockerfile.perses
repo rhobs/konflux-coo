@@ -11,7 +11,7 @@ COPY perses/ .
 
 ENV GOFLAGS="-mod=readonly"
 RUN go mod download
-RUN make build-api 
+RUN make build-api
 RUN make build-cli
 
 FROM registry.redhat.io/rhel9-4-els/rhel:9.4

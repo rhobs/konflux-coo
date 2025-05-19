@@ -1,0 +1,12 @@
+contentOrigin:
+  repofiles:
+    - ubi9.repo
+packages:
+  - python3
+  - python3-pyyaml
+arches:
+  - x86_64
+context:
+  containerfile:
+    file: ../Dockerfile.bundle
+    stageName: builder
