@@ -12,8 +12,8 @@ metadata:
       event == "pull_request" && target_branch == "release-1.2" &&
               (".tekton/distributed-tracing-console-plugin-0-4-1-2-pull-request.yaml".pathChanged() ||
               ".tekton/distributed-tracing-console-plugin-0-4-1-2-push.yaml".pathChanged() ||
-              "Dockerfile.ui-distributed-tracing".pathChanged() ||
-              "ui-distributed-tracing/***".pathChanged())
+              "Dockerfile.ui-distributed-tracing-pf5".pathChanged() ||
+              "ui-distributed-tracing-pf5".pathChanged())
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2

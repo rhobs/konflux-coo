@@ -12,7 +12,7 @@ metadata:
               (".tekton/distributed-tracing-console-plugin-1-0-1-2-pull-request.yaml".pathChanged() ||
               ".tekton/distributed-tracing-console-plugin-1-0-1-2-push.yaml".pathChanged() ||
               "Dockerfile.ui-distributed-tracing".pathChanged() ||
-              "ui-distributed-tracing/***".pathChanged())
+              "ui-distributed-tracing".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
   creationTimestamp: null
   labels:

@@ -13,7 +13,7 @@ metadata:
               (".tekton/distributed-tracing-console-plugin-0-3-1-2-pull-request.yaml".pathChanged() ||
               ".tekton/distributed-tracing-console-plugin-0-3-1-2-push.yaml".pathChanged() ||
               "Dockerfile.ui-distributed-tracing-pf4".pathChanged() ||
-              "ui-distributed-tracing-pf4/***".pathChanged())
+              "ui-distributed-tracing-pf4".pathChanged())
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
