@@ -26,7 +26,7 @@ do
         (\".tekton/$component-pull-request.yaml\".pathChanged() ||
         \".tekton/$component-push.yaml\".pathChanged() ||
         \"$dockerfile\".pathChanged() ||
-        \"$src/***\".pathChanged())"
+        \"$src\".pathChanged())"
         if [[ $action == "push" ]]; then
             yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "bundle-patches/render_templates"}' "$file"
         fi
