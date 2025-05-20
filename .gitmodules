@@ -37,7 +37,7 @@
 [submodule "korrel8r"]
         path = korrel8r
         url = https://github.com/korrel8r/korrel8r.git
-        branch = v0.8
+        branch = release-coo-1.2
 [submodule "perses-operator"]
 	path = perses-operator
 	url = https://github.com/perses/perses-operator
