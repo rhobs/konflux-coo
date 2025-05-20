@@ -26,6 +26,10 @@
 	path = ui-troubleshooting-panel
 	url = https://github.com/openshift/troubleshooting-panel-console-plugin.git
 	branch = release-0.4
+[submodule "ui-distributed-tracing"]
+	path = ui-distributed-tracing
+	url = https://github.com/openshift/distributed-tracing-console-plugin.git
+	branch = release-0.4
 [submodule "ui-monitoring"]
 	path = ui-monitoring
 	url = https://github.com/openshift/monitoring-plugin.git
@@ -37,7 +41,7 @@
 [submodule "korrel8r"]
         path = korrel8r
         url = https://github.com/korrel8r/korrel8r.git
-        branch = release-coo-1.2
+        branch = v0.8
 [submodule "perses-operator"]
 	path = perses-operator
 	url = https://github.com/perses/perses-operator
@@ -49,7 +53,7 @@
 [submodule "cluster-health-analyzer"]
 	path = cluster-health-analyzer
 	url = https://github.com/openshift/cluster-health-analyzer
-	branch = release-0.5
+	branch = release-0.4
 [submodule "ui-logging-pf4"]
 	path = ui-logging-pf4
 	url = https://github.com/openshift/logging-view-plugin.git
@@ -58,11 +62,3 @@
 	path = ui-distributed-tracing-pf4
 	url = https://github.com/openshift/distributed-tracing-console-plugin.git
 	branch = release-0.3
-[submodule "ui-distributed-tracing-pf5"]
-	path = ui-distributed-tracing-pf5
-	url = https://github.com/openshift/distributed-tracing-console-plugin.git
-	branch = release-0.4
-[submodule "ui-distributed-tracing"]
-	path = ui-distributed-tracing
-	url = https://github.com/openshift/distributed-tracing-console-plugin.git
-	branch = release-1.0
