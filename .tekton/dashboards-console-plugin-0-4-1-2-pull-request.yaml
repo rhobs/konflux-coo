@@ -13,7 +13,7 @@ metadata:
               (".tekton/dashboards-console-plugin-0-4-1-2-pull-request.yaml".pathChanged() ||
               ".tekton/dashboards-console-plugin-0-4-1-2-push.yaml".pathChanged() ||
               "Dockerfile.ui-dashboards".pathChanged() ||
-              "ui-dashboards/***".pathChanged())
+              "ui-dashboards".pathChanged())
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2

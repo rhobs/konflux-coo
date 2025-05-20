@@ -12,7 +12,7 @@ metadata:
               (".tekton/obo-prometheus-operator-admission-webhook-1-2-pull-request.yaml".pathChanged() ||
               ".tekton/obo-prometheus-operator-admission-webhook-1-2-push.yaml".pathChanged() ||
               "Dockerfile.p-o-admission-webhook".pathChanged() ||
-              "obo-prometheus-operator/***".pathChanged())
+              "obo-prometheus-operator".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
   creationTimestamp: null
   labels:
