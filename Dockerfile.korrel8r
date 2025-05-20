@@ -22,7 +22,7 @@ ENTRYPOINT [ "/bin/korrel8r", "web" ]
 
 LABEL com.redhat.component="coo-korrel8r-container" \
       name="rhobs/korrel8r" \
-      version="v0.8.0" \
+      version="release-coo-1.2" \
       summary="Korrel8r for Cluster Observability Operator" \
       io.openshift.expose-services="" \
       io.openshift.tags="monitoring" \
