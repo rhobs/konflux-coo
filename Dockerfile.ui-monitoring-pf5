@@ -52,7 +52,7 @@ ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/d
 
 LABEL com.redhat.component="coo-monitoring-console-plugin" \
       name="openshift/monitoring-console-plugin" \
-      version="v0.5.0" \
+      version="v0.4.0" \
       summary="OpenShift monitoring plugin to view and explore metrics and alerts" \
       io.openshift.tags="openshift,observability-ui,metrics,alerts" \
       io.k8s.display-name="OpenShift console monitoring plugin" \
