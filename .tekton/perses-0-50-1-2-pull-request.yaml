@@ -13,7 +13,7 @@ metadata:
               (".tekton/perses-0-50-1-2-pull-request.yaml".pathChanged() ||
               ".tekton/perses-0-50-1-2-push.yaml".pathChanged() ||
               "Dockerfile.perses".pathChanged() ||
-              "perses/***".pathChanged())
+              "perses".pathChanged())
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
