@@ -174,7 +174,7 @@ spec:
 
               echo "Install COO"
               coo_install_ns=$(params.namespace)
-              operator-sdk run bundle --timeout=5m --namespace "${coo_install_ns}" "$BUNDLE_IMAGE" --verbose
+              operator-sdk run bundle --timeout=20m --namespace "${coo_install_ns}" "$BUNDLE_IMAGE" --verbose
               oc wait -n "${coo_install_ns}" --for=condition=Available deploy/obo-prometheus-operator --timeout=300s
               oc wait -n "${coo_install_ns}" --for=condition=Available deploy/obo-prometheus-operator-admission-webhook --timeout=300s
               oc wait -n "${coo_install_ns}" --for=condition=Available deploy/observability-operator --timeout=300s
