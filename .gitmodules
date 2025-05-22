@@ -26,10 +26,14 @@
 	path = ui-troubleshooting-panel
 	url = https://github.com/openshift/troubleshooting-panel-console-plugin.git
 	branch = release-0.4
+[submodule "ui-monitoring-pf5"]
+	path = ui-monitoring-pf5
+	url = https://github.com/openshift/monitoring-plugin.git
+	branch = release-coo-0.4
 [submodule "ui-monitoring"]
 	path = ui-monitoring
 	url = https://github.com/openshift/monitoring-plugin.git
-	branch = release-coo-1.1
+	branch = release-coo-0.5
 [submodule "thanos"]
 	path = thanos
 	url = https://github.com/openshift/thanos.git

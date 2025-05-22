@@ -5,13 +5,13 @@ WORKDIR /opt/app-root
 USER 0
 
 ENV HUSKY=0
-COPY ui-monitoring/web/package*.json web/
-COPY ui-monitoring/Makefile Makefile
+COPY ui-monitoring-pf5/web/package*.json web/
+COPY ui-monitoring-pf5/Makefile Makefile
 RUN cd web && npm ci --legacy-peer-deps --omit=optional --ignore-scripts
 
-COPY ui-monitoring/web/ web/
-COPY ui-monitoring/config/ config/
-COPY ui-monitoring/scripts/update-plugin-name.sh scripts/update-plugin-name.sh
+COPY ui-monitoring-pf5/web/ web/
+COPY ui-monitoring-pf5/config/ config/
+COPY ui-monitoring-pf5/scripts/update-plugin-name.sh scripts/update-plugin-name.sh
 RUN make update-plugin-name
 ENV I18N_NAMESPACE="plugin__monitoring-console-plugin"
 RUN make build-frontend
@@ -20,14 +20,14 @@ FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.22 as go-
 
 WORKDIR /opt/app-root
 
-COPY ui-monitoring/Makefile Makefile
-COPY ui-monitoring/go.mod go.mod
-COPY ui-monitoring/go.sum go.sum
+COPY ui-monitoring-pf5/Makefile Makefile
+COPY ui-monitoring-pf5/go.mod go.mod
+COPY ui-monitoring-pf5/go.sum go.sum
 
 RUN make install-backend
 
-COPY ui-monitoring/cmd/ cmd/
-COPY ui-monitoring/pkg/ pkg/
+COPY ui-monitoring-pf5/cmd/ cmd/
+COPY ui-monitoring-pf5/pkg/ pkg/
 
 ENV GOOS=${TARGETOS:-linux}
 ENV GOARCH=${TARGETARCH}
@@ -40,7 +40,7 @@ RUN make build-backend
 FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 
 RUN mkdir /licenses
-COPY ui-monitoring/LICENSE /licenses/.
+COPY ui-monitoring-pf5/LICENSE /licenses/.
 
 USER 1001
 
@@ -52,7 +52,7 @@ ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/d
 
 LABEL com.redhat.component="coo-monitoring-console-plugin" \
       name="openshift/monitoring-console-plugin" \
-      version="v0.5.0" \
+      version="v0.4.0" \
       summary="OpenShift monitoring plugin to view and explore metrics and alerts" \
       io.openshift.tags="openshift,observability-ui,metrics,alerts" \
       io.k8s.display-name="OpenShift console monitoring plugin" \
