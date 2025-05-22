@@ -1,15 +1,10 @@
+# Builder
 FROM registry.redhat.io/ubi9/ubi-minimal@sha256:92b1d5747a93608b6adb64dfd54515c3c5a360802db4706765ff3d8470df6290 as builder
 
 USER root
 
-RUN microdnf install -y python3 python3-pyyaml
-
-# renovate: datasource=github-releases depName=mikefarah/yq
-ARG YQ_VERSION=4.43.1
-
-RUN curl -L "https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_amd64" -o /usr/local/bin/yq && \
-    chmod +x /usr/local/bin/yq && \
-    yq --version
+RUN microdnf update -y && rm -rf /var/cache/yum && \
+    microdnf install -y python3 python3-pyyaml
 
 WORKDIR /workspace
 
@@ -17,14 +12,28 @@ COPY /observability-operator/bundle/ bundle
 COPY /observability-operator/LICENSE LICENSE
 COPY /bundle-patches/render_templates .
 
-# cluster-observability-operator-bundle-push pipeline overrides this with the
-# prod registry registry.redhat.io
+# Get yq from konflux CI
+FROM quay.io/konflux-ci/yq@sha256:8068ee12171e5be43d60d5a34e3372e68ba7d935f3592e95931b325c9447282a AS parser
+
+# Run template rendering
+FROM builder as final
+
+COPY --from=parser /usr/bin/yq /usr/local/bin/yq
+
+RUN chmod +x /usr/local/bin/yq
+
 ARG REGISTRY=quay.io/redhat-user-workloads
-RUN mv bundle/manifests/observability-operator.clusterserviceversion.yaml bundle/manifests/cluster-observability-operator.clusterserviceversion.yaml
-RUN ./render_templates bundle/manifests/cluster-observability-operator.clusterserviceversion.yaml bundle/metadata/annotations.yaml
+ENV REGISTRY=${REGISTRY}
 
+RUN mv bundle/manifests/observability-operator.clusterserviceversion.yaml bundle/manifests/cluster-observability-operator.clusterserviceversion.yaml && \
+    echo "Renamed file successfully." && \
+    echo "Running render_templates..." && \
+    ./render_templates bundle/manifests/cluster-observability-operator.clusterserviceversion.yaml bundle/metadata/annotations.yaml && \
+    echo "Rendered annotations.yaml successfully." && \
+    echo "Contents of annotations.yaml:" && \
+    cat bundle/metadata/annotations.yaml
 
-
+# Final image
 FROM scratch
 
 # Core bundle labels.
@@ -57,8 +66,8 @@ LABEL com.redhat.component="coo-bundle" \
       url="https://github.com/rhobs/observability-operator"\
       vendor="Red Hat, Inc."
 
-# Copy files to locations specified by labels.
-COPY --from=builder workspace/bundle/manifests /manifests/
-COPY --from=builder workspace/bundle/metadata /metadata/
-COPY --from=builder workspace/bundle/tests/scorecard /tests/scorecard/
-COPY --from=builder workspace/LICENSE /licenses/.
+COPY --from=final /workspace/bundle/manifests /manifests/
+COPY --from=final /workspace/bundle/metadata /metadata/
+COPY --from=final /workspace/bundle/tests/scorecard /tests/scorecard/
+COPY --from=final /workspace/LICENSE /licenses/.
+
