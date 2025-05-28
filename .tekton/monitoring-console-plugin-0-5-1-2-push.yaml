@@ -17,7 +17,7 @@ metadata:
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
-    appstudio.openshift.io/component: monitoring-console-plugin-0-4-1-2
+    appstudio.openshift.io/component: monitoring-console-plugin-0-5-1-2
     pipelines.appstudio.openshift.io/type: build
   name: monitoring-console-plugin-0-5-1-2-on-push
   namespace: cluster-observabilit-tenant
@@ -28,7 +28,7 @@ spec:
     - name: revision
       value: '{{revision}}'
     - name: output-image
-      value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-0-4-rhel9:{{revision}}
+      value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-0-5-rhel9:{{revision}}
     - name: build-platforms
       value:
         - linux/x86_64
@@ -617,7 +617,7 @@ spec:
       - name: netrc
         optional: true
   taskRunTemplate:
-    serviceAccountName: build-pipeline-monitoring-console-plugin-0-4-1-2
+    serviceAccountName: build-pipeline-monitoring-console-plugin-0-5-1-2
   workspaces:
     - name: git-auth
       secret:
