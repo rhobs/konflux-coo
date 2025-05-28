@@ -1,10 +1,11 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.23 as builder
+FROM golang:1.24 as builder
 
 USER root
 
-RUN dnf install -y --setopt=tsflags=nodocs mailcap && \
-    dnf clean all && \
-    rm -rf /var/cache/dnf
+# This might be needed when using brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.24
+# RUN dnf install -y --setopt=tsflags=nodocs mailcap && \
+#     dnf clean all && \
+#     rm -rf /var/cache/dnf
 
 WORKDIR /app
 
@@ -27,7 +28,7 @@ ENTRYPOINT [ "/bin/manager" ]
 
 LABEL com.redhat.component="coo-perses-operator" \
     name="perses/perses-operator" \
-    version="v0.1.10" \
+    version="v0.1.12" \
     summary="Perses Operator for Cluster Observability Operator" \
     io.openshift.tags="openshift,observability-ui,perses-operator" \
     io.k8s.display-name="Perses Operator for Cluster Observability Operator" \
