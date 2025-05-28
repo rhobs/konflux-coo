@@ -13,7 +13,7 @@
 [submodule "observability-operator"]
 	path = observability-operator
 	url = https://github.com/rhobs/observability-operator
-        branch = release-1.1
+        branch = release-1.2
 [submodule "ui-logging"]
 	path = ui-logging
 	url = https://github.com/openshift/logging-view-plugin.git
