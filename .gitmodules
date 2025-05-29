@@ -1,11 +1,11 @@
 [submodule "alertmanager"]
 	path = alertmanager
 	url = https://github.com/prometheus/alertmanager
-        branch = release-0.28
+	branch = release-0.28
 [submodule "prometheus"]
 	path = prometheus
 	url = https://github.com/prometheus/prometheus.git
-        branch = release-3.2
+	branch = release-3.2
 [submodule "obo-prometheus-operator"]
 	path = obo-prometheus-operator
 	url = https://github.com/rhobs/obo-prometheus-operator
@@ -13,7 +13,7 @@
 [submodule "observability-operator"]
 	path = observability-operator
 	url = https://github.com/rhobs/observability-operator
-        branch = release-1.2
+	branch = release-1.2
 [submodule "ui-logging"]
 	path = ui-logging
 	url = https://github.com/openshift/logging-view-plugin.git
@@ -37,11 +37,11 @@
 [submodule "thanos"]
 	path = thanos
 	url = https://github.com/openshift/thanos.git
-        branch = release-4.19
+	branch = release-4.19
 [submodule "korrel8r"]
-        path = korrel8r
-        url = https://github.com/korrel8r/korrel8r.git
-        branch = release-coo-1.2
+	path = korrel8r
+	url = https://github.com/korrel8r/korrel8r.git
+	branch = release-coo-1.2
 [submodule "perses-operator"]
 	path = perses-operator
 	url = https://github.com/perses/perses-operator
