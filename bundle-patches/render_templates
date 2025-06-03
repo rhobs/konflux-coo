@@ -212,6 +212,11 @@ VALUE="${PRODUCT_VERSION}" yq -i '.spec.version = strenv(VALUE)' "${csv_file}"
 # Set CSV .metadata.name to downstream version.
 VALUE="${PRODUCT_VERSION}" yq -i '.metadata.name = "cluster-observability-operator.v" + strenv(VALUE)' "${csv_file}"
 
+# Fix observability-operator pod version label
+VALUE="${PRODUCT_VERSION}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").label) += {"app.kubernetes.io/version": strenv(VALUE)}' "$csv_file"
+
+VALUE="${PRODUCT_VERSION}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.metadata.labels) += {"app.kubernetes.io/version": strenv(VALUE)}' "$csv_file"
+
 # Add .olm.skipRange annotation
 VALUE=">="${CI_X_VERSION}.${CI_Y_VERSION}.0" <${PRODUCT_VERSION}" yq -i '.metadata.annotations += {"olm.skipRange": strenv(VALUE)}' "${csv_file}"
 
