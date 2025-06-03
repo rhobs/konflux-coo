@@ -33,7 +33,7 @@ ENTRYPOINT ["/manager"]
 
 LABEL com.redhat.component="coo-operator" \
       name="Cluster Observability Operator" \
-      version="v1.1.0" \
+      version="v1.2.0" \
       summary="Cluster Observability Operator" \
       io.openshift.tags="openshift,observability" \
       io.k8s.display-name="Cluster Observability Operator" \
