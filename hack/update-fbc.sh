@@ -1,6 +1,6 @@
 #!/bin/bash
 # run like so:
-# for f in release-payloads/release-1.1.1/release-stage-fbc-v4-1*; do bash hack/update-fbc.sh $f; done
+# for f in release-payloads/release-1.2.0/release-stage-fbc-v4-*; do bash hack/update-fbc.sh $f; done
 
 pipeline="$(basename "$1")"
 fbc="${pipeline:14:(-5)}"

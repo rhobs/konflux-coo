@@ -2,15 +2,15 @@
 apiVersion: appstudio.redhat.com/v1alpha1
 kind: Release
 metadata:
-  name: coo-fbc-v4-12-88vjp-2025-06-04-13-03
+  name: coo-fbc-v4-20-7dx92-2025-06-04-14-09
   namespace: cluster-observabilit-tenant
 spec:
-  releasePlan: coo-fbc-v4-12-staging-release-plan
-  snapshot: coo-fbc-v4-12-88vjp
+  releasePlan: coo-fbc-v4-20-staging-release-plan
+  snapshot: coo-fbc-v4-20-7dx92
   data:
     releaseNotes:
       type: RHBA
-      topic: "Cluster Observability Operator 1.2.0 release - fbc 4.12 - staging."
+      topic: "Cluster Observability Operator 1.2.0 release - fbc 4.4.20 - staging."
       issues:
         fixed:
           - id: COO-760
