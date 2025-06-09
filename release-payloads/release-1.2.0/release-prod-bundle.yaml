@@ -3,9 +3,9 @@ apiVersion: appstudio.redhat.com/v1alpha1
 kind: Release
 metadata:
   namespace: cluster-observabilit-tenant
-  name: coo-1.2.0-stage-release-wjgtl
+  name: coo-1.2.0-prod-release-wjgtl
 spec:
-  releasePlan: cluster-observability-operator-1-2-stage
+  releasePlan: cluster-observability-operator-1-2-prod
   snapshot: cluster-observability-operator-1-2-wjgtl
   data:
     releaseNotes:
@@ -16,17 +16,17 @@ spec:
       topic: Red Hat build of Cluster Observability Operator 1.2.0 has been released
       description: |
         New features and enhancements:
-        * Logging UI Plugin includes OTEL support. https://issues.redhat.com/browse/COO-816
+        * The logging UI plugin now supports the OTEL format, in addition to the previously supported ViaQ scheme. https://issues.redhat.com/browse/COO-816
 
-        * Accelerators Perses dashboards are included by default. https://issues.redhat.com/browse/COO-942
+        * Accelerators Perses dashboards are deployed by default when you install the dashboard UI plugin. https://issues.redhat.com/browse/COO-942
 
-        * Korrel8r can display multiple results per graph node. https://issues.redhat.com/browse/COO-785
+        * Multiple results per graph node are now displayed for Korrel8r. https://issues.redhat.com/browse/COO-785
 
-        * Incident detection supports direct navigation to individual incident details. https://issues.redhat.com/browse/COO-977
+        * Direct navigation to individual incident detail is now supported in the incident detection panel https://issues.redhat.com/browse/COO-977
 
         * Advanced filters have been added to the tracing view. https://issues.redhat.com/browse/COO-979
 
-        * Distributed tracing plugin GA supports Patternfly versions 4, 5 and 6. https://issues.redhat.com/browse/COO-873
+        * The status of the distributed tracing UI plugin is now General Avaiability (GA), supporting Patternfly 4, 5 and 6. https://issues.redhat.com/browse/COO-873
       type: RHBA
       issues:
         fixed:
