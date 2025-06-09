@@ -1,0 +1,36 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  namespace: cluster-observabilit-tenant
+  name: coo-1.2.0-stage-release-wjgtl
+spec:
+  releasePlan: cluster-observability-operator-1-2-stage
+  snapshot: cluster-observability-operator-1-2-wjgtl
+  data:
+    releaseNotes:
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.2.0 release
+      topic: Red Hat build of Cluster Observability Operator 1.2.0 has been released
+      description: |
+        New features and enhancements:
+        * Logging UI Plugin includes OTEL support. https://issues.redhat.com/browse/COO-816
+
+        * Accelerators Perses dashboards are included by default. https://issues.redhat.com/browse/COO-942
+
+        * Korrel8r can display multiple results per graph node. https://issues.redhat.com/browse/COO-785
+
+        * Incident detection supports direct navigation to individual incident details. https://issues.redhat.com/browse/COO-977
+
+        * Advanced filters have been added to the tracing view. https://issues.redhat.com/browse/COO-979
+
+        * Distributed tracing plugin GA supports Patternfly versions 4, 5 and 6. https://issues.redhat.com/browse/COO-873
+      type: RHBA
+      issues:
+        fixed:
+          - id: COO-760
+            source: issues.redhat.com
+          - id: COO-970
+            source: issues.redhat.com
