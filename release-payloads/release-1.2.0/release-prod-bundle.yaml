@@ -34,3 +34,15 @@ spec:
             source: issues.redhat.com
           - id: COO-970
             source: issues.redhat.com
+          - id: COO-816
+            source: issues.redhat.com
+          - id: COO-942
+            source: issues.redhat.com
+          - id: COO-785
+            source: issues.redhat.com
+          - id: COO-977
+            source: issues.redhat.com
+          - id: COO-979
+            source: issues.redhat.com
+          - id: COO-873
+            source: issues.redhat.com
