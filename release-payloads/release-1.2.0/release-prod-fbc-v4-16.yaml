@@ -2,11 +2,11 @@
 apiVersion: appstudio.redhat.com/v1alpha1
 kind: Release
 metadata:
-  name: coo-1.2.0-prod-release-wjgtl-v1
+  name: coo-fbc-v4-16-bhm6h-v1
   namespace: cluster-observabilit-tenant
 spec:
-  releasePlan: cluster-observability-operator-1-2-prod
-  snapshot: cluster-observability-operator-1-2-wjgtl
+  releasePlan: coo-fbc-v4-16-prod-release-plan
+  snapshot: coo-fbc-v4-16-bhm6h
   data:
     releaseNotes:
       references:
