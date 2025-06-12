@@ -1,0 +1,48 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: coo-fbc-v4-16-lh6lc-v1
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: coo-fbc-v4-16-prod-release-plan
+  snapshot: coo-fbc-v4-16-lh6lc
+  data:
+    releaseNotes:
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.2.0 release
+      topic: Red Hat build of Cluster Observability Operator 1.2.0 has been released
+      description: |
+        New features and enhancements:
+        * The logging UI plugin now supports the OTEL format, in addition to the previously supported ViaQ scheme. https://issues.redhat.com/browse/COO-816
+
+        * Accelerators Perses dashboards are deployed by default when you install the dashboard UI plugin. https://issues.redhat.com/browse/COO-942
+
+        * Multiple results per graph node are now displayed for Korrel8r. https://issues.redhat.com/browse/COO-785
+
+        * Direct navigation to individual incident detail is now supported in the incident detection panel https://issues.redhat.com/browse/COO-977
+
+        * Advanced filters have been added to the tracing view. https://issues.redhat.com/browse/COO-979
+
+        * The status of the distributed tracing UI plugin is now General Avaiability (GA), supporting Patternfly 4, 5 and 6. https://issues.redhat.com/browse/COO-873
+      type: RHBA
+      issues:
+        fixed:
+          - id: COO-760
+            source: issues.redhat.com
+          - id: COO-970
+            source: issues.redhat.com
+          - id: COO-816
+            source: issues.redhat.com
+          - id: COO-942
+            source: issues.redhat.com
+          - id: COO-785
+            source: issues.redhat.com
+          - id: COO-977
+            source: issues.redhat.com
+          - id: COO-979
+            source: issues.redhat.com
+          - id: COO-873
+            source: issues.redhat.com
