@@ -21,15 +21,16 @@ FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 
 LABEL maintainer="Observability UI team <team-observability-ui@redhat.com>"
 
-USER nobody
+COPY --from=builder  /app/bin/perses                         /bin/perses
+COPY --from=builder  /app/bin/percli                         /bin/percli
+COPY --from=builder  /app/docs/examples/config.docker.yaml   /etc/perses/config.yaml
+COPY --from=builder  /app/plugins-archive/                   /etc/perses/plugins-archive/
+COPY --from=builder  /app/LICENSE                            /LICENSE
+COPY --from=builder  /plugins                                /etc/perses/plugins
+COPY --from=builder  /etc/mime.types                         /etc/mime.types
 
-COPY --from=builder --chown=nobody:nobody /app/bin/perses                         /bin/perses
-COPY --from=builder --chown=nobody:nobody /app/bin/percli                         /bin/percli
-COPY --from=builder --chown=nobody:nobody /app/docs/examples/config.docker.yaml   /etc/perses/config.yaml
-COPY --from=builder --chown=nobody:nobody /app/plugins-archive/                   /etc/perses/plugins-archive/
-COPY --from=builder --chown=nobody:nobody /app/LICENSE                            /LICENSE
-COPY --from=builder --chown=nobody:nobody /plugins                                /etc/perses/plugins
-COPY --from=builder --chown=nobody:nobody /etc/mime.types                         /etc/mime.types
+RUN chgrp -R 0 /etc/perses && \
+    chmod -R g=u /etc/perses
 
 WORKDIR /perses
 
@@ -40,7 +41,7 @@ CMD        ["--config=/etc/perses/config.yaml", "--log.level=error"]
 
 LABEL com.redhat.component="coo-perses" \
     name="perses/perses" \
-    version="v0.51.0" \
+    version="v0.51.1" \
     summary="Perses for Cluster Observability Operator" \
     io.openshift.tags="openshift,observability-ui,perses" \
     io.k8s.display-name="Perses for Cluster Observability Operator" \
