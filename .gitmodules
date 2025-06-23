@@ -45,7 +45,7 @@
 [submodule "perses-operator"]
 	path = perses-operator
 	url = https://github.com/rhobs/perses-operator
-	branch = v0.1.12-golang_1_23
+	branch = v0.2.0-golang_1_23
 [submodule "perses"]
 	path = perses
 	url = https://github.com/rhobs/perses.git
