@@ -23,11 +23,11 @@ WORKDIR /
 COPY --from=builder /bin/cluster-health-analyzer /bin/cluster-health-analyzer
 USER 65532:65532
 
-ENTRYPOINT ["/bin/cluster-health-analyzer", "serve"]
+ENTRYPOINT ["/bin/cluster-health-analyzer"]
 
 LABEL com.redhat.component="coo-cluster-health-analyzer" \
       name="openshift/cluster-health-analyzer" \
-      version="v0.5.0" \
+      version="v0.5.1" \
       summary="OpenShift Cluster Health Analyzer" \
       io.openshift.tags="openshift,observability,metrics,alerts,incidents" \
       io.k8s.display-name="COO Cluster Health Analyzer" \
