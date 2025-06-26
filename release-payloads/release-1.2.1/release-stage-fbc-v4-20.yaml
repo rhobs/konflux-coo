@@ -1,0 +1,25 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: coo-fbc-v4-20-z582g-2025-06-26-10-31
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: coo-fbc-v4-20-staging-release-plan
+  snapshot: coo-fbc-v4-20-z582g
+  data:
+    releaseNotes:
+      type: RHBA
+      topic: "Cluster Observability Operator 1.2.1 release - fbc 4.4.20 - staging."
+      issues:
+        fixed:
+          - id: COO-871
+            source: issues.redhat.com
+          - id: COO-870
+            source: issues.redhat.com
+          - id: COO-365
+            source: issues.redhat.com
+          - id: COO-357
+            source: issues.redhat.com
+      references:
+        - https://access.redhat.com/security/updates/classification
