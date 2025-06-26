@@ -14,6 +14,8 @@ update_single_fbc() {
         echo "Error: No latest snapshot found for component coo-$fbc to update file $file"
         return 1
     fi
+
+    echo "Updating $file with latest snapshot: $latest_snap"
     
     sed -i "s/\(snapshot:\).*/\1 $latest_snap/" "$file"
     now=$(date +%Y-%m-%d-%H-%M)

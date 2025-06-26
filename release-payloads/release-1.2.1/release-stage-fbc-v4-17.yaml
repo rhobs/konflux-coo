@@ -2,7 +2,7 @@
 apiVersion: appstudio.redhat.com/v1alpha1
 kind: Release
 metadata:
-  name: coo-fbc-v4-17-8czm9-2025-06-26-09-50
+  name: coo-fbc-v4-17-8czm9-2025-06-26-10-31
   namespace: cluster-observabilit-tenant
 spec:
   releasePlan: coo-fbc-v4-17-staging-release-plan
