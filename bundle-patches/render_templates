@@ -130,7 +130,7 @@ VALUE="${COO_PERSES_OPERATOR_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name"
 sed -i -e "s|quay.io/rhobs/observability-operator.*|${COO_IMAGE_URL}|g" "$csv_file"
 sed -i -e "s|quay.io/rhobs/obo-prometheus-operator.*|${COO_PO_IMAGE_URL}|g" "$csv_file"
 sed -i -e "s|quay.io/rhobs/obo-admission-webhook.*|${COO_ADMISSION_WEBHOOK_IMAGE_URL}|g" "$csv_file"
-sed -i -e "s|quay.io/persesdev/perses-operator.*|${COO_PERSES_OPERATOR_IMAGE_URL}|g" "$csv_file"
+sed -i -e "s|quay.io/openshift-observability-ui/perses-operator.*|${COO_PERSES_OPERATOR_IMAGE_URL}|g" "$csv_file"
 
 # first add an empty env list to the obo operator container if it doesn't exist
 # already
