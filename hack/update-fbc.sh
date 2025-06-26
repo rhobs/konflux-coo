@@ -15,9 +15,9 @@ update_single_fbc() {
         return 1
     fi
     
-    sed -i "s/\(snapshot: \).*/\1$latest_snap/" "$file"
+    sed -i "s/\(snapshot:\).*/\1 $latest_snap/" "$file"
     now=$(date +%Y-%m-%d-%H-%M)
-    sed -i "s/\(name: \).*/\1$latest_snap-$now/" "$file"
+    sed -i "s/\(name:\).*/\1 $latest_snap-$now/" "$file"
 }
 
 # Function to update all FBC files given a directory and environment
