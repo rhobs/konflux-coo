@@ -3,10 +3,10 @@ apiVersion: appstudio.redhat.com/v1alpha1
 kind: Release
 metadata:
   namespace: cluster-observabilit-tenant
-  name: coo-1.2.1-stage-release-x97hm-2025-06-25-17-44
+  name: coo-1.2.1-stage-release-wg49m-2025-06-26-13-52
 spec:
   releasePlan: cluster-observability-operator-1-2-stage
-  snapshot: cluster-observability-operator-1-2-x97hm
+  snapshot: cluster-observability-operator-1-2-wg49m
   data:
     releaseNotes:
       type: RHBA
