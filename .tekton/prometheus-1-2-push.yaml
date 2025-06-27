@@ -51,9 +51,9 @@ spec:
         - name: build
           computeResources:
             requests:
-              memory: 12Gi
+              memory: 13Gi
             limits:
-              memory: 15Gi
+              memory: 18Gi
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
