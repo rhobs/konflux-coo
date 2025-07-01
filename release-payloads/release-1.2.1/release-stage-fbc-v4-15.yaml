@@ -2,11 +2,11 @@
 apiVersion: appstudio.redhat.com/v1alpha1
 kind: Release
 metadata:
-  name: coo-fbc-v4-15-cpmdr-2025-06-26-13-51
+  name: coo-fbc-v4-15-s4smq-2025-07-01-15-05
   namespace: cluster-observabilit-tenant
 spec:
   releasePlan: coo-fbc-v4-15-staging-release-plan
-  snapshot: coo-fbc-v4-15-cpmdr
+  snapshot: coo-fbc-v4-15-s4smq
   data:
     releaseNotes:
       type: RHBA
