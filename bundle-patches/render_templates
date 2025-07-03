@@ -36,7 +36,7 @@ yq -i '.metadata.labels += {"operatorframework.io/arch.s390x": "supported"}' "$c
 
 # Konflux Build Pipeline should automatically create PRs to update the SHA images but no always
 # Use 'update-component-images.sh' to update the render_templates file with the latest SHA images
-COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel9-operator@sha256:4f329863a370006c72a82fa7352fb0851eeed9857c92e536caca8b0e66bf3774"
+COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel9-operator@sha256:c98dc7497e0731564e008c5f7fa7f218784fb57d0c83fdad4c033525e4116d87"
 
 COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:cdad568ba40b9108990f4ac217a45dc24d5c6ba32886064c64a5b2931bfe64a3"
 
