@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# This script gets the images inside a given snapshot and compares them with the images in the render_templates file.
-# it requires to be connected to the Konflux cluster
+# This script gets the images inside a given snapshot and compares them with the images in the repos render_templates file.
+# It requires to be connected to the Konflux cluster
 
 SNAPSHOT_NAME="${1}"
 RENDER_TEMPLATES_FILE="bundle-patches/render_templates"
