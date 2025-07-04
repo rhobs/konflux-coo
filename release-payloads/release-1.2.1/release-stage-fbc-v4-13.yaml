@@ -2,11 +2,11 @@
 apiVersion: appstudio.redhat.com/v1alpha1
 kind: Release
 metadata:
-  name: coo-fbc-v4-13-9f7g2-2025-07-01-13-44
+  name: coo-fbc-v4-13-6gg8k-2025-07-04-22-44
   namespace: cluster-observabilit-tenant
 spec:
   releasePlan: coo-fbc-v4-13-staging-release-plan
-  snapshot: coo-fbc-v4-13-9f7g2
+  snapshot: coo-fbc-v4-13-6gg8k
   data:
     releaseNotes:
       type: RHBA
@@ -17,9 +17,7 @@ spec:
             source: issues.redhat.com
           - id: COO-870
             source: issues.redhat.com
-          - id: COO-365
-            source: issues.redhat.com
-          - id: COO-357
+          - id: COO-978
             source: issues.redhat.com
       references:
         - https://access.redhat.com/security/updates/classification
