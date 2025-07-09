@@ -1,10 +1,42 @@
 #!/bin/bash
 
-# This script gets the images inside a given snapshot and compares them with the images in the repos render_templates file.
+# This script gets the images inside a given snapshot and compares them with the images in the repos render_templates file and the bundle CSV.
 # It requires to be connected to the Konflux cluster
 
 SNAPSHOT_NAME="${1}"
 RENDER_TEMPLATES_FILE="bundle-patches/render_templates"
+
+# Check for help flag
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    echo "check-snapshot-images.sh - Compare Konflux snapshot images with bundle templates and CSV"
+    echo ""
+    echo "DESCRIPTION:"
+    echo "    This script extracts container images from a given Konflux snapshot and compares"
+    echo "    them with the images referenced in:"
+    echo "    1. The repository's render_templates file (bundle-patches/render_templates)"
+    echo "    2. The ClusterServiceVersion (CSV) file within the operator bundle"
+    echo ""
+    echo "    The script helps verify that snapshot images are properly referenced in the"
+    echo "    operator bundle configuration files."
+    echo ""
+    echo "USAGE:"
+    echo "    $0 <snapshot-name>"
+    echo "    $0 -h|--help"
+    echo ""
+    echo "ARGUMENTS:"
+    echo "    snapshot-name    Name of the Konflux snapshot to analyze"
+    echo ""
+    echo "EXAMPLES:"
+    echo "    $0 cluster-observability-operator-1-2-9h6j9"
+    echo "    $0 --help"
+    echo ""
+    echo "REQUIREMENTS:"
+    echo "    - kubectl CLI tool with access to Konflux cluster"
+    echo "    - oc CLI tool for image extraction"
+    echo "    - yq CLI tool for YAML parsing"
+    echo "    - render_templates file at bundle-patches/render_templates"
+    exit 0
+fi
 
 if [[ -z "$SNAPSHOT_NAME" ]]; then
     echo "Usage: $0 <snapshot-name>"
