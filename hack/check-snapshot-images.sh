@@ -28,22 +28,80 @@ fi
 
 echo "Comparing snapshot images with render_templates..."
 
+bundle_image=""
+
 # Iterate over each snapshot image
-echo "$images" | while IFS=':' read -r component_name image; do
+while IFS=':' read -r component_name image; do
     if [[ -n "$component_name" && -n "$image" ]]; then
         # Skip bundle images
         if [[ "$component_name" == cluster-observability-operator-bundle* ]]; then
+            bundle_image="$image"
             continue
         fi
-        echo -n "$component_name ... "
+        echo -n "	$component_name ... "
         
         # Use grep to check if image exists in render_templates file
         if grep -q "$image" "$RENDER_TEMPLATES_FILE"; then
             echo -e "\033[32m✓\033[0m"
         else
-            echo -e "\033[31m✗ NOT FOUND\033[0m"
+            echo -e "\033[31m✗ NOT FOUND IN BUNDLE\033[0m"
         fi
     fi
-done
+done <<< "$images"
 
+csv_images=""
+
+echo "Comparing snapshot images with bundle CSV..."
+
+if [[ -n "$bundle_image" ]]; then
+    echo "Extracting CSV from bundle image..."
+    
+    # Create temporary directory for bundle extraction
+    temp_dir=$(mktemp -d)
+    
+    # Extract the bundle contents using oc image extract
+    if oc image extract "$bundle_image" --path="/:$temp_dir" --confirm; then
+        # Look for the CSV file in the extracted manifests
+        csv_file=$(find "$temp_dir/manifests" -name "*.clusterserviceversion.yaml" | head -1)
+        
+        if [[ -n "$csv_file" && -f "$csv_file" ]]; then
+            echo "Found CSV file: $(basename "$csv_file")"
+            
+            # Extract images from the CSV using yq
+            echo "Extracting images from CSV..."
+            env_images=$(yq '.spec.install.spec.deployments[].spec.template.spec.containers[].env[]? | select(.name | test("RELATED_IMAGE.*")) | .value' "$csv_file" 2>/dev/null)
+
+            related_images=$(yq '.spec.relatedImages[].image' "$csv_file" 2>/dev/null)
+            
+            csv_images=$(echo -e "$env_images\n$related_images" | grep -v '^$' | sort -u)
+            
+        else
+            echo "No CSV file found in bundle"
+        fi
+    else
+        echo "Failed to extract bundle image contents"
+    fi
+    
+    # Clean up temporary directory
+    rm -rf "$temp_dir"
+else
+    echo "No bundle image found in snapshot."
+fi
+
+if [[ -n "$csv_images" ]]; then
+    # Compare each snapshot image with CSV images
+    while IFS=':' read -r component_name image; do
+        snapshot_suffix="${image:58}"
+        if [[ -n "$component_name" && -n "$image" && "$component_name" != cluster-observability-operator-bundle* ]]; then
+            echo -n "   $component_name ... "
+            if echo "$csv_images" | grep -q "$snapshot_suffix"; then
+                echo -e "\033[32m✓\033[0m"
+            else
+                echo -e "\033[31m✗ NOT FOUND IN CSV\033[0m"
+            fi
+        fi
+    done <<< "$images"
+else
+    echo "No images found in CSV"
+fi
 
