@@ -1,0 +1,27 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: coo-fbc-v4-14-9d89m-2025-07-09-10-00
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: coo-fbc-v4-14-prod-release-plan
+  snapshot: coo-fbc-v4-14-9d89m
+  data:
+    releaseNotes:
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.2.1 release
+      topic: Red Hat build of Cluster Observability Operator 1.2.1 has been released
+      description: |
+        New features and enhancements:
+        * Before this update, an old version label matcher was kept during the Operator version 1.2 upgrade. This caused Perses dashboards to become unavailable. With this release, the version label is removed and Perses dashboards are correctly reconciled. https://issues.redhat.com/browse/COO-978
+
+        Known issues
+        * Upgrading from version 1.2.0 to 1.2.1, with distributed tracing, the troubleshooting panel, and ACM installed alongside the monitoring plugin, will corrupt the monitoring plugin's UIPlugin resource. This issue can be resolved by recreating the UIPlugin. https://issues.redhat.com/browse/COO-1051
+      type: RHBA
+      issues:
+        fixed:
+          - id: COO-978
+            source: issues.redhat.com
