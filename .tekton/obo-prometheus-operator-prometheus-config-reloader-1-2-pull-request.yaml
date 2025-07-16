@@ -14,7 +14,7 @@ metadata:
               ".tekton/obo-prometheus-operator-prometheus-config-reloader-1-2-push.yaml".pathChanged() ||
               "Dockerfile.prometheus-config-reloader".pathChanged() ||
               "obo-prometheus-operator".pathChanged())
-  creationTimestamp:
+  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: obo-prometheus-operator-prometheus-config-reloader-1-2

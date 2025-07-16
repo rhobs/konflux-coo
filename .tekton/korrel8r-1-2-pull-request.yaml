@@ -14,7 +14,7 @@ metadata:
               ".tekton/korrel8r-1-2-push.yaml".pathChanged() ||
               "Dockerfile.korrel8r".pathChanged() ||
               "korrel8r".pathChanged())
-  creationTimestamp:
+  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: korrel8r-1-2

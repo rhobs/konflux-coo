@@ -14,7 +14,7 @@ metadata:
               "Dockerfile.ui-logging".pathChanged() ||
               "ui-logging".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
-  creationTimestamp:
+  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: logging-console-plugin-6-1-1-2

@@ -14,7 +14,7 @@ metadata:
               ".tekton/obo-prometheus-operator-1-2-push.yaml".pathChanged() ||
               "Dockerfile.prom-op".pathChanged() ||
               "obo-prometheus-operator".pathChanged())
-  creationTimestamp:
+  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: obo-prometheus-operator-1-2

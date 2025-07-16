@@ -14,7 +14,7 @@ metadata:
               "Dockerfile.ui-distributed-tracing-pf4".pathChanged() ||
               "ui-distributed-tracing-pf4".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
-  creationTimestamp:
+  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: distributed-tracing-console-plugin-0-3-1-2
