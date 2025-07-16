@@ -53,8 +53,8 @@ LABEL operators.operatorframework.io.test.config.v1=tests/scorecard/
 
 LABEL com.redhat.component="coo-bundle" \
       name="cluster-observability-operator-bundle" \
-      release="v1.2.1" \
-      version="v1.2.1" \
+      release="v1.2.2" \
+      version="v1.2.2" \
       com.redhat.openshift.versions="v4.12" \
       distribution-scope="public" \
       summary="Cluster Observability Operator Bundle" \

@@ -14,7 +14,7 @@ metadata:
               ".tekton/perses-operator-0-1-1-2-push.yaml".pathChanged() ||
               "Dockerfile.perses-operator".pathChanged() ||
               "perses-operator".pathChanged())
-  creationTimestamp:
+  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: perses-operator-0-1-1-2

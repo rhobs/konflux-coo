@@ -14,7 +14,7 @@ metadata:
               ".tekton/monitoring-console-plugin-0-4-1-2-push.yaml".pathChanged() ||
               "Dockerfile.ui-monitoring-pf5".pathChanged() ||
               "ui-monitoring-pf5".pathChanged())
-  creationTimestamp:
+  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: monitoring-console-plugin-0-4-1-2

@@ -14,7 +14,7 @@ metadata:
               "Dockerfile.ui-monitoring-pf5".pathChanged() ||
               "ui-monitoring-pf5".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
-  creationTimestamp:
+  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: monitoring-console-plugin-0-4-1-2
