@@ -1,11 +1,18 @@
 #!/bin/bash
 
+# This script updates FBC files with the latest snapshot for a given environment (stage or prod).
+
 # Function to update a single FBC file
 update_single_fbc() {
     local file="$1"
     local env="$2"
     pipeline="$(basename "$file")"
-    fbc="${pipeline:14}"
+
+    if [[ "$env" == "prod" ]]; then
+        fbc="${pipeline:13}"
+    else
+        fbc="${pipeline:14}"
+    fi
     fbc="${fbc%.yaml}"
     
     latest_snap=$(kubectl get snapshots -l appstudio.openshift.io/component=coo-"$fbc" --sort-by='.metadata.creationTimestamp' --no-headers -o custom-columns=":metadata.name" | tail -n 3 | tac | xargs kubectl get snapshots -o json | jq -r ".items[] | select(.metadata.labels.\"appstudio.openshift.io/build-pipelinerun\" | startswith(\"coo-$fbc-on-push\")).metadata.name" | head -n1)
@@ -52,6 +59,14 @@ while [[ $# -gt 0 ]]; do
                 exit 1
             fi
             shift 2
+            ;;
+        --env=*)
+            env="${1#*=}"
+            if [[ "$env" != "stage" && "$env" != "prod" ]]; then
+                echo "Error: Environment must be 'stage' or 'prod'"
+                exit 1
+            fi
+            shift
             ;;
         *)
             target="$1"
