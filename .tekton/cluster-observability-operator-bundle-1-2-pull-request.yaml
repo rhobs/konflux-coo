@@ -15,7 +15,6 @@ metadata:
               "Dockerfile.bundle".pathChanged() ||
               "bundle-patches/***".pathChanged() ||
               "observability-operator/bundle/***".pathChanged())
-  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: cluster-observability-operator-bundle-1-2

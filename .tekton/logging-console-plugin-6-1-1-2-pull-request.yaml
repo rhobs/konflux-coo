@@ -14,7 +14,6 @@ metadata:
               ".tekton/logging-console-plugin-6-1-1-2-push.yaml".pathChanged() ||
               "Dockerfile.ui-logging".pathChanged() ||
               "ui-logging".pathChanged())
-  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: logging-console-plugin-6-1-1-2

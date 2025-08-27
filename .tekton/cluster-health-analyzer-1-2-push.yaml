@@ -14,7 +14,6 @@ metadata:
               "Dockerfile.cluster-health-analyzer".pathChanged() ||
               "cluster-health-analyzer".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
-  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: cluster-health-analyzer-1-2

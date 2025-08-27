@@ -14,7 +14,6 @@ metadata:
               "Dockerfile.obo".pathChanged() ||
               "observability-operator".pathChanged())
     build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
-  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: cluster-observability-operator-1-2

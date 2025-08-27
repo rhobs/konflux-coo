@@ -35,6 +35,7 @@ do
     yq -i '(.spec.params[] | select(.name == "build-platforms").value | select(length == 1)) += ["linux/arm64","linux/ppc64le","linux/s390x"]' "$file"
     yq -i 'with(.spec.params; select(all_c(.name != "build-source-image")) | . += [{"name": "build-source-image", "value": "true"}])' "$file"
     value="build-pipeline-$component" yq -i '.spec.taskRunTemplate += {"serviceAccountName": strenv(value)}' "$file"
+    sed -i '' '/^  creationTimestamp: /d' "$file"
     # yq -i 'with(.spec.params; select(all_c(.name != "hermetic")) | . += [{"name": "hermetic", "value": "true"}])' "$file"
     # export gomod_prefetch="$src"
     # yq -i 'with(.spec.params; select(all_c(.name != "prefetch-input")) | . += [{"name": "prefetch-input", "value": "[{\"type\": \"gomod\", \"path\": \"./\(strenv(gomod_prefetch))\"}]"}])' "$file"

@@ -14,7 +14,6 @@ metadata:
               ".tekton/thanos-1-2-push.yaml".pathChanged() ||
               "Dockerfile.thanos".pathChanged() ||
               "thanos".pathChanged())
-  creationTimestamp: null
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-2
     appstudio.openshift.io/component: thanos-1-2
