@@ -43,8 +43,9 @@ CMD        [ "--config.file=/etc/prometheus/prometheus.yml", \
              "--storage.tsdb.path=/prometheus" ]
 
 LABEL com.redhat.component="coo-prometheus-container" \
-      name="prometheus/prometheus" \
+      name="cluster-observability-operator/prometheus-rhel9" \
       version="v3.2.1" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       summary="Prometheus for Cluster Observability Operator" \
       io.openshift.expose-services="" \
       io.openshift.tags="monitoring" \
