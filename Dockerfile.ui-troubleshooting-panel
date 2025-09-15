@@ -44,7 +44,8 @@ COPY --from=go-builder /opt/app-root/plugin-backend /opt/app-root
 ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/dist"]
 
 LABEL com.redhat.component="coo-troubleshooting-panel-console-plugin" \
-      name="openshift/troubleshooting-panel-console-plugin" \
+      name="cluster-observability-operator/troubleshooting-panel-console-plugin-0-4-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       version="v0.4.0" \
       summary="OpenShift console plugin to troubleshoot by correlating observability signals" \
       io.openshift.tags="openshift,observability-ui,korrel8r,correlation" \
