@@ -45,7 +45,8 @@ COPY ui-logging/config /opt/app-root/config
 ENTRYPOINT ["/opt/app-root/plugin-backend", "-config-path", "/opt/app-root/config", "-static-path", "/opt/app-root/web/dist"]
 
 LABEL com.redhat.component="coo-logging-console-plugin" \
-      name="openshift/logging-console-plugin" \
+      name="cluster-observability-operator/logging-console-plugin-6-1-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       version="v6.1.0" \
       summary="OpenShift console plugin to view and explore logs" \
       io.openshift.tags="openshift,observability-ui,logging" \
