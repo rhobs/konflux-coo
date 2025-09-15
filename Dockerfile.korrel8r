@@ -21,9 +21,10 @@ USER 1000
 ENTRYPOINT [ "/bin/korrel8r", "web" ]
 
 LABEL com.redhat.component="coo-korrel8r-container" \
-      name="rhobs/korrel8r" \
+      name="cluster-observability-operator/korrel8r-rhel9" \
       version="release-coo-1.2" \
       summary="Korrel8r for Cluster Observability Operator" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       io.openshift.expose-services="" \
       io.openshift.tags="monitoring" \
       io.k8s.display-name="COO Korrel8r" \
