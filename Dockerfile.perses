@@ -40,7 +40,8 @@ ENTRYPOINT [ "/bin/perses" ]
 CMD        ["--config=/etc/perses/config.yaml", "--log.level=error"]
 
 LABEL com.redhat.component="coo-perses" \
-    name="perses/perses" \
+    name="cluster-observability-operator/perses-0-50-rhel9" \
+    cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
     version="v0.51.1" \
     summary="Perses for Cluster Observability Operator" \
     io.openshift.tags="openshift,observability-ui,perses" \
