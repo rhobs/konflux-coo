@@ -20,9 +20,10 @@ USER nobody
 ENTRYPOINT [ "/bin/thanos" ]
 
 LABEL com.redhat.component="coo-thanos-container" \
-      name="rhobs/thanos" \
+      name="cluster-observability-operator/thanos-rhel9" \
       version="v0.37.2" \
       summary="Thanos for Cluster Observability Operator" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       io.openshift.expose-services="" \
       io.openshift.tags="monitoring" \
       io.k8s.display-name="COO Thanos" \
