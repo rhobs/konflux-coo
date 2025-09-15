@@ -51,7 +51,8 @@ COPY --from=web-builder /opt/app-root/config /opt/app-root/config
 ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/dist"]
 
 LABEL com.redhat.component="coo-monitoring-console-plugin" \
-      name="openshift/monitoring-console-plugin" \
+      name="cluster-observability-operator/monitoring-console-plugin-0-4-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       version="v0.4.0" \
       summary="OpenShift monitoring plugin to view and explore metrics and alerts" \
       io.openshift.tags="openshift,observability-ui,metrics,alerts" \
