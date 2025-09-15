@@ -26,7 +26,8 @@ USER 65532:65532
 ENTRYPOINT ["/bin/cluster-health-analyzer"]
 
 LABEL com.redhat.component="coo-cluster-health-analyzer" \
-      name="openshift/cluster-health-analyzer" \
+      name="cluster-observability-operator/cluster-health-analyzer-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       version="v0.5.1" \
       summary="OpenShift Cluster Health Analyzer" \
       io.openshift.tags="openshift,observability,metrics,alerts,incidents" \
