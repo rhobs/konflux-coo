@@ -20,7 +20,8 @@ USER nobody
 ENTRYPOINT ["/bin/prometheus-config-reloader"]
 
 LABEL com.redhat.component="coo-po-prometheus-config-reloader" \
-      name="prometheus-operator-prometheus-config-reloader" \
+      name="cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       version="v0.80.1" \
       summary="Prometheus Config Reloader for Prometheus Operator" \
       io.openshift.tags="monitoring" \
