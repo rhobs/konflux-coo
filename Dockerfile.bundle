@@ -52,7 +52,7 @@ LABEL operators.operatorframework.io.test.mediatype.v1=scorecard+v1
 LABEL operators.operatorframework.io.test.config.v1=tests/scorecard/
 
 LABEL com.redhat.component="coo-bundle" \
-      name="cluster-observability-operator-bundle" \
+      name="cluster-observability-operator/cluster-observability-operator-bundle" \
       release="v1.2.2" \
       version="v1.2.2" \
       com.redhat.openshift.versions="v4.12" \
@@ -64,6 +64,7 @@ LABEL com.redhat.component="coo-bundle" \
       description="Cluster Observability Operator Bundle" \
       io.k8s.description="Cluster Observability Operator Bundle" \
       url="https://github.com/rhobs/observability-operator"\
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       vendor="Red Hat, Inc."
 
 COPY --from=final /workspace/bundle/manifests /manifests/
