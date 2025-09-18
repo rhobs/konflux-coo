@@ -1,7 +1,7 @@
 #!/bin/bash
 # run like so:
 # ./hack/customize-pipeline.sh <pipeline file to customize> [more files]
-branch="release-1.2"
+branch="release-1.3"
 for file in "$@"
 do
     echo "Processing file $file"
