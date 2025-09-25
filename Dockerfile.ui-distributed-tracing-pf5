@@ -44,7 +44,8 @@ COPY --from=go-builder /opt/app-root/plugin-backend /opt/app-root
 ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/dist"]
 
 LABEL com.redhat.component="coo-distributed-tracing-console-plugin" \
-      name="openshift/distributed-tracing-console-plugin" \
+      name="cluster-observability-operator/distributed-tracing-console-plugin-0-4-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       version="v0.4.0" \
       summary="OpenShift console plugin to view and explore traces" \
       io.openshift.tags="openshift,observability-ui,distributed tracing" \
