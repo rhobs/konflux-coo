@@ -32,7 +32,8 @@ USER 65532:65532
 ENTRYPOINT ["/manager"]
 
 LABEL com.redhat.component="coo-operator" \
-      name="Cluster Observability Operator" \
+      name="cluster-observability-operator/cluster-observability-rhel9-operator" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       version="v1.2.2" \
       summary="Cluster Observability Operator" \
       io.openshift.tags="openshift,observability" \
