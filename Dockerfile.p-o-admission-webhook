@@ -20,7 +20,8 @@ USER nobody
 ENTRYPOINT ["/bin/admission-webhook"]
 
 LABEL com.redhat.component="coo-po-admission-webhook" \
-      name="prometheus-operator-admission-webhook" \
+      name="cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
       version="v0.80.1" \
       summary="Admission Webhook for Prometheus Operator" \
       io.openshift.tags="monitoring" \
