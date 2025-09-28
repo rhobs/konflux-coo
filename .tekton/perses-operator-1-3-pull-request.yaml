@@ -10,16 +10,16 @@ metadata:
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: |-
       event == "pull_request" && target_branch == "release-1.3" &&
-              (".tekton/monitoring-console-plugin-0-4-1-3-pull-request.yaml".pathChanged() ||
-              ".tekton/monitoring-console-plugin-0-4-1-3-push.yaml".pathChanged() ||
-              "Dockerfile.ui-monitoring-pf5".pathChanged() ||
-              "ui-monitoring-pf5".pathChanged())
+              (".tekton/perses-operator-1-3-pull-request.yaml".pathChanged() ||
+              ".tekton/perses-operator-1-3-push.yaml".pathChanged() ||
+              "Dockerfile.perses-operator".pathChanged() ||
+              "perses-operator".pathChanged())
   creationTimestamp:
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-3
-    appstudio.openshift.io/component: monitoring-console-plugin-0-4-1-3
+    appstudio.openshift.io/component: perses-operator-1-3
     pipelines.appstudio.openshift.io/type: build
-  name: monitoring-console-plugin-0-4-1-3-on-pull-request
+  name: perses-operator-1-3-on-pull-request
   namespace: cluster-observabilit-tenant
 spec:
   params:
@@ -28,7 +28,7 @@ spec:
     - name: revision
       value: '{{revision}}'
     - name: output-image
-      value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-0-4-rhel9:on-pr-{{revision}}
+      value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-0-1-rhel9-operator:on-pr-{{revision}}
     - name: image-expires-after
       value: 5d
     - name: build-platforms
@@ -38,7 +38,7 @@ spec:
         - linux/ppc64le
         - linux/s390x
     - name: dockerfile
-      value: Dockerfile.ui-monitoring-pf5
+      value: Dockerfile.perses-operator
     - name: path-context
       value: .
     - name: build-source-image
@@ -629,7 +629,7 @@ spec:
       - name: netrc
         optional: true
   taskRunTemplate:
-    serviceAccountName: build-pipeline-monitoring-console-plugin-0-4-1-3
+    serviceAccountName: build-pipeline-perses-operator-1-3
   workspaces:
     - name: git-auth
       secret:

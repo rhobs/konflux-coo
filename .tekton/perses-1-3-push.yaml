@@ -4,22 +4,22 @@ metadata:
   annotations:
     build.appstudio.openshift.io/repo: https://github.com/rhobs/konflux-coo?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
-    build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
-    pipelinesascode.tekton.dev/cancel-in-progress: "true"
+    pipelinesascode.tekton.dev/cancel-in-progress: "false"
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: |-
-      event == "pull_request" && target_branch == "release-1.3" &&
-              (".tekton/perses-operator-0-1-1-3-pull-request.yaml".pathChanged() ||
-              ".tekton/perses-operator-0-1-1-3-push.yaml".pathChanged() ||
-              "Dockerfile.perses-operator".pathChanged() ||
-              "perses-operator".pathChanged())
+      event == "push" && target_branch == "release-1.3" &&
+              (".tekton/perses-1-3-pull-request.yaml".pathChanged() ||
+              ".tekton/perses-1-3-push.yaml".pathChanged() ||
+              "Dockerfile.perses".pathChanged() ||
+              "perses".pathChanged())
+    build.appstudio.openshift.io/build-nudge-files: bundle-patches/render_templates
   creationTimestamp:
   labels:
     appstudio.openshift.io/application: cluster-observability-operator-1-3
-    appstudio.openshift.io/component: perses-operator-0-1-1-3
+    appstudio.openshift.io/component: perses-1-3
     pipelines.appstudio.openshift.io/type: build
-  name: perses-operator-0-1-1-3-on-pull-request
+  name: perses-1-3-on-push
   namespace: cluster-observabilit-tenant
 spec:
   params:
@@ -28,9 +28,7 @@ spec:
     - name: revision
       value: '{{revision}}'
     - name: output-image
-      value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-0-1-rhel9-operator:on-pr-{{revision}}
-    - name: image-expires-after
-      value: 5d
+      value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9:{{revision}}
     - name: build-platforms
       value:
         - linux/x86_64
@@ -38,7 +36,7 @@ spec:
         - linux/ppc64le
         - linux/s390x
     - name: dockerfile
-      value: Dockerfile.perses-operator
+      value: Dockerfile.perses
     - name: path-context
       value: .
     - name: build-source-image
@@ -629,7 +627,7 @@ spec:
       - name: netrc
         optional: true
   taskRunTemplate:
-    serviceAccountName: build-pipeline-perses-operator-0-1-1-3
+    serviceAccountName: build-pipeline-perses-1-3
   workspaces:
     - name: git-auth
       secret:
