@@ -26,9 +26,10 @@ EXPOSE     8080
 ENTRYPOINT [ "/bin/manager" ]
 
 LABEL com.redhat.component="coo-perses-operator" \
-    name="perses/perses-operator" \
+    name="cluster-observability-operator/perses-0-1-rhel9-operator" \
     version="v0.1.12" \
     summary="Perses Operator for Cluster Observability Operator" \
+    cpe="cpe:/a:redhat:cluster_observability_operator:1.2::el9" \
     io.openshift.tags="openshift,observability-ui,perses-operator" \
     io.k8s.display-name="Perses Operator for Cluster Observability Operator" \
     io.k8s.description="Perses Operator for Cluster Observability Operator" \
