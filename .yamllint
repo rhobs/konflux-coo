@@ -12,7 +12,10 @@ rules:
   document-end: disable
   document-start: disable
   empty-lines: enable
-  empty-values: enable
+  empty-values:
+    ignore: |
+       .tekton/*.yaml
+       .tekton/*.yml
   hyphens: enable
   key-duplicates: enable
   key-ordering: disable
