@@ -43,6 +43,8 @@ spec:
       value: .
     - name: build-source-image
       value: "true"
+    - name: buildah-format
+      value: docker
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
@@ -113,10 +115,10 @@ spec:
         description: List of platforms to build the container images on. The available set of values is determined by the configuration of the multi-platform-controller.
         name: build-platforms
         type: array
-      - name: buildah-format
-        default: docker
-        type: string
+      - default: oci
         description: The format for the resulting image's mediaType. Valid values are oci or docker.
+        name: buildah-format
+        type: string
     results:
       - description: ""
         name: IMAGE_URL
