@@ -41,6 +41,14 @@ spec:
       value: "true"
     - name: buildah-format
       value: docker
+  taskRunSpecs:
+    - pipelineTaskName: prefetch-dependencies
+      computeResources:
+        requests:
+          cpu: '1'
+          memory: 2Gi
+        limits:
+          memory: 2Gi
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while reducing network traffic.
