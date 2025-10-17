@@ -27,6 +27,10 @@ spec:
       value: '{{source_url}}'
     - name: revision
       value: '{{revision}}'
+    - name: prefetch-input
+      value: [{"type": "gomod", "path": "./ui-logging"}, {"type": "npm", "path": "./ui-logging/web"}]
+    - name: hermetic
+      value: "true"
     - name: output-image
       value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-rhel9:{{revision}}
     - name: build-platforms
