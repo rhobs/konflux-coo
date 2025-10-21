@@ -45,6 +45,10 @@ spec:
       value: "true"
     - name: buildah-format
       value: docker
+    - name: hermetic
+      value: "true"
+    - name: prefetch-input
+      value: '[{"type": "rpm", "path": "./bundle-patches"}]'
   taskRunSpecs:
     - pipelineTaskName: prefetch-dependencies
       computeResources:
@@ -207,6 +211,8 @@ spec:
         params:
           - name: input
             value: $(params.prefetch-input)
+          - name: dev-package-managers
+            value: "true"
         runAfter:
           - clone-repository
         taskRef:
@@ -636,7 +642,7 @@ spec:
             - ReadWriteOnce
           resources:
             requests:
-              storage: 1Gi
+              storage: 2Gi
         status: {}
     - name: git-auth
       secret:
