@@ -4,11 +4,11 @@ set -ex
 
 csv_file="$1"
 annotation_file="$2"
-PRODUCT_VERSION="1.2.2"
+PRODUCT_VERSION="1.3.0"
 X_VERSION="1"
-Y_VERSION="2"
-Z_VERSION="2"
-CSV_REPLACES_VERSION="1.2.1"
+Y_VERSION="3"
+Z_VERSION="0"
+CSV_REPLACES_VERSION="1.3.0"
 
 if [[ -z "$REGISTRY" ]]; then
     echo "Must provide REGISTRY in environment" 1>&2
@@ -72,7 +72,7 @@ COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenan
 
 COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-rhel9@sha256:1a20b035c76ab0c4731f7cbbe1ef3b33a3cbb7a0a38e87c5e1e66d49a821dd5f"
 
-COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9@sha256:f9ce456d636c60a10408e86d0b070a6d556937efed581f21c16f10957d849844"
+COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9@sha256:1f92f2f4d26c59b5f96ac0819daa3c818019cb9dad79a925f988ef1c288c4be6"
 
 COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9-operator@sha256:f2137050a7229c7ae06b1addef8734380b040cc25cbc4879ed9e2467e85d82b7"
 
