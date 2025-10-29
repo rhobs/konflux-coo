@@ -1,4 +1,4 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.23 as builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.24 as builder
 WORKDIR /workspace
 
 # Copy source files
@@ -21,7 +21,7 @@ ENTRYPOINT ["/bin/admission-webhook"]
 
 LABEL com.redhat.component="coo-po-admission-webhook" \
       name="prometheus-operator-admission-webhook" \
-      version="v0.80.1" \
+      version="v0.86.1" \
       summary="Admission Webhook for Prometheus Operator" \
       io.openshift.tags="monitoring" \
       io.k8s.display-name="Admission Webhook for Prometheus Operator" \

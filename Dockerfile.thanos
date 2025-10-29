@@ -1,4 +1,4 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.23 as builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.24 as builder
 
 WORKDIR /workspace
 
@@ -21,7 +21,7 @@ ENTRYPOINT [ "/bin/thanos" ]
 
 LABEL com.redhat.component="coo-thanos-container" \
       name="rhobs/thanos" \
-      version="v0.37.2" \
+      version="v0.39.2" \
       summary="Thanos for Cluster Observability Operator" \
       io.openshift.expose-services="" \
       io.openshift.tags="monitoring" \
