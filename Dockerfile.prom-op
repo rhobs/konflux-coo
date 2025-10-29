@@ -1,4 +1,4 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.23 as builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.24 as builder
 WORKDIR /workspace
 
 # Copy source files
@@ -19,7 +19,7 @@ USER 65534
 
 LABEL com.redhat.component="coo-prometheus-operator" \
       name="prometheus-operator" \
-      version="v0.80.1" \
+      version="v0.86.1" \
       summary="Prometheus Operator" \
       io.openshift.tags="monitoring" \
       io.k8s.display-name="Prometheus Operator" \

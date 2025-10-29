@@ -8,7 +8,7 @@ COPY prometheus/ .
 
 RUN make assets-compress
 
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.22 AS builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.24 AS builder
 
 WORKDIR /workspace
 
@@ -44,7 +44,7 @@ CMD        [ "--config.file=/etc/prometheus/prometheus.yml", \
 
 LABEL com.redhat.component="coo-prometheus-container" \
       name="prometheus/prometheus" \
-      version="v3.2.1" \
+      version="v3.7.2" \
       summary="Prometheus for Cluster Observability Operator" \
       io.openshift.expose-services="" \
       io.openshift.tags="monitoring" \
