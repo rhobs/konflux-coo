@@ -5,7 +5,7 @@ WORKDIR /workspace
 COPY korrel8r .
 
 ENV GOFLAGS='-mod=mod'
-ENV CGO_ENABLED=0
+ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
 
 RUN go build -tags strictfipsruntime,openssl ./cmd/korrel8r
