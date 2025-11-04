@@ -8,7 +8,7 @@ ENV GOFLAGS='-mod=mod'
 ENV CGO_ENABLED=0
 ENV GOEXPERIMENT=strictfipsruntime
 
-RUN go build -tags strictfipsruntime ./cmd/korrel8r
+RUN go build -tags strictfipsruntime,openssl ./cmd/korrel8r
 
 FROM registry.redhat.io/rhel9-4-els/rhel:9.4
 WORKDIR /
