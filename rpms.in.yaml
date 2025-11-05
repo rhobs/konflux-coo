@@ -3,6 +3,8 @@ contentOrigin:
     - ubi9.repo
 packages:
   - mailcap
+  - python3
+  - python3-pyyaml
 arches:
   - x86_64
   - aarch64

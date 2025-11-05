@@ -20,7 +20,7 @@ ENV NO_DOCKER=true
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o alertmanager github.com/prometheus/alertmanager/cmd/alertmanager
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o amtool github.com/prometheus/alertmanager/cmd/amtool
 
-FROM registry.redhat.io/rhel9-4-els/rhel:9.4
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:34880b64c07f28f64d95737f82f891516de9a3b43583f39970f7bf8e4cfa48b7
 
 COPY --from=builder workspace/amtool       /bin/amtool
 COPY --from=builder workspace/alertmanager /bin/alertmanager
