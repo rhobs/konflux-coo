@@ -52,7 +52,7 @@ COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/clus
 
 COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/dashboards-console-plugin-rhel9@sha256:93b4e19fef5f03eae74ac45e09d905aad240fd102a33511aeaae616268b932a3"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-rhel9@sha256:959130cdcc69eecf35561409e68351d08b24f8a7c740b2c2ed71d91186659ec3"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-rhel9@sha256:897e1bfad1187062725b54d87107bd0155972257a50d8335dd29e1999b828a4f"
 
 COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-pf5-rhel9@sha256:a6bc238bb24c5748356c11380a53dddddebef93d6627630a9a6c51ed75f7ccbd"
 
