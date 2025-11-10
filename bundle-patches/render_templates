@@ -139,18 +139,18 @@ yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operat
 # variable. This allows OSBS to massage the pullspec (registry replacement,
 # sha pinning)
 # We do that by first using sed to replace the relevant image spec with our new
-# env var.
+# env var or add it if its not present.
 # Then we use yq to add the env var value to the containers environment.
 sed -i -e 's|--prometheus-config-reloader=.*|"--prometheus-config-reloader=$(RELATED_IMAGE_PROMETHEUS_CONFIG_RELOADER)"|' "$csv_file"
 VALUE="${COO_CONF_RELOADER_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "obo-prometheus-operator").spec.template.spec.containers[] | select(.name == "prometheus-operator").env) += [{"name":"RELATED_IMAGE_PROMETHEUS_CONFIG_RELOADER", "value": strenv(VALUE)}]' "$csv_file"
 
-sed -i -e 's|--images=alertmanager=.*|"--images=alertmanager=$(RELATED_IMAGE_ALERTMANAGER)"|' "$csv_file"
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=alertmanager=$(RELATED_IMAGE_ALERTMANAGER)"]' "$csv_file"
 VALUE="${COO_ALERTMANAGER_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_ALERTMANAGER", "value": strenv(VALUE)}]' "$csv_file"
 
-sed -i -e 's|--images=prometheus=.*|"--images=prometheus=$(RELATED_IMAGE_PROMETHEUS)"|' "$csv_file"
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=prometheus=$(RELATED_IMAGE_PROMETHEUS)"]' "$csv_file"
 VALUE="${COO_PROMETHEUS_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_PROMETHEUS", "value": strenv(VALUE)}]' "$csv_file"
 
-sed -i -e 's|--images=thanos=.*|"--images=thanos=$(RELATED_IMAGE_THANOS)"|' "$csv_file"
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=thanos=$(RELATED_IMAGE_THANOS)"]' "$csv_file"
 VALUE="${COO_THANOS_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_THANOS", "value": strenv(VALUE)}]' "$csv_file"
 
 sed -i -e 's|--images=perses=.*|"--images=perses=$(RELATED_IMAGE_PERSES)"|' "$csv_file"
