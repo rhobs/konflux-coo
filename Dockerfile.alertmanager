@@ -8,7 +8,7 @@ COPY alertmanager/ .
 
 RUN make build-react-app assets-compress
 
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.22 AS builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.220000 AS builder
 
 WORKDIR /workspace
 
@@ -39,7 +39,7 @@ CMD        [ "--config.file=/etc/alertmanager/alertmanager.yml", \
              "--storage.path=/alertmanager" ]
 
 LABEL com.redhat.component="coo-alertmanager" \
-      name="Alertmanager" \
+      name="Alertmanager-foo-foo" \
       version="v0.28.1" \
       summary="Alertmanager for Cluster Observability Operator" \
       io.openshift.tags="openshift,monitoring" \
