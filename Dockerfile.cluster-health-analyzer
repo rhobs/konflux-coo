@@ -25,9 +25,14 @@ USER 65532:65532
 
 ENTRYPOINT ["/bin/cluster-health-analyzer"]
 
+ARG VERSION=v1.0.0
 LABEL com.redhat.component="coo-cluster-health-analyzer" \
       name="openshift/cluster-health-analyzer" \
-      version="v1.0.0" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/openshift/cluster-health-analyzer" \
       summary="OpenShift Cluster Health Analyzer" \
       io.openshift.tags="openshift,observability,metrics,alerts,incidents" \
       io.k8s.display-name="COO Cluster Health Analyzer" \

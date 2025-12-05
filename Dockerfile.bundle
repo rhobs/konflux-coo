@@ -51,23 +51,23 @@ LABEL operators.operatorframework.io.metrics.project_layout=unknown
 LABEL operators.operatorframework.io.test.mediatype.v1=scorecard+v1
 LABEL operators.operatorframework.io.test.config.v1=tests/scorecard/
 
+ARG VERSION=v1.3.1
 LABEL com.redhat.component="coo-bundle" \
       name="cluster-observability-operator-bundle" \
-      release="v1.3.1" \
-      version="v1.3.1" \
-      com.redhat.openshift.versions="v4.12" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
       distribution-scope="public" \
+      url="https://github.com/rhobs/observability-operator" \
       summary="Cluster Observability Operator Bundle" \
+      com.redhat.openshift.versions="v4.12" \
       io.openshift.tags="openshift,observability,monitoring" \
       io.k8s.display-name="Cluster Observability Operator Bundle" \
-      maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
-      description="Cluster Observability Operator Bundle" \
       io.k8s.description="Cluster Observability Operator Bundle" \
-      url="https://github.com/rhobs/observability-operator"\
-      vendor="Red Hat, Inc."
+      maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
+      description="Cluster Observability Operator Bundle"
 
 COPY --from=final /workspace/bundle/manifests /manifests/
 COPY --from=final /workspace/bundle/metadata /metadata/
 COPY --from=final /workspace/bundle/tests/scorecard /tests/scorecard/
 COPY --from=final /workspace/LICENSE /licenses/.
-

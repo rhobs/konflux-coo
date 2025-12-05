@@ -31,9 +31,14 @@ USER 65532:65532
 
 ENTRYPOINT ["/manager"]
 
+ARG VERSION=v1.3.1
 LABEL com.redhat.component="coo-operator" \
       name="Cluster Observability Operator" \
-      version="v1.3.1" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/rhobs/observability-operator" \
       summary="Cluster Observability Operator" \
       io.openshift.tags="openshift,observability" \
       io.k8s.display-name="Cluster Observability Operator" \

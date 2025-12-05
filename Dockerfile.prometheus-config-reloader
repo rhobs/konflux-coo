@@ -19,13 +19,17 @@ USER nobody
 
 ENTRYPOINT ["/bin/prometheus-config-reloader"]
 
+ARG VERSION=v0.87.0
 LABEL com.redhat.component="coo-po-prometheus-config-reloader" \
       name="prometheus-operator-prometheus-config-reloader" \
-      version="v0.86.1" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/rhobs/obo-prometheus-operator" \
       summary="Prometheus Config Reloader for Prometheus Operator" \
       io.openshift.tags="monitoring" \
       io.k8s.display-name="Prometheus Config Reloader for Prometheus Operator" \
+      io.k8s.description="Prometheus Config Reloader for Prometheus Operator" \
       maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
-      maintainer="Prometheus Config Reloader for Prometheus Operator" \
-      description="Prometheus Config Reloader for Prometheus Operator" \
-      io.k8s.description="Prometheus Config Reloader for Prometheus Operator"
+      description="Prometheus Config Reloader for Prometheus Operator"

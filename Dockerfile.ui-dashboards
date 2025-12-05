@@ -43,9 +43,14 @@ COPY --from=go-builder /opt/app-root/plugin-backend /opt/app-root
 
 ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/dist"]
 
+ARG VERSION=v0.4.0
 LABEL com.redhat.component="coo-dashboards-console-plugin" \
       name="openshift/dashboards-console-plugin" \
-      version="v0.4.0" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/openshift/console-dashboards-plugin" \
       summary="OpenShift console plugin to enhance dashboards datasources" \
       io.openshift.tags="openshift,observability-ui" \
       io.k8s.display-name="OpenShift console dashboards plugin" \

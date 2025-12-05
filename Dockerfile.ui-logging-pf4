@@ -44,9 +44,14 @@ COPY ui-logging-pf4/config /opt/app-root/config
 
 ENTRYPOINT ["/opt/app-root/plugin-backend", "-config-path", "/opt/app-root/config", "-static-path", "/opt/app-root/web/dist"]
 
+ARG VERSION=v6.0.0
 LABEL com.redhat.component="coo-logging-console-plugin" \
       name="openshift/logging-console-plugin" \
-      version="v6.0.0" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/openshift/logging-view-plugin" \
       summary="OpenShift console plugin to view and explore logs" \
       io.openshift.tags="openshift,observability-ui,logging" \
       io.k8s.display-name="OpenShift console logging plugin" \
