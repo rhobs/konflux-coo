@@ -42,9 +42,14 @@ ENTRYPOINT ["/bin/prometheus"]
 CMD        [ "--config.file=/etc/prometheus/prometheus.yml", \
              "--storage.tsdb.path=/prometheus" ]
 
+ARG VERSION=v3.7.2
 LABEL com.redhat.component="coo-prometheus-container" \
       name="prometheus/prometheus" \
-      version="v3.7.2" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/prometheus/prometheus" \
       summary="Prometheus for Cluster Observability Operator" \
       io.openshift.expose-services="" \
       io.openshift.tags="monitoring" \

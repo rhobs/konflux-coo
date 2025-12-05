@@ -39,9 +39,14 @@ VOLUME     ["/perses"]
 ENTRYPOINT [ "/bin/perses" ]
 CMD        ["--config=/etc/perses/config.yaml", "--log.level=error"]
 
+ARG VERSION=v0.51.1
 LABEL com.redhat.component="coo-perses" \
     name="perses/perses" \
-    version="v0.51.1" \
+    version="${VERSION}" \
+    release="${VERSION}" \
+    vendor="Red Hat, Inc." \
+    distribution-scope="public" \
+    url="https://github.com/rhobs/perses" \
     summary="Perses for Cluster Observability Operator" \
     io.openshift.tags="openshift,observability-ui,perses" \
     io.k8s.display-name="Perses for Cluster Observability Operator" \

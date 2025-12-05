@@ -25,9 +25,14 @@ COPY --from=builder --chown=nobody:nobody /etc/mime.types   /etc/mime.types
 EXPOSE     8080
 ENTRYPOINT [ "/bin/manager" ]
 
+ARG VERSION=v0.2.0
 LABEL com.redhat.component="coo-perses-operator" \
     name="perses/perses-operator" \
-    version="v0.2.0" \
+    version="${VERSION}" \
+    release="${VERSION}" \
+    vendor="Red Hat, Inc." \
+    distribution-scope="public" \
+    url="https://github.com/rhobs/perses-operator" \
     summary="Perses Operator for Cluster Observability Operator" \
     io.openshift.tags="openshift,observability-ui,perses-operator" \
     io.k8s.display-name="Perses Operator for Cluster Observability Operator" \

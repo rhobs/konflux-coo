@@ -17,15 +17,19 @@ COPY --from=builder /workspace/LICENSE      /licenses/.
 # On busybox 'nobody' has uid `65534'
 USER 65534
 
+ARG VERSION=v0.87.0
 LABEL com.redhat.component="coo-prometheus-operator" \
       name="prometheus-operator" \
-      version="v0.86.1" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/rhobs/obo-prometheus-operator" \
       summary="Prometheus Operator" \
       io.openshift.tags="monitoring" \
       io.k8s.display-name="Prometheus Operator" \
       io.k8s.description="COO Prometheus Operator" \
       maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
-      maintainer="Prometheus Operator" \
       description="Prometheus Operator"
 
 ENTRYPOINT ["/bin/operator"]

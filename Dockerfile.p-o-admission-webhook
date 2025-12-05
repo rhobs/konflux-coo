@@ -19,13 +19,17 @@ USER nobody
 
 ENTRYPOINT ["/bin/admission-webhook"]
 
+ARG VERSION=v0.87.0
 LABEL com.redhat.component="coo-po-admission-webhook" \
       name="prometheus-operator-admission-webhook" \
-      version="v0.86.1" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/rhobs/obo-prometheus-operator" \
       summary="Admission Webhook for Prometheus Operator" \
       io.openshift.tags="monitoring" \
       io.k8s.display-name="Admission Webhook for Prometheus Operator" \
+      io.k8s.description="Admission Webhook for Prometheus Operator" \
       maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
-      maintainer="Admission Webhook for Prometheus Operator" \
-      description="Admission Webhook for Prometheus Operator" \
-      io.k8s.description="Admission Webhook for Prometheus Operator"
+      description="Admission Webhook for Prometheus Operator"

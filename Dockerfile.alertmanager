@@ -38,9 +38,14 @@ ENTRYPOINT [ "/bin/alertmanager" ]
 CMD        [ "--config.file=/etc/alertmanager/alertmanager.yml", \
              "--storage.path=/alertmanager" ]
 
-LABEL com.redhat.component="coo-alertmanager" \
+ARG VERSION=v0.28.1 
+LABEL com.redhat.component="coo-alertmanager" \           
       name="Alertmanager" \
-      version="v0.28.1" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/prometheus/alertmanager" \
       summary="Alertmanager for Cluster Observability Operator" \
       io.openshift.tags="openshift,monitoring" \
       io.k8s.display-name="Alertmanager" \

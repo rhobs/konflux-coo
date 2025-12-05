@@ -19,9 +19,14 @@ COPY --from=builder /workspace/LICENSE /licenses/.
 USER nobody
 ENTRYPOINT [ "/bin/thanos" ]
 
+ARG VERSION=v0.39.2
 LABEL com.redhat.component="coo-thanos-container" \
       name="rhobs/thanos" \
-      version="v0.39.2" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/openshift/thanos" \
       summary="Thanos for Cluster Observability Operator" \
       io.openshift.expose-services="" \
       io.openshift.tags="monitoring" \
