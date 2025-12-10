@@ -4,10 +4,10 @@ set -ex
 
 csv_file="$1"
 annotation_file="$2"
-PRODUCT_VERSION="1.3.0"
+PRODUCT_VERSION="1.3.1"
 X_VERSION="1"
 Y_VERSION="3"
-Z_VERSION="0"
+Z_VERSION="1"
 CSV_REPLACES_VERSION="1.3.0"
 
 if [[ -z "$REGISTRY" ]]; then
