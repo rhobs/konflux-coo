@@ -1,0 +1,38 @@
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: cluster-observability-operator-1-3-1
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: cluster-observability-operator-1-3-prod
+  snapshot: cluster-observability-operator-1-3-m7v55
+  data:
+    releaseNotes:
+      topic: Red Hat build of Cluster Observability Operator 1.3.1 has been released
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.3.1 release
+      description: |
+        This is a bug fix release
+      type: RHBA
+      issues:
+        fixed:
+          - id: COO-1250
+            source: issues.redhat.com
+          - id: COO-1334
+            source: issues.redhat.com
+          - id: COO-1390
+            source: issues.redhat.com
+          - id: COO-15
+            source: issues.redhat.com
+          - id: COO-1325
+            source: issues.redhat.com
+          - id: COO-1327
+            source: issues.redhat.com
+          - id: COO-1331
+            source: issues.redhat.com
+          - id: COO-1367
+            source: issues.redhat.com
+          - id: COO-1384
+            source: issues.redhat.com
