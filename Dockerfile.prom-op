@@ -5,7 +5,10 @@ WORKDIR /workspace
 COPY obo-prometheus-operator/ .
 
 ENV GOFLAGS='-mod=mod'
+
+ENV GOTOOLCHAIN=local
 ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
 
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o operator ./cmd/operator/
 
