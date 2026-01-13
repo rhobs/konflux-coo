@@ -5,7 +5,7 @@ WORKDIR /workspace
 COPY obo-prometheus-operator/ .
 
 ENV GOFLAGS='-mod=mod'
-ENV CGO_ENABLED=0
+ENV CGO_ENABLED=1
 
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o operator ./cmd/operator/
 
