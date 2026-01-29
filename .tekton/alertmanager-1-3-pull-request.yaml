@@ -28,7 +28,7 @@ spec:
     - name: revision
       value: '{{revision}}'
     - name: prefetch-input
-      value: [{"type": "gomod", "path": "./alertmanager"}, {"type": "npm", "path":"./alertmanager/ui/react-app"}]
+      value: [{"type": "gomod", "path": "./alertmanager"}, {"type": "npm", "path": "./alertmanager/ui/react-app"}]
     - name: hermetic
       value: "true"
     - name: output-image
@@ -49,6 +49,8 @@ spec:
       value: "true"
     - name: buildah-format
       value: docker
+    - name: enable-cache-proxy
+      value: "true"
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
