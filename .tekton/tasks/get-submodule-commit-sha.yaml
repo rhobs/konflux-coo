@@ -1,0 +1,54 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: get-submodule-commit-sha
+  labels:
+    app.kubernetes.io/version: "0.1"
+spec:
+  description: >-
+    This task retrieves the commit SHA of git submodules in the repository.
+  params:
+    - name: source-artifact
+      description: The Trusted Artifact URI pointing to the artifact with the application source code.
+      type: string
+      default: ""
+    - name: submodule-name
+      description: name of the specific submodule.
+      type: string
+      default: ""
+  results:
+    - name: submodule-sha
+      type: string
+      description: submodule commit sha id
+    - name: submodule-url
+      type: string
+      description: submodule https url
+  steps:
+    - name: use-trusted-artifact
+      image: quay.io/konflux-ci/build-trusted-artifacts:latest@sha256:15d7dc86012e41b10d1eb37679ec03ee75c96436224fadd0938a49dc537aa4ad
+      args:
+        - use
+        - $(params.source-artifact)=/tekton/home/source
+    - name: get-submodule-sha
+      image: quay.io/konflux-ci/buildah-task:4c470b5a153c4acd14bf4f8731b5e36c61d7faafe09c2bf376bb81ce84aa5709
+      workingDir: /tekton/home/source
+      script: |
+        #!/bin/bash
+        set -e
+
+        # Initialize variables
+        submodule_sha=""
+        submodule_url=""
+
+        # Get the commit SHA for the submodule
+        cd $(params.submodule-name)
+        # Get the commit SHA from the git index
+        submodule_sha=$(git rev-parse HEAD)
+        submodule_url=$(git remote get-url origin)
+        submodule_commit_url=${submodule_url}/commit/${submodule_sha}
+
+        # Write results
+        echo -n "$submodule_sha" | tee $(results.submodule-sha.path)
+        echo -n "$submodule_commit_url" | tee $(results.submodule-url.path)
+
+        echo "Submodule commit SHAs extracted successfully"
