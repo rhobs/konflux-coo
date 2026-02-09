@@ -53,7 +53,7 @@ LABEL operators.operatorframework.io.test.config.v1=tests/scorecard/
 
 ARG VERSION=v1.3.1
 LABEL com.redhat.component="coo-bundle" \
-      name="cluster-observability-operator-bundle" \
+      name="cluster-observability-operator/cluster-observability-operator-bundle"
       version="${VERSION}" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \

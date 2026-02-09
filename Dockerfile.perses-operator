@@ -27,7 +27,7 @@ ENTRYPOINT [ "/bin/manager" ]
 
 ARG VERSION=v0.2.0
 LABEL com.redhat.component="coo-perses-operator" \
-    name="perses/perses-operator" \
+    name="cluster-observability-operator/perses-rhel9-operator"
     version="${VERSION}" \
     release="${VERSION}" \
     vendor="Red Hat, Inc." \

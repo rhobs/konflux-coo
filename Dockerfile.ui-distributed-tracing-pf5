@@ -45,7 +45,7 @@ ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/d
 
 ARG VERSION=v0.4.0
 LABEL com.redhat.component="coo-distributed-tracing-console-plugin" \
-      name="openshift/distributed-tracing-console-plugin" \
+      name="cluster-observability-operator/distributed-tracing-console-plugin-pf5-rhel9"
       version="${VERSION}" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \

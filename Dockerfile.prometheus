@@ -44,7 +44,7 @@ CMD        [ "--config.file=/etc/prometheus/prometheus.yml", \
 
 ARG VERSION=v3.7.2
 LABEL com.redhat.component="coo-prometheus-container" \
-      name="prometheus/prometheus" \
+      name="cluster-observability-operator/prometheus-rhel9"
       version="${VERSION}" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \

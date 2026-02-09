@@ -46,7 +46,7 @@ ENTRYPOINT ["/opt/app-root/plugin-backend", "-config-path", "/opt/app-root/confi
 
 ARG VERSION=v6.1.0
 LABEL com.redhat.component="coo-logging-console-plugin" \
-      name="openshift/logging-console-plugin" \
+      name="cluster-observability-operator/logging-console-plugin-rhel9"
       version="${VERSION}" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \
