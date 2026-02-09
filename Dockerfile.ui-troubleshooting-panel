@@ -45,7 +45,8 @@ ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/d
 
 ARG VERSION=v0.4.0
 LABEL com.redhat.component="coo-troubleshooting-panel-console-plugin" \
-      name="cluster-observability-operator/troubleshooting-panel-console-plugin-rhel9"
+      name="cluster-observability-operator/troubleshooting-panel-console-plugin-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.3::el9" \
       version="${VERSION}" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \
