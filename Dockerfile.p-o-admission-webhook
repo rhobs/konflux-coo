@@ -21,7 +21,8 @@ ENTRYPOINT ["/bin/admission-webhook"]
 
 ARG VERSION=v0.87.0
 LABEL com.redhat.component="coo-po-admission-webhook" \
-      name="prometheus-operator-admission-webhook" \
+      name="cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.3::el9" \
       version="${VERSION}" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \

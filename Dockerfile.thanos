@@ -21,7 +21,8 @@ ENTRYPOINT [ "/bin/thanos" ]
 
 ARG VERSION=v0.39.2
 LABEL com.redhat.component="coo-thanos-container" \
-      name="rhobs/thanos" \
+      name="cluster-observability-operator/thanos-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.3::el9" \
       version="${VERSION}" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \
