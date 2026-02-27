@@ -39,7 +39,7 @@ CMD        [ "--config.file=/etc/alertmanager/alertmanager.yml", \
              "--storage.path=/alertmanager" ]
 
 ARG VERSION=v0.28.1 
-LABEL com.redhat.component="coo-alertmanager" \           
+LABEL com.redhat.component="coo-alertmanager" \          
       name="cluster-observability-operator/alertmanager-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
       version="${VERSION}" \
