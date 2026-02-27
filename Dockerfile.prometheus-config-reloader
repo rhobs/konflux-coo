@@ -19,7 +19,7 @@ USER nobody
 
 ENTRYPOINT ["/bin/prometheus-config-reloader"]
 
-ARG VERSION=v0.87.0
+ARG VERSION=v0.89.0
 LABEL com.redhat.component="coo-po-prometheus-config-reloader" \
       name="cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
