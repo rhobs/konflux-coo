@@ -27,6 +27,10 @@ spec:
       value: '{{source_url}}'
     - name: revision
       value: '{{revision}}'
+    - name: prefetch-input
+      value: [{"type": "gomod", "path": "./korrel8r"}]
+    - name: hermetic
+      value: "true"
     - name: output-image
       value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/korrel8r-rhel9:on-pr-{{revision}}
     - name: image-expires-after
