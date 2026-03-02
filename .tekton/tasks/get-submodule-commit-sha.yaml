@@ -17,12 +17,9 @@ spec:
       type: string
       default: ""
   results:
-    - name: submodule-sha
-      type: string
-      description: submodule commit sha id
-    - name: submodule-url
-      type: string
-      description: submodule https url
+    - name: labels
+      type: array
+      description: LABELS array for buildah
   steps:
     - name: use-trusted-artifact
       image: quay.io/konflux-ci/build-trusted-artifacts:latest@sha256:15d7dc86012e41b10d1eb37679ec03ee75c96436224fadd0938a49dc537aa4ad
@@ -48,7 +45,7 @@ spec:
         submodule_commit_url=${submodule_url}/commit/${submodule_sha}
 
         # Write results
-        echo -n "$submodule_sha" | tee $(results.submodule-sha.path)
-        echo -n "$submodule_commit_url" | tee $(results.submodule-url.path)
+        echo "$submodule_commit_url"
+        printf '["commit.id=%s", "commit.url=%s"]' "${submodule_sha}" "${submodule_commit_url}" > $(results.labels.path)
 
-        echo "Submodule commit SHAs extracted successfully"
+        echo -e "\nSubmodule commit SHAs extracted successfully"
