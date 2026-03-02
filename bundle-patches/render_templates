@@ -4,11 +4,11 @@ set -ex
 
 csv_file="$1"
 annotation_file="$2"
-PRODUCT_VERSION="1.3.1"
+PRODUCT_VERSION="1.4.0"
 X_VERSION="1"
-Y_VERSION="3"
-Z_VERSION="1"
-CSV_REPLACES_VERSION="1.3.0"
+Y_VERSION="4"
+Z_VERSION="0"
+CSV_REPLACES_VERSION="1.3.1"
 
 if [[ -z "$REGISTRY" ]]; then
     echo "Must provide REGISTRY in environment" 1>&2
@@ -76,7 +76,7 @@ COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/
 
 COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9-operator@sha256:16e1d231f1cd1578219239614aca3896c3542ebcb083a3d2d3be1551b0ad433d"
 
-if [[ $REGISTRY == "registry.redhat.io"  || $REGISTRY == "registry.stage.redhat.io" ]]; then
+if [[ $REGISTRY == "registry.redhat.io" || $REGISTRY == "registry.stage.redhat.io" ]]; then
     COO_IMAGE_URL="$REGISTRY/${COO_IMAGE_URL:(58)}"
     COO_CONF_RELOADER_IMAGE_URL="$REGISTRY/${COO_CONF_RELOADER_IMAGE_URL:(58)}"
     COO_ALERTMANAGER_IMAGE_URL="$REGISTRY/${COO_ALERTMANAGER_IMAGE_URL:(58)}"
@@ -98,7 +98,6 @@ if [[ $REGISTRY == "registry.redhat.io"  || $REGISTRY == "registry.stage.redhat.
     COO_PERSES_IMAGE_URL="$REGISTRY/${COO_PERSES_IMAGE_URL:(58)}"
     COO_PERSES_OPERATOR_IMAGE_URL="$REGISTRY/${COO_PERSES_OPERATOR_IMAGE_URL:(58)}"
 fi
-
 
 # Add related images for disconnected installs
 # First we add an empty list
@@ -224,7 +223,7 @@ VALUE=">="${CI_X_VERSION}.${CI_Y_VERSION}.0" <${PRODUCT_VERSION}" yq -i '.metada
 
 # Set replaces based upon the version defined from the environment variable or
 # calculate it to be the previous z-stream
-python3 - << END
+python3 - <<END
 replaces = "${CSV_REPLACES_VERSION:-}"
 if replaces == "":
   patch = int("${Z_VERSION}") - 1
@@ -241,7 +240,8 @@ END
 
 # Nedds the ! since read in compination with EOF will return != 0 and the script
 # will fail due to set -e
-DESC="$(cat << EOF
+DESC="$(
+    cat <<EOF
 Cluster Observability Operator is a Go based Kubernetes operator to easily setup and manage various observability tools.
 ### Supported Features
 - Setup multiple Highly Available Monitoring stack using Prometheus, Alertmanager and Thanos Querier
