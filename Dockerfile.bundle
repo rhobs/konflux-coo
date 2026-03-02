@@ -51,7 +51,7 @@ LABEL operators.operatorframework.io.metrics.project_layout=unknown
 LABEL operators.operatorframework.io.test.mediatype.v1=scorecard+v1
 LABEL operators.operatorframework.io.test.config.v1=tests/scorecard/
 
-ARG VERSION=v1.3.1
+ARG VERSION=v1.4.0
 LABEL com.redhat.component="coo-bundle" \
       name="cluster-observability-operator/cluster-observability-operator-bundle" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
