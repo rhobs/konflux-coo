@@ -7,7 +7,7 @@ USER 0
 ENV HUSKY=0
 COPY ui-monitoring-pf5/web/package*.json web/
 COPY ui-monitoring-pf5/Makefile Makefile
-RUN cd web && npm ci --legacy-peer-deps --omit=optional --ignore-scripts
+RUN cd web && npm ci --legacy-peer-deps --ignore-scripts
 
 COPY ui-monitoring-pf5/web/ web/
 COPY ui-monitoring-pf5/config/ config/
@@ -52,7 +52,7 @@ ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/d
 
 ARG VERSION=v0.4.0
 LABEL com.redhat.component="coo-monitoring-console-plugin" \
-      name="cluster-observability-operator/monitoring-console-plugin-pf5-rhel9" \ 
+      name="cluster-observability-operator/monitoring-console-plugin-pf5-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
       version="${VERSION}" \
       release="${VERSION}" \
