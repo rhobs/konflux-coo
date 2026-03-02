@@ -30,6 +30,7 @@ LABEL com.redhat.component="coo-cluster-health-analyzer" \
       name="cluster-observability-operator/cluster-health-analyzer-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
       version="${VERSION}" \
+      foo="bar" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \
       distribution-scope="public" \
