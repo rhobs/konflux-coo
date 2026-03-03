@@ -39,7 +39,7 @@ VOLUME     ["/perses"]
 ENTRYPOINT [ "/bin/perses" ]
 CMD        ["--config=/etc/perses/config.yaml", "--log.level=error"]
 
-ARG VERSION=v0.51.1
+ARG VERSION=v0.53.0
 LABEL com.redhat.component="coo-perses" \
     name="cluster-observability-operator/perses-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
