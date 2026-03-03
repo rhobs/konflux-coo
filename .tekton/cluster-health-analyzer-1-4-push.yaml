@@ -237,8 +237,12 @@ spec:
             value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
           - name: IMAGE_APPEND_PLATFORM
             value: "true"
+          - name: LABELS
+            value:
+              - $(tasks.get-submodule-commit-sha.results.labels[*])
         runAfter:
           - prefetch-dependencies
+          - get-submodule-commit-sha
         taskRef:
           params:
             - name: name
@@ -607,6 +611,16 @@ spec:
             operator: in
             values:
               - "false"
+      - name: get-submodule-commit-sha
+        params:
+          - name: source-artifact
+            value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
+          - name: component-name
+            value: cluster-health-analyzer
+        runAfter:
+          - clone-repository
+        taskRef:
+          name: get-submodule-commit-sha
     workspaces:
       - name: git-auth
         optional: true

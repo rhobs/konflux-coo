@@ -1,7 +1,46 @@
 #!/bin/bash
 # run like so:
 # ./hack/customize-pipeline.sh <pipeline file to customize> [more files]
-branch="release-1.3"
+branch="release-1.4"
+
+add_submodule_tasks() {
+    local file="$1"
+    local component="$2"
+
+    # Extract submodule name by removing version suffix (-X-Y)
+    component=$(echo "$component" | sed 's/-[0-9]*-[0-9]*$//')
+
+    # Check if get-submodule-commit-sha task already exists
+    if ! yq '.spec.pipelineSpec.tasks[] | select(.name == "get-submodule-commit-sha")' "$file" | grep -q "get-submodule-commit-sha"; then
+        # Add get-submodule-commit-sha task after clone-repository
+        export component
+        yq -i '
+            .spec.pipelineSpec.tasks += [{
+                "name": "get-submodule-commit-sha",
+                "params": [
+                    {"name": "source-artifact", "value": "$(tasks.clone-repository.results.SOURCE_ARTIFACT)"},
+                    {"name": "component-name", "value": strenv(component)}
+                ],
+                "runAfter": ["clone-repository"],
+                "taskRef": {"name": "get-submodule-commit-sha"}
+            }]
+        ' "$file"
+
+        # Add LABELS parameter to build-images task
+        yq -i '
+            (.spec.pipelineSpec.tasks[] | select(.name == "build-images").params) += [{
+                "name": "LABELS",
+                "value": ["$(tasks.get-submodule-commit-sha.results.labels[*])"]
+            }]
+        ' "$file"
+
+        # Add get-submodule-commit-sha to runAfter in build-images task
+        yq -i '
+            (.spec.pipelineSpec.tasks[] | select(.name == "build-images").runAfter) += ["get-submodule-commit-sha"]
+        ' "$file"
+    fi
+}
+
 for file in "$@"
 do
     echo "Processing file $file"
@@ -30,6 +69,8 @@ do
         if [[ $action == "push" ]]; then
             yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "bundle-patches/render_templates"}' "$file"
         fi
+
+        add_submodule_tasks "$file" "$component"
     fi
     yq -i '.metadata.annotations += {"pipelinesascode.tekton.dev/on-cel-expression": strenv(trigger)}' "$file"
     yq -i '(.spec.params[] | select(.name == "build-platforms").value | select(length == 1)) += ["linux/arm64","linux/ppc64le","linux/s390x"]' "$file"
