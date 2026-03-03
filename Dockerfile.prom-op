@@ -1,4 +1,4 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.24 as builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.25 as builder
 WORKDIR /workspace
 
 # Copy source files
@@ -20,7 +20,7 @@ COPY --from=builder /workspace/LICENSE      /licenses/.
 # On busybox 'nobody' has uid `65534'
 USER 65534
 
-ARG VERSION=v0.87.0
+ARG VERSION=v0.89.0
 LABEL com.redhat.component="coo-prometheus-operator" \
       name="cluster-observability-operator/obo-prometheus-rhel9-operator" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \

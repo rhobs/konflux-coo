@@ -1,4 +1,4 @@
-FROM registry.redhat.io/ubi9/nodejs-20:latest AS web-builder
+FROM registry.redhat.io/ubi9/nodejs-22:latest AS web-builder
 
 USER 0
 
@@ -42,7 +42,7 @@ ENTRYPOINT ["/bin/prometheus"]
 CMD        [ "--config.file=/etc/prometheus/prometheus.yml", \
              "--storage.tsdb.path=/prometheus" ]
 
-ARG VERSION=v3.7.2
+ARG VERSION=v3.9.1
 LABEL com.redhat.component="coo-prometheus-container" \
       name="cluster-observability-operator/prometheus-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
