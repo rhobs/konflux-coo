@@ -24,7 +24,7 @@ spec:
       default: 'openshift-cluster-observability-operator'
     - name: coo_tests_branch
       description: 'E2E test branch'
-      default: 'release-1.1'
+      default: 'release-1.4'
   tasks:
     - name: eaas-provision-space
       taskRef:
@@ -214,6 +214,13 @@ spec:
               - name: credentials
                 value: credentials
           - name: run-e2e-tests
+            resources:
+              requests:
+                memory: 4Gi
+                cpu: "16"
+              limits:
+                memory: 8Gi
+                cpu: "32"
             volumeMounts:
               - name: credentials
                 mountPath: /credentials
@@ -230,7 +237,7 @@ spec:
               dnf -y install jq vim unzip git make
 
               echo "Install GO"
-              curl -Lo /go.tar.gz https://go.dev/dl/go1.22.10.linux-amd64.tar.gz
+              curl -Lo /go.tar.gz https://go.dev/dl/go1.25.5.linux-amd64.tar.gz
               tar -C /usr/local -xzf /go.tar.gz
               export PATH=$PATH:/usr/local/go/bin
               # Set the Go path and Go cache environment variables
