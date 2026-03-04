@@ -48,14 +48,14 @@ spec:
     - name: prefetch-input
       value: '[{"type": "gomod", "path": "./prometheus"}, {"type": "npm", "path": "./prometheus/web/ui"}, {"type": "npm", "path": "./prometheus/web/ui/react-app"}]'
   taskRunSpecs:
-  - pipelineTaskName: build-images
-    stepSpecs:
-      - name: build
-        computeResources:
-          requests:
-            memory: 32Gi
-          limits:
-            memory: 64Gi
+    - pipelineTaskName: build-images
+      stepSpecs:
+        - name: build
+          computeResources:
+            requests:
+              memory: 32Gi
+            limits:
+              memory: 64Gi
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
@@ -250,10 +250,10 @@ spec:
             value: "true"
           - name: LABELS
             value:
-              - $(tasks.get-submodule-commit-sha.results.labels[*])
+              - $(tasks.get-submodule-commit-labels.results.labels[*])
         runAfter:
           - prefetch-dependencies
-          - get-submodule-commit-sha
+          - get-submodule-commit-labels
         taskRef:
           params:
             - name: name
@@ -622,16 +622,16 @@ spec:
             operator: in
             values:
               - "false"
-      - name: get-submodule-commit-sha
+      - name: get-submodule-commit-labels
         params:
-          - name: source-artifact
+          - name: SOURCE-ARTIFACT
             value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
-          - name: component-name
-            value: prometheus
+          - name: DOCKERFILE
+            value: $(params.dockerfile)
         runAfter:
           - clone-repository
         taskRef:
-          name: get-submodule-commit-sha
+          name: get-submodule-commit-labels
     workspaces:
       - name: git-auth
         optional: true

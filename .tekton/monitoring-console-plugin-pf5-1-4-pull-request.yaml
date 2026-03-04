@@ -243,10 +243,10 @@ spec:
             value: "true"
           - name: LABELS
             value:
-              - $(tasks.get-submodule-commit-sha.results.labels[*])
+              - $(tasks.get-submodule-commit-labels.results.labels[*])
         runAfter:
           - prefetch-dependencies
-          - get-submodule-commit-sha
+          - get-submodule-commit-labels
         taskRef:
           params:
             - name: name
@@ -615,16 +615,16 @@ spec:
             operator: in
             values:
               - "false"
-      - name: get-submodule-commit-sha
+      - name: get-submodule-commit-labels
         params:
-          - name: source-artifact
+          - name: SOURCE-ARTIFACT
             value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
-          - name: component-name
-            value: monitoring-console-plugin-pf5
+          - name: DOCKERFILE
+            value: $(params.dockerfile)
         runAfter:
           - clone-repository
         taskRef:
-          name: get-submodule-commit-sha
+          name: get-submodule-commit-labels
     workspaces:
       - name: git-auth
         optional: true
