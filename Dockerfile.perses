@@ -32,7 +32,13 @@ COPY --from=builder  /etc/mime.types                         /etc/mime.types
 RUN chgrp -R 0 /etc/perses && \
     chmod -R g=u /etc/perses
 
+RUN mkdir -p /perses && \
+    chgrp -R 0 /perses && \
+    chmod -R g=u /perses
+
 WORKDIR /perses
+
+USER 65534
 
 EXPOSE     8080
 VOLUME     ["/perses"]
