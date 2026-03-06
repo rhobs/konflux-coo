@@ -29,7 +29,7 @@ COPY --from=builder  /app/LICENSE                            /LICENSE
 COPY --from=builder  /plugins                                /etc/perses/plugins
 COPY --from=builder  /etc/mime.types                         /etc/mime.types
 
-RUN chgrp -R 0 /etc/perses && \
+RUN chown -R 65534:0 /etc/perses && \
     chmod -R g=u /etc/perses
 
 RUN mkdir -p /perses && \
