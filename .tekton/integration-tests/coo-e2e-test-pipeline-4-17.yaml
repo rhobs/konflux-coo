@@ -262,6 +262,8 @@ spec:
               git clone https://github.com/rhobs/observability-operator.git /tmp/coo-tests
               cd /tmp/coo-tests
               git checkout $COO_TESTS_BRANCH
+              # check to ensure the tempo test changes are included
+              git log -1 --format=%H
               make build
 
               # Execute coo e2e tests

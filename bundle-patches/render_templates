@@ -15,6 +15,7 @@ if [[ -z "$REGISTRY" ]]; then
     exit 1
 fi
 
+
 # Add openshift specific annotations to CSV file
 # https://docs.openshift.com/container-platform/4.14/operators/operator_sdk/osdk-generating-csvs.html#osdk-csv-annotations-infra_osdk-generating-csvs
 yq -i '.metadata.annotations += {"features.operators.openshift.io/disconnected": "true"}' "$csv_file"
