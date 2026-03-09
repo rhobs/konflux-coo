@@ -1,7 +1,42 @@
 #!/bin/bash
 # run like so:
 # ./hack/customize-pipeline.sh <pipeline file to customize> [more files]
-branch="release-1.3"
+branch="release-1.4"
+
+add_submodule_tasks() {
+    local file="$1"
+
+    # Check if get-submodule-commit-labels task already exists
+    if ! yq '.spec.pipelineSpec.tasks[] | select(.name == "get-submodule-commit-labels")' "$file" | grep -q "get-submodule-commit-labels"; then
+        # Add get-submodule-commit-labels task after clone-repository
+        export component
+        yq -i '
+            .spec.pipelineSpec.tasks += [{
+                "name": "get-submodule-commit-labels",
+                "params": [
+                    {"name": "SOURCE-ARTIFACT", "value": "$(tasks.clone-repository.results.SOURCE_ARTIFACT)"},
+                    {"name": "DOCKERFILE", "value": "$(params.dockerfile)"}
+                ],
+                "runAfter": ["clone-repository"],
+                "taskRef": {"name": "get-submodule-commit-labels"}
+            }]
+        ' "$file"
+
+        # Add LABELS parameter to build-images task
+        yq -i '
+            (.spec.pipelineSpec.tasks[] | select(.name == "build-images").params) += [{
+                "name": "LABELS",
+                "value": ["$(tasks.get-submodule-commit-labels.results.labels[*])"]
+            }]
+        ' "$file"
+
+        # Add get-submodule-commit-labels to runAfter in build-images task
+        yq -i '
+            (.spec.pipelineSpec.tasks[] | select(.name == "build-images").runAfter) += ["get-submodule-commit-labels"]
+        ' "$file"
+    fi
+}
+
 for file in "$@"
 do
     echo "Processing file $file"
@@ -30,6 +65,8 @@ do
         if [[ $action == "push" ]]; then
             yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "bundle-patches/render_templates"}' "$file"
         fi
+
+        add_submodule_tasks "$file"
     fi
     yq -i '.metadata.annotations += {"pipelinesascode.tekton.dev/on-cel-expression": strenv(trigger)}' "$file"
     yq -i '(.spec.params[] | select(.name == "build-platforms").value | select(length == 1)) += ["linux/arm64","linux/ppc64le","linux/s390x"]' "$file"
