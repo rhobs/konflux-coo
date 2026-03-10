@@ -11,6 +11,7 @@ ALLOWED_ACTIONS="retest,merge"
 # Default filters to empty (consider all PRs)
 LABEL=""
 TITLE_PREFIX=""
+BASE_BRANCH=""
 
 # Default skip patterns
 SKIP_PATTERNS_ARG=""
@@ -28,6 +29,7 @@ Process Konflux PRs by checking CI status and taking actions (retest/merge).
 OPTIONS:
   --label LABEL            Filter PRs by label
   --title-prefix PREFIX    Filter PRs by title prefix
+  --base BRANCH            Filter PRs by base branch (e.g. release-1.3)
   --actions ACTIONS        Comma-separated list of allowed actions: retest,merge
                            (default: retest,merge)
   --skip-patterns PATTERNS Comma-separated list of CI check name patterns to ignore
@@ -70,6 +72,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --title-prefix)
             TITLE_PREFIX="$2"
+            shift 2
+            ;;
+        --base)
+            BASE_BRANCH="$2"
             shift 2
             ;;
         --actions)
@@ -144,12 +150,11 @@ if [[ "$DRY_RUN" == true ]]; then
     echo ""
 fi
 
-# Get all PRs (filtered by label if specified)
-if [[ -n "$LABEL" ]]; then
-    pr_data=$(gh pr list --repo "$REPO" --label "$LABEL" --state open --json number,title,labels)
-else
-    pr_data=$(gh pr list --repo "$REPO" --state open --json number,title,labels)
-fi
+# Get all PRs (filtered by label and/or base branch if specified)
+gh_args=(--repo "$REPO" --state open --json number,title,labels)
+[[ -n "$LABEL" ]] && gh_args+=(--label "$LABEL")
+[[ -n "$BASE_BRANCH" ]] && gh_args+=(--base "$BASE_BRANCH")
+pr_data=$(gh pr list "${gh_args[@]}")
 
 # Filter by title prefix if specified
 if [[ -n "$TITLE_PREFIX" ]]; then
