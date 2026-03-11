@@ -28,7 +28,7 @@ ENTRYPOINT [ "/bin/alertmanager" ]
 CMD        [ "--config.file=/etc/alertmanager/alertmanager.yml", \
              "--storage.path=/alertmanager" ]
 
-ARG VERSION=v0.31.1
+ARG VERSION=v0.31.0
 LABEL com.redhat.component="coo-alertmanager" \
       name="cluster-observability-operator/alertmanager-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
