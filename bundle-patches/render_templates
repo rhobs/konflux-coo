@@ -74,7 +74,7 @@ COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-obs
 
 COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9@sha256:e610d6a67b24aa979a6f332e72bdd5234bf3813b0efe5909ac99555d6e59f7fb"
 
-COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9-operator@sha256:59516e73e6a496895cfb76b37042f211955c747dfd68406607171ac2724c7893"
+COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9-operator@sha256:0d081390a0af4f577714f3cb11dbf5e4d62b7f0813f8d2c2e2f208106a7bc9d7"
 
 if [[ $REGISTRY == "registry.redhat.io" || $REGISTRY == "registry.stage.redhat.io" ]]; then
     COO_IMAGE_URL="$REGISTRY/${COO_IMAGE_URL:(58)}"
