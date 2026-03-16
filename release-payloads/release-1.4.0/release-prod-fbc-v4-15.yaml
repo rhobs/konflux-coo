@@ -1,0 +1,59 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: coo-fbc-v4-15-1
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: coo-fbc-v4-15-prod-release-plan
+  snapshot: coo-fbc-v4-15-20260312-200520-000
+  data:
+    releaseNotes:
+      topic: "Cluster Observability Operator 1.4.0 release - fbc 4.15."
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.4.0 release
+      description: |
+        Incidents UI now displays data refresh policy information
+        The Incidents view in the monitoring UI plugin now includes a tooltip with the following text: Incident data is updated every few minutes. What you see may be up to 5 minutes old. Refresh the page to view updated information. This enhancement ensures clearer understanding of the displayed data, indicating that the Incidents UI operates differently from the real-time Alerting tab.
+
+        OU-1039
+
+        Red Hat build of Perses dashboarding tool (Technology Preview)
+        The Cluster Observability Operator 1.4 introduces a technology preview of the Red Hat build of Perses, a downstream version of the open source Perses project, a dashboarding tool for displaying observability data with native Kubernetes RBAC support. This feature includes a dashboard management UI with create, edit, and delete capabilities directly in the OpenShift Container Platform web console, a Grafana import tool for migrating existing dashboards, configurable datasources for metrics, logging, and tracing, and built-in RBAC roles for secure access control. Users can now manage observability dashboards without switching to external platforms and easily migrate from Grafana using the integrated import functionality.
+
+        The incidents attribute is deprecated
+        Incident detection in the Cluster Observability Operator is now configured by using the clusterHealthAnalyzer.enabled flag instead of the incidents.enabled flag. The existing incidents attribute is now marked as deprecated and will continue to work during the deprecation period to ensure backward compatibility.
+
+        You can migrate existing configurations from spec.monitoring.incidents.enabled: true to spec.monitoring.clusterHealthAnalyzer.enabled: true.
+      type: RHSA
+      issues:
+        fixed:
+          - id: COO-1668
+            source: issues.redhat.com
+          - id: COO-1383
+            source: issues.redhat.com
+          - id: COO-1611
+            source: issues.redhat.com
+          - id: COO-1511
+            source: issues.redhat.com
+          - id: COO-1383
+            source: issues.redhat.com
+          - id: COO-1282
+            source: issues.redhat.com
+          - id: COO-1391
+            source: issues.redhat.com
+          - id: OU-632
+            source: issues.redhat.com
+          - id: OU-1205
+            source: issues.redhat.com
+          - id: OU-1213
+            source: issues.redhat.com
+          - id: OU-1123
+            source: issues.redhat.com
+      cves:
+        - key: CVE-2025-13465
+          component: monitoring-console-plugin-pf5-1-4
+        - key: CVE-2025-13465
+          component: monitoring-console-plugin-1-4
