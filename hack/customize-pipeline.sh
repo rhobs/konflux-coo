@@ -37,6 +37,35 @@ add_submodule_tasks() {
     fi
 }
 
+add_slack_notification() {
+    local file="$1"
+
+    # Check if slack-webhook-notification task already exists in finally block
+    if ! yq '.spec.pipelineSpec.finally[]? | select(.name == "slack-webhook-notification")' "$file" | grep -q "slack-webhook-notification"; then
+        yq -i '
+            .spec.pipelineSpec.finally += [{
+                "name": "slack-webhook-notification",
+                "params": [
+                    {"name": "message", "value": "PipelineRun $(context.pipelineRun.name) failed"},
+                    {"name": "secret-name", "value": "slack-notifications"},
+                    {"name": "key-name", "value": "obo-cicd"}
+                ],
+                "taskRef": {
+                    "params": [
+                        {"name": "bundle", "value": "quay.io/konflux-ci/tekton-catalog/task-slack-webhook-notification:0.1"},
+                        {"name": "name", "value": "slack-webhook-notification"},
+                        {"name": "kind", "value": "Task"}
+                    ],
+                    "resolver": "bundles"
+                },
+                "when": [
+                    {"input": "$(tasks.status)", "operator": "in", "values": ["Failed"]}
+                ]
+            }]
+        ' "$file"
+    fi
+}
+
 for file in "$@"
 do
     echo "Processing file $file"
@@ -67,6 +96,9 @@ do
         fi
 
         add_submodule_tasks "$file"
+    fi
+    if [[ $action == "push" ]]; then
+        add_slack_notification "$file"
     fi
     yq -i '.metadata.annotations += {"pipelinesascode.tekton.dev/on-cel-expression": strenv(trigger)}' "$file"
     yq -i '(.spec.params[] | select(.name == "build-platforms").value | select(length == 1)) += ["linux/arm64","linux/ppc64le","linux/s390x"]' "$file"
