@@ -3,33 +3,10 @@ apiVersion: operator.openshift.io/v1alpha1
 kind: ImageDigestMirrorSet
 metadata:
   name: example-mirror-set
-  annotations:
-    pipelinesascode.tekton.dev/on-cel-expression: |-
-      ((event == ".yaml" && target_branch == "release-1.4") ||
-              (event == "push" && target_branch.startsWith("gh-readonly-queue/main/"))) &&
-              (".tekton/images-mirror-set.yaml-pull-request.yaml".pathChanged() ||
-              ".tekton/images-mirror-set.yaml-push.yaml".pathChanged() ||
-              "".pathChanged() ||
-              "".pathChanged())
 spec:
   imageDigestMirrors:
     - mirrors:
         - quay.io/my-namespace/valid-repo
       source: registry.redhat.io/unreleased-image/or-inaccessible-image
   pipelineSpec:
-    tasks:
-      - name: get-submodule-commit-labels
-        params:
-          - name: SOURCE-ARTIFACT
-            value: $(tasks.clone-repository.results.SOURCE_ARTIFACT)
-          - name: DOCKERFILE
-            value: $(params.dockerfile)
-        runAfter:
-          - clone-repository
-        taskRef:
-          name: get-submodule-commit-labels
-  params:
-    - name: build-source-image
-      value: "true"
-  taskRunTemplate:
-    serviceAccountName: build-pipeline-images-mirror-set.yaml
+    tasks: []
