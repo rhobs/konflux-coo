@@ -5,7 +5,9 @@ WORKDIR /workspace
 COPY observability-operator/ .
 
 ENV GOFLAGS='-mod=mod'
+ENV GOTOOLCHAIN=local
 ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
 
 # Build
 RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -a -tags netgo,osusergo -o manager cmd/operator/main.go

@@ -4,11 +4,16 @@ WORKDIR /workspace
 
 COPY thanos .
 
-ENV CGO_ENABLED=0
+ENV GOTOOLCHAIN=local
+ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
 
-# Install promu and build thanos
+# Konflux prepends: . /cachi2/cachi2.env && …
+# cachi2.env often sets GOFLAGS=-mod=mod, which makes the compiler expect module zips under the
+# prefetch cache (…/pkg/mod/cache/download/*.zip) that Thanos builds hit as missing. The submodule
+# ships vendor/; -mod=vendor avoids that. Pass -mod/-tags on the CLI so they override GOFLAGS.
 ARG TARGETOS TARGETARCH
-RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build -tags -netgo $GOFLAGS -o /go/bin/thanos ./cmd/thanos
+RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build -mod=vendor -tags=netgo -o /go/bin/thanos ./cmd/thanos
 
 FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
 WORKDIR /
