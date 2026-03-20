@@ -8,7 +8,8 @@ metadata:
     pipelinesascode.tekton.dev/cancel-in-progress: "false"
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: |-
-      event == "push" && target_branch == "release-1.4" &&
+      ((event == "push" && target_branch == "release-1.4") ||
+              (event == "push" && target_branch.startsWith("gh-readonly-queue/main/"))) &&
               (".tekton/troubleshooting-panel-console-plugin-1-4-pull-request.yaml".pathChanged() ||
               ".tekton/troubleshooting-panel-console-plugin-1-4-push.yaml".pathChanged() ||
               "Dockerfile.ui-troubleshooting-panel".pathChanged() ||
