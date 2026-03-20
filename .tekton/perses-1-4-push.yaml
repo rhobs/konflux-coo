@@ -621,6 +621,29 @@ spec:
           - clone-repository
         taskRef:
           name: get-submodule-commit-labels
+    finally:
+      - name: slack-webhook-notification
+        params:
+          - name: message
+            value: PipelineRun $(context.pipelineRun.name) failed
+          - name: secret-name
+            value: slack-notifications
+          - name: key-name
+            value: obo-cicd
+        taskRef:
+          params:
+            - name: bundle
+              value: quay.io/konflux-ci/tekton-catalog/task-slack-webhook-notification:0.1
+            - name: name
+              value: slack-webhook-notification
+            - name: kind
+              value: Task
+          resolver: bundles
+        when:
+          - input: $(tasks.status)
+            operator: in
+            values:
+              - Failed
     workspaces:
       - name: git-auth
         optional: true
