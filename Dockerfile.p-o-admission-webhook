@@ -5,14 +5,28 @@ WORKDIR /workspace
 COPY obo-prometheus-operator/ .
 
 ENV GOFLAGS='-mod=mod'
-ENV CGO_ENABLED=0
-
-# Build
-RUN make admission-webhook
+ENV GOTOOLCHAIN=local
+ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
+# CGO required for FIPS/check-payload; upstream Makefile uses CGO_ENABLED=0 for this target — build here instead of touching the submodule Makefile.
+ARG TARGETOS TARGETARCH
+RUN VERSION="$(tr -d ' \t\n\r' < VERSION)" && \
+    BUILD_DATE="$(date +%Y%m%d-%T)" && \
+    BUILD_REVISION="$(git rev-parse --short HEAD 2>/dev/null || true)" && \
+    BUILD_USER="${BUILD_USER:-coo-image-build}" && \
+    BUILD_BRANCH="$(git branch --show-current 2>/dev/null || true)" && \
+    GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=1 go build -mod=mod \
+      -ldflags="-s \
+        -X github.com/prometheus/common/version.Revision=${BUILD_REVISION} \
+        -X github.com/prometheus/common/version.BuildUser=${BUILD_USER} \
+        -X github.com/prometheus/common/version.BuildDate=${BUILD_DATE} \
+        -X github.com/prometheus/common/version.Branch=${BUILD_BRANCH} \
+        -X github.com/prometheus/common/version.Version=${VERSION}" \
+      -o admission-webhook ./cmd/admission-webhook/
 
 FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
 
-COPY --from=builder workspace/admission-webhook /bin/admission-webhook
+COPY --from=builder /workspace/admission-webhook /bin/admission-webhook
 COPY --from=builder /workspace/LICENSE      /licenses/.
 
 USER nobody

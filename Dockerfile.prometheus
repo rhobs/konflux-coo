@@ -17,7 +17,9 @@ WORKDIR /workspace
 COPY --from=web-builder /workspace/ .
 
 ENV GOFLAGS='-mod=mod -tags=builtinassets,netgo,stringlabels'
-ENV CGO_ENABLED=0
+ENV GOTOOLCHAIN=local
+ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
 # Build prometheus directly using Go
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./prometheus ./cmd/prometheus
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./promtool ./cmd/promtool

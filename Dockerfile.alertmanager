@@ -5,8 +5,11 @@ WORKDIR /workspace
 COPY alertmanager/ .
 
 ENV GOFLAGS='-mod=mod -tags=netgo'
-ENV CGO_ENABLED=0
+ENV GOTOOLCHAIN=local
+ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
 ENV NO_DOCKER=true
+
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o alertmanager github.com/prometheus/alertmanager/cmd/alertmanager
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o amtool github.com/prometheus/alertmanager/cmd/amtool
 
