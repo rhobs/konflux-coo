@@ -5,26 +5,26 @@ WORKDIR /opt/app-root
 USER 0
 
 ENV HUSKY=0
-COPY ui-logging/web/package*.json web/
-COPY ui-logging/Makefile Makefile
+COPY ui-logging-pf5/web/package*.json web/
+COPY ui-logging-pf5/Makefile Makefile
 RUN cd web && npm ci --omit=optional --ignore-scripts
 
-COPY ui-logging/web/ web/
+COPY ui-logging-pf5/web/ web/
 RUN make build-frontend
 
 FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.25 as go-builder
 
 WORKDIR /opt/app-root
 
-COPY ui-logging/Makefile Makefile
-COPY ui-logging/go.mod go.mod
-COPY ui-logging/go.sum go.sum
+COPY ui-logging-pf5/Makefile Makefile
+COPY ui-logging-pf5/go.mod go.mod
+COPY ui-logging-pf5/go.sum go.sum
 
 RUN make install-backend
 
-COPY ui-logging/config/ config/
-COPY ui-logging/cmd/ cmd/
-COPY ui-logging/pkg/ pkg/
+COPY ui-logging-pf5/config/ config/
+COPY ui-logging-pf5/cmd/ cmd/
+COPY ui-logging-pf5/pkg/ pkg/
 
 ENV GOEXPERIMENT=strictfipsruntime
 ENV CGO_ENABLED=1
@@ -34,17 +34,17 @@ RUN make build-backend BUILD_OPTS="-tags strictfipsruntime"
 FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
 
 RUN mkdir /licenses
-COPY ui-logging/LICENSE /licenses/.
+COPY ui-logging-pf5/LICENSE /licenses/.
 
 USER 1001
 
 COPY --from=web-builder /opt/app-root/web/dist /opt/app-root/web/dist
 COPY --from=go-builder /opt/app-root/plugin-backend /opt/app-root
-COPY ui-logging/config /opt/app-root/config
+COPY ui-logging-pf5/config /opt/app-root/config
 
 ENTRYPOINT ["/opt/app-root/plugin-backend", "-config-path", "/opt/app-root/config", "-static-path", "/opt/app-root/web/dist"]
 
-ARG VERSION=v6.2.0
+ARG VERSION=v6.1.0
 LABEL com.redhat.component="coo-logging-console-plugin" \
       name="cluster-observability-operator/logging-console-plugin-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
