@@ -3,36 +3,32 @@ kind: PipelineRun
 metadata:
   annotations:
     build.appstudio.openshift.io/repo: https://github.com/rhobs/konflux-coo?rev={{revision}}
-    build.appstudio.redhat.com/commit_sha: '{{revision}}'
-    build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
-    build.appstudio.redhat.com/target_branch: '{{target_branch}}'
+    build.appstudio.redhat.com/commit_sha: "{{revision}}"
+    build.appstudio.redhat.com/pull_request_number: "{{pull_request_number}}"
+    build.appstudio.redhat.com/target_branch: "{{target_branch}}"
     pipelinesascode.tekton.dev/cancel-in-progress: "true"
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: |-
-      event == "pull_request" && target_branch == "release-1.4" &&
-              (".tekton/obo-prometheus-operator-prometheus-config-reloader-1-4-pull-request.yaml".pathChanged() ||
-              ".tekton/obo-prometheus-operator-prometheus-config-reloader-1-4-push.yaml".pathChanged() ||
-              "Dockerfile.prometheus-config-reloader".pathChanged() ||
-              "obo-prometheus-operator".pathChanged())
+      event == "pull_request" && target_branch == "release-1.5" &&
+              (".tekton/logging-console-plugin-pf5-1-5-pull-request.yaml".pathChanged() ||
+              ".tekton/logging-console-plugin-pf5-1-5-push.yaml".pathChanged() ||
+              "Dockerfile.ui-logging-pf5".pathChanged() ||
+              "ui-logging-pf5".pathChanged())
   creationTimestamp: null
   labels:
-    appstudio.openshift.io/application: cluster-observability-operator-1-4
-    appstudio.openshift.io/component: obo-prometheus-operator-prometheus-config-reloader-1-4
+    appstudio.openshift.io/application: cluster-observability-operator-1-5
+    appstudio.openshift.io/component: logging-console-plugin-pf5-1-5
     pipelines.appstudio.openshift.io/type: build
-  name: obo-prometheus-operator-prometheus-config-reloader-1-4-on-pull-request
+  name: logging-console-plugin-pf5-1-5-on-pull-request
   namespace: cluster-observabilit-tenant
 spec:
   params:
     - name: git-url
-      value: '{{source_url}}'
+      value: "{{source_url}}"
     - name: revision
-      value: '{{revision}}'
-    - name: prefetch-input
-      value: [{"type": "gomod", "path": "./obo-prometheus-operator"}]
-    - name: hermetic
-      value: "true"
+      value: "{{revision}}"
     - name: output-image
-      value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9:on-pr-{{revision}}
+      value: quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-pf5-rhel9:on-pr-{{revision}}
     - name: image-expires-after
       value: 5d
     - name: build-platforms
@@ -42,13 +38,21 @@ spec:
         - linux/ppc64le
         - linux/s390x
     - name: dockerfile
-      value: Dockerfile.prometheus-config-reloader
+      value: Dockerfile.ui-logging-pf5
     - name: path-context
       value: .
     - name: build-source-image
       value: "true"
     - name: enable-cache-proxy
       value: "true"
+    - name: hermetic
+      value: "true"
+    - name: prefetch-input
+      value:
+        - type: gomod
+          path: ./ui-logging-pf5
+        - type: npm
+          path: ./ui-logging-pf5/web
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
@@ -260,10 +264,6 @@ spec:
         params:
           - name: IMAGE
             value: $(params.output-image)
-          - name: COMMIT_SHA
-            value: $(tasks.clone-repository.results.commit)
-          - name: IMAGE_EXPIRES_AFTER
-            value: $(params.image-expires-after)
           - name: ALWAYS_BUILD_INDEX
             value: $(params.build-image-index)
           - name: IMAGES
@@ -271,6 +271,10 @@ spec:
               - $(tasks.build-images.results.IMAGE_REF[*])
           - name: BUILDAH_FORMAT
             value: $(params.buildah-format)
+          - name: COMMIT_SHA
+            value: $(tasks.clone-repository.results.commit)
+          - name: IMAGE_EXPIRES_AFTER
+            value: $(params.image-expires-after)
         runAfter:
           - build-images
         taskRef:
@@ -278,7 +282,7 @@ spec:
             - name: name
               value: build-image-index
             - name: bundle
-              value: quay.io/konflux-ci/tekton-catalog/task-build-image-index:0.2@sha256:c7b0f7e1f743040d99a3532abbdfddc9484f80fd559a75171c97499c3eb5d163
+              value: quay.io/konflux-ci/tekton-catalog/task-build-image-index:0.3@sha256:b65a1e0961e0e768dda1f118bc5b5cab9c7ca7f4ed094e6a4352e66f82b9fa0b
             - name: kind
               value: task
           resolver: bundles
@@ -435,72 +439,6 @@ spec:
             operator: in
             values:
               - "false"
-      - name: sast-coverity-check
-        params:
-          - name: image-digest
-            value: $(tasks.build-image-index.results.IMAGE_DIGEST)
-          - name: image-url
-            value: $(tasks.build-image-index.results.IMAGE_URL)
-          - name: IMAGE
-            value: $(params.output-image)
-          - name: DOCKERFILE
-            value: $(params.dockerfile)
-          - name: CONTEXT
-            value: $(params.path-context)
-          - name: HERMETIC
-            value: $(params.hermetic)
-          - name: PREFETCH_INPUT
-            value: $(params.prefetch-input)
-          - name: IMAGE_EXPIRES_AFTER
-            value: $(params.image-expires-after)
-          - name: COMMIT_SHA
-            value: $(tasks.clone-repository.results.commit)
-          - name: BUILD_ARGS
-            value:
-              - $(params.build-args[*])
-          - name: BUILD_ARGS_FILE
-            value: $(params.build-args-file)
-          - name: SOURCE_ARTIFACT
-            value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
-          - name: CACHI2_ARTIFACT
-            value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
-        runAfter:
-          - coverity-availability-check
-        taskRef:
-          params:
-            - name: name
-              value: sast-coverity-check-oci-ta
-            - name: bundle
-              value: quay.io/konflux-ci/tekton-catalog/task-sast-coverity-check-oci-ta:0.3@sha256:ab60e90de028036be823e75343fdc205418edcfa7c4de569bb5f8ab833bc2037
-            - name: kind
-              value: task
-          resolver: bundles
-        when:
-          - input: $(params.skip-checks)
-            operator: in
-            values:
-              - "false"
-          - input: $(tasks.coverity-availability-check.results.STATUS)
-            operator: in
-            values:
-              - success
-      - name: coverity-availability-check
-        runAfter:
-          - build-image-index
-        taskRef:
-          params:
-            - name: name
-              value: coverity-availability-check
-            - name: bundle
-              value: quay.io/konflux-ci/tekton-catalog/task-coverity-availability-check:0.2@sha256:de35caf2f090e3275cfd1019ea50d9662422e904fb4aebd6ea29fb53a1ad57f5
-            - name: kind
-              value: task
-          resolver: bundles
-        when:
-          - input: $(params.skip-checks)
-            operator: in
-            values:
-              - "false"
       - name: sast-shell-check
         params:
           - name: image-digest
@@ -625,15 +563,81 @@ spec:
           - clone-repository
         taskRef:
           name: get-submodule-commit-labels
+      - name: coverity-availability-check
+        runAfter:
+          - build-image-index
+        taskRef:
+          params:
+            - name: name
+              value: coverity-availability-check
+            - name: bundle
+              value: quay.io/konflux-ci/tekton-catalog/task-coverity-availability-check:0.2@sha256:de35caf2f090e3275cfd1019ea50d9662422e904fb4aebd6ea29fb53a1ad57f5
+            - name: kind
+              value: task
+          resolver: bundles
+        when:
+          - input: $(params.skip-checks)
+            operator: in
+            values:
+              - "false"
+      - name: sast-coverity-check
+        params:
+          - name: image-digest
+            value: $(tasks.build-image-index.results.IMAGE_DIGEST)
+          - name: image-url
+            value: $(tasks.build-image-index.results.IMAGE_URL)
+          - name: IMAGE
+            value: $(params.output-image)
+          - name: DOCKERFILE
+            value: $(params.dockerfile)
+          - name: CONTEXT
+            value: $(params.path-context)
+          - name: HERMETIC
+            value: $(params.hermetic)
+          - name: PREFETCH_INPUT
+            value: $(params.prefetch-input)
+          - name: IMAGE_EXPIRES_AFTER
+            value: $(params.image-expires-after)
+          - name: COMMIT_SHA
+            value: $(tasks.clone-repository.results.commit)
+          - name: BUILD_ARGS
+            value:
+              - $(params.build-args[*])
+          - name: BUILD_ARGS_FILE
+            value: $(params.build-args-file)
+          - name: SOURCE_ARTIFACT
+            value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+          - name: CACHI2_ARTIFACT
+            value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
+        runAfter:
+          - coverity-availability-check
+        taskRef:
+          params:
+            - name: name
+              value: sast-coverity-check-oci-ta
+            - name: bundle
+              value: quay.io/konflux-ci/tekton-catalog/task-sast-coverity-check-oci-ta:0.3@sha256:ab60e90de028036be823e75343fdc205418edcfa7c4de569bb5f8ab833bc2037
+            - name: kind
+              value: task
+          resolver: bundles
+        when:
+          - input: $(params.skip-checks)
+            operator: in
+            values:
+              - "false"
+          - input: $(tasks.coverity-availability-check.results.STATUS)
+            operator: in
+            values:
+              - success
     workspaces:
       - name: git-auth
         optional: true
       - name: netrc
         optional: true
   taskRunTemplate:
-    serviceAccountName: build-pipeline-obo-prometheus-operator-prometheus-config-reloader-1-4
+    serviceAccountName: build-pipeline-logging-console-plugin-pf5-1-5
   workspaces:
     - name: git-auth
       secret:
-        secretName: '{{ git_auth_secret }}'
+        secretName: "{{ git_auth_secret }}"
 status: {}
