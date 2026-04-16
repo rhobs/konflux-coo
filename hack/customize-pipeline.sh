@@ -296,5 +296,11 @@ do
                 }]' "$file"
             fi
             ;;
+        perses-*)
+            # Perses components need gomod and rpm prefetch
+            export gomod_prefetch="$src"
+            yq -i 'del(.spec.params[] | select(.name == "prefetch-input"))' "$file"
+            yq -i '.spec.params += [{"name": "prefetch-input", "value": [{"type": "gomod", "path": ("./"+strenv(gomod_prefetch))}, {"type": "rpm"}]}]' "$file"
+            ;;
     esac
 done
