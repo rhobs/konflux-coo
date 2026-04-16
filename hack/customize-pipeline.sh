@@ -281,7 +281,8 @@ do
         prometheus-*)
             # Prometheus builds need larger arm64 instances and extra memory
             yq -i '(.spec.params[] | select(.name == "build-platforms").value) |= map(select(. == "linux/arm64") = "linux-m4xlarge/arm64")' "$file"
-            yq -i '(.spec.params[] | select(.name == "prefetch-input")).value = [{"type": "gomod", "path": "./prometheus"}, {"type": "npm", "path": "./prometheus/web/ui"}, {"type": "npm", "path": "./prometheus/web/ui/react-app"}]' "$file"
+            yq -i 'del(.spec.params[] | select(.name == "prefetch-input"))' "$file"
+            yq -i '.spec.params += [{"name": "prefetch-input", "value": [{"type": "gomod", "path": "./prometheus"}, {"type": "npm", "path": "./prometheus/web/ui"}, {"type": "npm", "path": "./prometheus/web/ui/react-app"}]}]' "$file"
             if [ -z "$(yq '.spec.taskRunSpecs[]? | select(.pipelineTaskName == "build-images") | .pipelineTaskName' "$file")" ]; then
                 yq -i '.spec.taskRunSpecs += [{
                     "pipelineTaskName": "build-images",
