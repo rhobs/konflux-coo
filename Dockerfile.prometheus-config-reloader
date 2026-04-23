@@ -5,10 +5,11 @@ WORKDIR /workspace
 COPY obo-prometheus-operator/ .
 
 ENV GOFLAGS='-mod=mod'
-ENV CGO_ENABLED=0
+ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
 
-# Build
-RUN make prometheus-config-reloader
+# CGO required for FIPS/check-payload; upstream Makefile uses CGO_ENABLED=0 — build here instead
+RUN go build -tags strictfipsruntime -ldflags "-s -w" -o prometheus-config-reloader ./cmd/prometheus-config-reloader
 
 FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
 
