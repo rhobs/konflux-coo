@@ -25,10 +25,10 @@ COPY --from=builder --chown=nobody:nobody /etc/mime.types   /etc/mime.types
 EXPOSE     8080
 ENTRYPOINT [ "/bin/manager" ]
 
-ARG VERSION=v0.3.0
+ARG VERSION=v0.4.0
 LABEL com.redhat.component="coo-perses-operator" \
     name="cluster-observability-operator/perses-rhel9-operator" \
-      cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
     version="${VERSION}" \
     release="${VERSION}" \
     vendor="Red Hat, Inc." \
