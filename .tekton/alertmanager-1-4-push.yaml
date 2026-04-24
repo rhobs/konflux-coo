@@ -8,7 +8,8 @@ metadata:
     pipelinesascode.tekton.dev/cancel-in-progress: "false"
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: |-
-      event == "push" && target_branch == "release-1.4" &&
+      ((event == "push" && target_branch == "release-1.4") ||
+              (event == "push" && target_branch.startsWith("gh-readonly-queue/main/"))) &&
               (".tekton/alertmanager-1-4-pull-request.yaml".pathChanged() ||
               ".tekton/alertmanager-1-4-push.yaml".pathChanged() ||
               "Dockerfile.alertmanager".pathChanged() ||
@@ -45,6 +46,8 @@ spec:
       value: "true"
     - name: prefetch-input
       value: '[{"type": "gomod", "path": "./alertmanager"}]'
+    - name: enable-cache-proxy
+      value: "true"
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
@@ -115,6 +118,10 @@ spec:
         description: List of platforms to build the container images on. The available set of values is determined by the configuration of the multi-platform-controller.
         name: build-platforms
         type: array
+      - name: enable-cache-proxy
+        default: "false"
+        description: Enable cache proxy configuration
+        type: string
     results:
       - description: ""
         name: IMAGE_URL
