@@ -134,6 +134,10 @@ sed -i -e "s|quay.io/rhobs/obo-prometheus-operator.*|${COO_PO_IMAGE_URL}|g" "$cs
 sed -i -e "s|quay.io/rhobs/obo-admission-webhook.*|${COO_ADMISSION_WEBHOOK_IMAGE_URL}|g" "$csv_file"
 sed -i -e "s|quay.io/openshift-observability-ui/perses-operator.*|${COO_PERSES_OPERATOR_IMAGE_URL}|g" "$csv_file"
 
+# Add the watch TLS profile args to the perses operator container.
+yq -i '(.spec.install.spec.deployments[] | select(.name == "perses-operator").spec.template.spec.containers[] | select(.name == "perses-operator") | select(has("args") | not)) += {"args": []}' "$csv_file"
+yq -i '(.spec.install.spec.deployments[] | select(.name == "perses-operator").spec.template.spec.containers[] | select(.name == "perses-operator").args) += ["--tls-cluster-profile", "--tls-configure-operands"]' "$csv_file"
+
 # first add an empty env list to the obo operator container if it doesn't exist
 # already
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator") | select(has("env") | not)) += {"env": []}' "$csv_file"
