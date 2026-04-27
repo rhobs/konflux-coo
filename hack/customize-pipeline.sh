@@ -80,7 +80,7 @@ do
             yq -i 'with(.spec.params; select(all_c(.name != "build-args")) | . += [{"name": "build-args", "value": ["REGISTRY=registry.redhat.io"]}])' "$file"
             export trigger="((event == \"$action\" && target_branch == \"$branch\") ||
         (event == \"push\" && target_branch.startsWith(\"gh-readonly-queue/main/\"))) &&
-        \".tekton/$component-push.yaml\".pathChanged() ||
+        (\".tekton/$component-push.yaml\".pathChanged() ||
         \"$dockerfile\".pathChanged() ||
         \"bundle-patches/***\".pathChanged() ||
         \"observability-operator/bundle/***\".pathChanged())"
@@ -97,7 +97,7 @@ do
             yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "bundle-patches/render_templates"}' "$file"
             export trigger="((event == \"$action\" && target_branch == \"$branch\") ||
         (event == \"push\" && target_branch.startsWith(\"gh-readonly-queue/main/\"))) &&
-        \".tekton/$component-push.yaml\".pathChanged() ||
+        (\".tekton/$component-push.yaml\".pathChanged() ||
         \"$dockerfile\".pathChanged() ||
         \"$src\".pathChanged())"
         elif  [[ $action == "pull_request" ]]; then
