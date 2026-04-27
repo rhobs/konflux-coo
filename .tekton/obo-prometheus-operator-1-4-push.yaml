@@ -9,7 +9,7 @@ metadata:
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: |-
       ((event == "push" && target_branch == "release-1.4") ||
-              (event == "push" && target_branch.startsWith("gh-readonly-queue/main/"))) &&
+              (event == "push" && target_branch.startsWith("gh-readonly-queue/release-1.4/"))) &&
               (".tekton/obo-prometheus-operator-1-4-push.yaml".pathChanged() ||
               "Dockerfile.prom-op".pathChanged() ||
               "obo-prometheus-operator".pathChanged())

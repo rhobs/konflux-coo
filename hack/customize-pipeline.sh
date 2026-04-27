@@ -79,7 +79,7 @@ do
             yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "hack/update-catalog.sh"}' "$file"
             yq -i 'with(.spec.params; select(all_c(.name != "build-args")) | . += [{"name": "build-args", "value": ["REGISTRY=registry.redhat.io"]}])' "$file"
             export trigger="((event == \"$action\" && target_branch == \"$branch\") ||
-        (event == \"push\" && target_branch.startsWith(\"gh-readonly-queue/main/\"))) &&
+        (event == \"push\" && target_branch.startsWith(\"gh-readonly-queue/$branch/\"))) &&
         (\".tekton/$component-push.yaml\".pathChanged() ||
         \"$dockerfile\".pathChanged() ||
         \"bundle-patches/***\".pathChanged() ||
@@ -96,7 +96,7 @@ do
         if [[ $action == "push" ]]; then
             yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "bundle-patches/render_templates"}' "$file"
             export trigger="((event == \"$action\" && target_branch == \"$branch\") ||
-        (event == \"push\" && target_branch.startsWith(\"gh-readonly-queue/main/\"))) &&
+        (event == \"push\" && target_branch.startsWith(\"gh-readonly-queue/$branch/\"))) &&
         (\".tekton/$component-push.yaml\".pathChanged() ||
         \"$dockerfile\".pathChanged() ||
         \"$src\".pathChanged())"
