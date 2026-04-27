@@ -9,10 +9,8 @@ metadata:
     pipelinesascode.tekton.dev/cancel-in-progress: "true"
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: |-
-      ((event == "pull_request" && target_branch == "release-1.4") ||
-              (event == "push" && target_branch.startsWith("gh-readonly-queue/main/"))) &&
+      (event == "pull_request" && target_branch == "release-1.4") &&
               (".tekton/korrel8r-1-4-pull-request.yaml".pathChanged() ||
-              ".tekton/korrel8r-1-4-push.yaml".pathChanged() ||
               "Dockerfile.korrel8r".pathChanged() ||
               "korrel8r".pathChanged())
   creationTimestamp: null

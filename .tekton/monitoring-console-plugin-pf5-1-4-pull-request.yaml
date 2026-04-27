@@ -9,10 +9,8 @@ metadata:
     pipelinesascode.tekton.dev/cancel-in-progress: "true"
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: |-
-      ((event == "pull_request" && target_branch == "release-1.4") ||
-              (event == "push" && target_branch.startsWith("gh-readonly-queue/main/"))) &&
+      (event == "pull_request" && target_branch == "release-1.4") &&
               (".tekton/monitoring-console-plugin-pf5-1-4-pull-request.yaml".pathChanged() ||
-              ".tekton/monitoring-console-plugin-pf5-1-4-push.yaml".pathChanged() ||
               "Dockerfile.ui-monitoring-pf5".pathChanged() ||
               "ui-monitoring-pf5".pathChanged())
   creationTimestamp: null

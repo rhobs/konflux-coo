@@ -10,7 +10,6 @@ metadata:
     pipelinesascode.tekton.dev/on-cel-expression: |-
       ((event == "push" && target_branch == "release-1.4") ||
               (event == "push" && target_branch.startsWith("gh-readonly-queue/main/"))) &&
-              (".tekton/monitoring-console-plugin-pf5-1-4-pull-request.yaml".pathChanged() ||
               ".tekton/monitoring-console-plugin-pf5-1-4-push.yaml".pathChanged() ||
               "Dockerfile.ui-monitoring-pf5".pathChanged() ||
               "ui-monitoring-pf5".pathChanged())

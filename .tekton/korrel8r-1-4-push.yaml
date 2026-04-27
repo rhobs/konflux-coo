@@ -10,7 +10,6 @@ metadata:
     pipelinesascode.tekton.dev/on-cel-expression: |-
       ((event == "push" && target_branch == "release-1.4") ||
               (event == "push" && target_branch.startsWith("gh-readonly-queue/main/"))) &&
-              (".tekton/korrel8r-1-4-pull-request.yaml".pathChanged() ||
               ".tekton/korrel8r-1-4-push.yaml".pathChanged() ||
               "Dockerfile.korrel8r".pathChanged() ||
               "korrel8r".pathChanged())
