@@ -75,26 +75,36 @@ do
     dockerfile=$(yq '.spec.params[] | select(.name == "dockerfile").value' "$file")
     src="$(grep COPY "$dockerfile" | head -n1 | awk '{print $2}'| cut -d'/' -f1)"
     if [[ "$component" == *"bundle"* ]]; then
-        export trigger="((event == \"$action\" && target_branch == \"$branch\") ||
+        if [[ $action == "push" ]]; then
+            yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "hack/update-catalog.sh"}' "$file"
+            yq -i 'with(.spec.params; select(all_c(.name != "build-args")) | . += [{"name": "build-args", "value": ["REGISTRY=registry.redhat.io"]}])' "$file"
+            export trigger="((event == \"$action\" && target_branch == \"$branch\") ||
         (event == \"push\" && target_branch.startsWith(\"gh-readonly-queue/main/\"))) &&
-        (\".tekton/$component-pull-request.yaml\".pathChanged() ||
         \".tekton/$component-push.yaml\".pathChanged() ||
         \"$dockerfile\".pathChanged() ||
         \"bundle-patches/***\".pathChanged() ||
         \"observability-operator/bundle/***\".pathChanged())"
-        if [[ $action == "push" ]]; then
-            yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "hack/update-catalog.sh"}' "$file"
-            yq -i 'with(.spec.params; select(all_c(.name != "build-args")) | . += [{"name": "build-args", "value": ["REGISTRY=registry.redhat.io"]}])' "$file"
+        elif  [[ $action == "pull_request" ]]; then
+            export trigger="(event == \"$action\" && target_branch == \"$branch\") &&
+        (\".tekton/$component-pull-request.yaml\".pathChanged() ||
+        \"$dockerfile\".pathChanged() ||
+        \"bundle-patches/***\".pathChanged() ||
+        \"observability-operator/bundle/***\".pathChanged())"
+
         fi
     else
-        export trigger="((event == \"$action\" && target_branch == \"$branch\") ||
+        if [[ $action == "push" ]]; then
+            yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "bundle-patches/render_templates"}' "$file"
+            export trigger="((event == \"$action\" && target_branch == \"$branch\") ||
         (event == \"push\" && target_branch.startsWith(\"gh-readonly-queue/main/\"))) &&
-        (\".tekton/$component-pull-request.yaml\".pathChanged() ||
         \".tekton/$component-push.yaml\".pathChanged() ||
         \"$dockerfile\".pathChanged() ||
         \"$src\".pathChanged())"
-        if [[ $action == "push" ]]; then
-            yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "bundle-patches/render_templates"}' "$file"
+        elif  [[ $action == "pull_request" ]]; then
+            export trigger="(event == \"$action\" && target_branch == \"$branch\") &&
+        (\".tekton/$component-pull-request.yaml\".pathChanged() ||
+        \"$dockerfile\".pathChanged() ||
+        \"$src\".pathChanged())"
         fi
 
         add_submodule_tasks "$file"
