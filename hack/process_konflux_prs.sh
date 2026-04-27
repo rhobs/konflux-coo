@@ -345,7 +345,7 @@ while IFS= read -r pr_json; do
             if [[ "$VERBOSE" == true ]]; then
                 echo "  Action: Merging PR"
             fi
-            gh pr merge "$pr" --repo "$REPO" --squash
+            gh pr merge "$pr" --repo "$REPO" --auto
         fi
     else
         action="Wait"
