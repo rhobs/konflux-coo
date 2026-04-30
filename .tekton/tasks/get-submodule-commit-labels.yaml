@@ -27,7 +27,7 @@ spec:
         - use
         - $(params.SOURCE-ARTIFACT)=/tekton/home/source
     - name: get-submodule-sha
-      image: quay.io/konflux-ci/buildah-task:4d8273444b0f2781264c232e12e88449bbf078c99e3da2a7f6dcaaf27bc53712
+      image: quay.io/konflux-ci/buildah-task@sha256:4c470b5a153c4acd14bf4f8731b5e36c61d7faafe09c2bf376bb81ce84aa5709
       workingDir: /tekton/home/source
       script: |
         #!/bin/bash

@@ -1,6 +1,5 @@
 {
     "extends": [
-        "github>konflux-ci/mintmaker//config/renovate/renovate.json",
         "github>konflux-ci/mintmaker-presets:refresh-rpm-lockfiles"
     ],
     "ignoreDeps": [
