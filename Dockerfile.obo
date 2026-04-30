@@ -4,7 +4,7 @@ WORKDIR /workspace
 # Copy the Go Modules manifests
 COPY observability-operator/ .
 
-ENV GOFLAGS='-mod=mod'
+ENV GOFLAGS='-mod=readonly'
 ENV GOTOOLCHAIN=local
 ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
