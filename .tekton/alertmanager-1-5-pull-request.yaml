@@ -51,6 +51,8 @@ spec:
       value:
         - type: gomod
           path: ./alertmanager
+        - type: npm
+          path: ./alertmanager/ui/app/
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
