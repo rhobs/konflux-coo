@@ -223,10 +223,15 @@ configure_trigger() {
             yq -i 'with(.spec.params; select(all_c(.name != "build-args")) | . += [{"name": "build-args", "value": ["REGISTRY=registry.redhat.io"]}])' "$file"
         fi
     else
+        local tasks_trigger=""
+        if [[ "$component" == cluster-observability-operator-* ]]; then
+            tasks_trigger="\".tekton/tasks/get-submodule-commit-labels.yaml\".pathChanged() ||
+        "
+        fi
         export trigger="event == \"$action\" && target_branch == \"$branch\" &&
         (\".tekton/$component-pull-request.yaml\".pathChanged() ||
         \".tekton/$component-push.yaml\".pathChanged() ||
-        \"$dockerfile\".pathChanged() ||
+        ${tasks_trigger}\"$dockerfile\".pathChanged() ||
         \"$src\".pathChanged())"
         if [[ $action == "push" ]]; then
             yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "bundle-patches/render_templates"}' "$file"
