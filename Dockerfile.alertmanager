@@ -29,20 +29,20 @@ VOLUME     [ "/alertmanager" ]
 WORKDIR    /alertmanager
 ENTRYPOINT [ "/bin/alertmanager" ]
 CMD        [ "--config.file=/etc/alertmanager/alertmanager.yml", \
-             "--storage.path=/alertmanager" ]
+    "--storage.path=/alertmanager" ]
 
 ARG VERSION=v0.31.0
 LABEL com.redhat.component="coo-alertmanager" \
-      name="cluster-observability-operator/alertmanager-rhel9" \
-      cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
-      version="${VERSION}" \
-      release="${VERSION}" \
-      vendor="Red Hat, Inc." \
-      distribution-scope="public" \
-      url="https://github.com/prometheus/alertmanager" \
-      summary="Alertmanager for Cluster Observability Operator" \
-      io.openshift.tags="openshift,monitoring" \
-      io.k8s.display-name="Alertmanager" \
-      io.k8s.description="Alertmanager handles alerts sent by client applications such as the Prometheus server" \
-      maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
-      description="Alertmanager for Cluster Observability Operator"
+    name="cluster-observability-operator/alertmanager-rhel9" \
+    cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
+    version="${VERSION}" \
+    release="${VERSION}" \
+    vendor="Red Hat, Inc." \
+    distribution-scope="public" \
+    url="https://github.com/prometheus/alertmanager" \
+    summary="Alertmanager for Cluster Observability Operator" \
+    io.openshift.tags="openshift,monitoring" \
+    io.k8s.display-name="Alertmanager" \
+    io.k8s.description="Alertmanager handles alerts sent by client applications such as the Prometheus server" \
+    maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
+    description="Alertmanager for Cluster Observability Operator"
