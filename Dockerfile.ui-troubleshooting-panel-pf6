@@ -5,25 +5,25 @@ WORKDIR /opt/app-root
 USER 0
 
 ENV HUSKY=0
-COPY ui-troubleshooting-panel/web/package*.json web/
-COPY ui-troubleshooting-panel/Makefile Makefile
+COPY ui-troubleshooting-panel-pf6/web/package*.json web/
+COPY ui-troubleshooting-panel-pf6/Makefile Makefile
 RUN make install-frontend-ci
 
-COPY ui-troubleshooting-panel/web/ web/
+COPY ui-troubleshooting-panel-pf6/web/ web/
 RUN make build-frontend
 
 FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.25 as go-builder
 
 WORKDIR /opt/app-root
 
-COPY ui-troubleshooting-panel/Makefile Makefile
-COPY ui-troubleshooting-panel/go.mod go.mod
-COPY ui-troubleshooting-panel/go.sum go.sum
+COPY ui-troubleshooting-panel-pf6/Makefile Makefile
+COPY ui-troubleshooting-panel-pf6/go.mod go.mod
+COPY ui-troubleshooting-panel-pf6/go.sum go.sum
 
 RUN make install-backend
 
-COPY ui-troubleshooting-panel/cmd/ cmd/
-COPY ui-troubleshooting-panel/pkg/ pkg/
+COPY ui-troubleshooting-panel-pf6/cmd/ cmd/
+COPY ui-troubleshooting-panel-pf6/pkg/ pkg/
 
 ENV GOFLAGS='-mod=mod'
 ENV GOEXPERIMENT=strictfipsruntime
@@ -34,7 +34,7 @@ RUN make build-backend BUILD_OPTS="-tags strictfipsruntime"
 FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:8d0a8fb39ec907e8ca62cdd24b62a63ca49a30fe465798a360741fde58437a23
 
 RUN mkdir /licenses
-COPY ui-troubleshooting-panel/LICENSE /licenses/.
+COPY ui-troubleshooting-panel-pf6/LICENSE /licenses/.
 
 USER 1001
 
@@ -43,9 +43,9 @@ COPY --from=go-builder /opt/app-root/plugin-backend /opt/app-root
 
 ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/dist"]
 
-ARG VERSION=v1.0.0
+ARG VERSION=v0.4.0
 LABEL com.redhat.component="coo-troubleshooting-panel-console-plugin" \
-      name="cluster-observability-operator/troubleshooting-panel-console-plugin-rhel9" \
+      name="cluster-observability-operator/troubleshooting-panel-console-plugin-pf6-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
       version="${VERSION}" \
       release="${VERSION}" \

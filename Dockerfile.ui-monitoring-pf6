@@ -5,13 +5,13 @@ WORKDIR /opt/app-root
 USER 0
 
 ENV HUSKY=0
-COPY ui-monitoring/web/package*.json web/
-COPY ui-monitoring/Makefile Makefile
+COPY ui-monitoring-pf6/web/package*.json web/
+COPY ui-monitoring-pf6/Makefile Makefile
 RUN cd web && npm ci --legacy-peer-deps --ignore-scripts
 
-COPY ui-monitoring/web/ web/
-COPY ui-monitoring/config/ config/
-COPY ui-monitoring/scripts/update-plugin-name.sh scripts/update-plugin-name.sh
+COPY ui-monitoring-pf6/web/ web/
+COPY ui-monitoring-pf6/config/ config/
+COPY ui-monitoring-pf6/scripts/update-plugin-name.sh scripts/update-plugin-name.sh
 RUN make update-plugin-name
 ENV I18N_NAMESPACE="plugin__monitoring-console-plugin"
 RUN make build-frontend
@@ -20,14 +20,14 @@ FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.25 as go-
 
 WORKDIR /opt/app-root
 
-COPY ui-monitoring/Makefile Makefile
-COPY ui-monitoring/go.mod go.mod
-COPY ui-monitoring/go.sum go.sum
+COPY ui-monitoring-pf6/Makefile Makefile
+COPY ui-monitoring-pf6/go.mod go.mod
+COPY ui-monitoring-pf6/go.sum go.sum
 
 RUN make install-backend
 
-COPY ui-monitoring/cmd/ cmd/
-COPY ui-monitoring/pkg/ pkg/
+COPY ui-monitoring-pf6/cmd/ cmd/
+COPY ui-monitoring-pf6/pkg/ pkg/
 
 ENV GOOS=${TARGETOS:-linux}
 ENV GOARCH=${TARGETARCH}
@@ -40,7 +40,7 @@ RUN make build-backend
 FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:8d0a8fb39ec907e8ca62cdd24b62a63ca49a30fe465798a360741fde58437a23
 
 RUN mkdir /licenses
-COPY ui-monitoring/LICENSE /licenses/.
+COPY ui-monitoring-pf6/LICENSE /licenses/.
 
 USER 1001
 
@@ -50,9 +50,9 @@ COPY --from=web-builder /opt/app-root/config /opt/app-root/config
 
 ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/dist"]
 
-ARG VERSION=v1.0.0
+ARG VERSION=v0.5.0
 LABEL com.redhat.component="coo-monitoring-console-plugin" \
-      name="cluster-observability-operator/monitoring-console-plugin-rhel9" \
+      name="cluster-observability-operator/monitoring-console-plugin-pf6-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
       version="${VERSION}" \
       release="${VERSION}" \
