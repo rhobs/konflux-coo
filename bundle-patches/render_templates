@@ -74,6 +74,8 @@ COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-o
 
 COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-pf5-rhel9@sha256:f677f6dbe21cab04820f10fd4453e2b535d1eeadc7f8751102bf5f507a9efbe6"
 
+COO_CONSOLE_MONITORING_PLUGIN_PF6_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-pf6-rhel9@sha256:f677f6dbe21cab04820f10fd4453e2b535d1eeadc7f8751102bf5f507a9efbe6"
+
 COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/korrel8r-rhel9@sha256:68fa9c0ab83b5e4401482ef505d5120bfd4e362436ebca936ba6de67f3dd87c2"
 
 COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-rhel9@sha256:51bcba9242ea5ac14bba655e7d95c07b27e7709a61fd697fd971783a1cd4f056"
@@ -102,6 +104,7 @@ if [[ $REGISTRY == "registry.redhat.io" || $REGISTRY == "registry.stage.redhat.i
     COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_PF6_IMAGE_URL="$REGISTRY/${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_PF6_IMAGE_URL:(58)}"
     COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL:(58)}"
     COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL="$REGISTRY/${COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL:(58)}"
+    COO_CONSOLE_MONITORING_PLUGIN_PF6_IMAGE_URL="$REGISTRY/${COO_CONSOLE_MONITORING_PLUGIN_PF6_IMAGE_URL:(58)}"
     COO_KORREL8R_IMAGE_URL="$REGISTRY/${COO_KORREL8R_IMAGE_URL:(58)}"
     COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="$REGISTRY/${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL:(58)}"
     COO_PERSES_IMAGE_URL="$REGISTRY/${COO_PERSES_IMAGE_URL:(58)}"
@@ -130,6 +133,7 @@ VALUE="${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL}" yq -i '(.spec.rela
 VALUE="${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_PF6_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-troubleshooting-pf6", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-monitoring", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-monitoring-pf5", "image": strenv(VALUE)}])' "$csv_file"
+VALUE="${COO_CONSOLE_MONITORING_PLUGIN_PF6_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-monitoring-pf6", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_KORREL8R_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"korrel8r", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"cluster-health-analyzer", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_PERSES_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"perses", "image": strenv(VALUE)}])' "$csv_file"
@@ -206,6 +210,9 @@ VALUE="${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL}" yq -i '(.spec.install.spec.de
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-monitoring-pf5=$(RELATED_IMAGE_CONSOLE_MONITORING_PLUGIN_PF5)"]' "$csv_file"
 VALUE="${COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_MONITORING_PLUGIN_PF5", "value": strenv(VALUE)}]' "$csv_file"
+
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-monitoring-pf6=$(RELATED_IMAGE_CONSOLE_MONITORING_PLUGIN_PF6)"]' "$csv_file"
+VALUE="${COO_CONSOLE_MONITORING_PLUGIN_PF6_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_MONITORING_PLUGIN_PF6", "value": strenv(VALUE)}]' "$csv_file"
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=korrel8r=$(RELATED_IMAGE_KORREL8R)"]' "$csv_file"
 VALUE="${COO_KORREL8R_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_KORREL8R", "value": strenv(VALUE)}]' "$csv_file"
