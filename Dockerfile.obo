@@ -33,7 +33,7 @@ USER 65532:65532
 
 ENTRYPOINT ["/manager"]
 
-ARG VERSION=v1.4.0
+ARG VERSION=v1.5.0
 LABEL com.redhat.component="coo-operator" \
     name="cluster-observability-operator/cluster-observability-rhel9-operator" \
     cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
