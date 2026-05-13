@@ -20,6 +20,15 @@ spec:
     - name: labels
       type: array
       description: LABELS array for buildah
+    - name: revision
+      type: string
+      description: The submodule commit SHA.
+    - name: branch
+      type: string
+      description: The submodule branch name.
+    - name: version
+      type: string
+      description: The submodule version derived from git describe.
   steps:
     - name: use-trusted-artifact
       image: quay.io/konflux-ci/build-trusted-artifacts:latest@sha256:fe8e5c96d66b9b72ed8adeebecf9121c57ca198a9331983ca985670a2ef55647
@@ -50,8 +59,15 @@ spec:
         submodule_url=$(git remote get-url origin)
         submodule_commit_url=${submodule_url%.git}/commit/${submodule_sha}
 
+        # Get branch and version info
+        submodule_branch=$(git rev-parse --abbrev-ref HEAD)
+        submodule_version=$(cat VERSION)
+
         # Write results
         echo "$submodule_commit_url"
         printf '["commit.id=%s", "commit.url=%s"]' "${submodule_sha}" "${submodule_commit_url}" > $(results.labels.path)
+        printf '%s' "${submodule_sha}" > $(results.revision.path)
+        printf '%s' "${submodule_branch}" > $(results.branch.path)
+        printf '%s' "${submodule_version}" > $(results.version.path)
 
         echo -e "\nSubmodule commit SHAs extracted successfully"

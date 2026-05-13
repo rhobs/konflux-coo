@@ -16,13 +16,21 @@ WORKDIR /workspace
 
 COPY --from=web-builder /workspace/ .
 
+ARG VERSION=
+ARG REVISION=unknown
+ARG BRANCH=
+
 ENV GOFLAGS='-mod=mod -tags=builtinassets,netgo,stringlabels'
 ENV GOTOOLCHAIN=local
 ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
-# Build prometheus directly using Go
-RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./prometheus ./cmd/prometheus
-RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./promtool ./cmd/promtool
+
+RUN GOLDFLAGS="-X github.com/prometheus/common/version.Version=${VERSION} \
+    -X github.com/prometheus/common/version.Revision=${REVISION} \
+    -X github.com/prometheus/common/version.Branch=${BRANCH} \
+    -X github.com/prometheus/common/version.BuildDate=$(date -u +%Y%m%d-%H:%M:%S)" && \
+    GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -ldflags="$GOLDFLAGS" -o ./prometheus ./cmd/prometheus && \
+    GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -ldflags="$GOLDFLAGS" -o ./promtool ./cmd/promtool
 
 FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:fe9e574f04371b333ed4e21d30d984f6b7fcd1046e579f5ddab4816c0c8e231d
 

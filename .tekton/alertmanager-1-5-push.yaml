@@ -233,6 +233,9 @@ spec:
           - name: BUILD_ARGS
             value:
               - $(params.build-args[*])
+              - REVISION=$(tasks.get-submodule-commit-labels.results.revision)
+              - BRANCH=$(tasks.get-submodule-commit-labels.results.branch)
+              - VERSION=$(tasks.get-submodule-commit-labels.results.version)
           - name: BUILD_ARGS_FILE
             value: $(params.build-args-file)
           - name: PRIVILEGED_NESTED
