@@ -3,6 +3,8 @@ FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.25
 WORKDIR /workspace
 
 COPY alertmanager/ .
+RUN cp /cachi2/output/deps/generic/alertmanager-web-ui.tar.gz ./ui/app
+RUN tar -xyf ./ui/app/alertmanager-web-ui.tar.gz -C ./ui/app/
 
 ARG GIT_VERSION=
 ARG GIT_REVISION=unknown
