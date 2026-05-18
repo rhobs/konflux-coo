@@ -52,8 +52,8 @@ spec:
         - type: gomod
           path: ./alertmanager
         - type: generic
-          path: ./alertmanager
-          lockfile: ../alertmanager-artifacts.lock.yaml
+          path: ./
+          lockfile: ./alertmanager-artifacts.lock.yaml
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.

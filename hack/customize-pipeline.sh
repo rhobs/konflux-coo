@@ -283,7 +283,7 @@ do
                 yq -i '(.spec.params[] | select(.name == "build-platforms").value) |= map(select(. == "linux/arm64") = "linux-mxlarge/arm64")' "$file"
             fi
             yq -i 'del(.spec.params[] | select(.name == "prefetch-input"))' "$file"
-            yq -i '.spec.params += [{"name": "prefetch-input", "value": [{"type": "gomod", "path": "./alertmanager"}, {"type": "generic", "path": "./alertmanager", "lockfile": "../alertmanager-artifacts.lock.yaml"}]}]' "$file"
+            yq -i '.spec.params += [{"name": "prefetch-input", "value": [{"type": "gomod", "path": "./alertmanager"}, {"type": "generic", "path": "./", "lockfile": "./alertmanager-artifacts.lock.yaml"}]}]' "$file"
             ;;
         prometheus-*)
             # Prometheus builds need larger arm64 instances and extra memory
