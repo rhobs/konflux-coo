@@ -4,9 +4,9 @@ WORKDIR /workspace
 
 COPY alertmanager/ .
 
-ARG VERSION=
-ARG REVISION=unknown
-ARG BRANCH=
+ARG GIT_VERSION=
+ARG GIT_REVISION=unknown
+ARG GIT_BRANCH=
 
 ENV GOFLAGS='-mod=mod -tags=netgo'
 ENV GOTOOLCHAIN=local
@@ -14,9 +14,9 @@ ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
 ENV NO_DOCKER=true
 
-RUN GOLDFLAGS="-X github.com/prometheus/common/version.Version=${VERSION} \
-    -X github.com/prometheus/common/version.Revision=${REVISION} \
-    -X github.com/prometheus/common/version.Branch=${BRANCH} \
+RUN GOLDFLAGS="-X github.com/prometheus/common/version.Version=${GIT_VERSION} \
+    -X github.com/prometheus/common/version.Revision=${GIT_REVISION} \
+    -X github.com/prometheus/common/version.Branch=${GIT_BRANCH} \
     -X github.com/prometheus/common/version.BuildDate=$(date -u +%Y%m%d-%H:%M:%S)" && \
     GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -ldflags="$GOLDFLAGS" -o alertmanager github.com/prometheus/alertmanager/cmd/alertmanager && \
     GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -ldflags="$GOLDFLAGS" -o amtool github.com/prometheus/alertmanager/cmd/amtool
@@ -39,12 +39,11 @@ ENTRYPOINT [ "/bin/alertmanager" ]
 CMD        [ "--config.file=/etc/alertmanager/alertmanager.yml", \
     "--storage.path=/alertmanager" ]
 
-ARG VERSION=v0.31.0
 LABEL com.redhat.component="coo-alertmanager" \
     name="cluster-observability-operator/alertmanager-rhel9" \
     cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
-    version="${VERSION}" \
-    release="${VERSION}" \
+    version="${GIT_VERSION}" \
+    release="${GIT_VERSION}" \
     vendor="Red Hat, Inc." \
     distribution-scope="public" \
     url="https://github.com/prometheus/alertmanager" \

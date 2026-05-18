@@ -61,7 +61,7 @@ spec:
 
         # Get branch and version info
         submodule_branch=$(git rev-parse --abbrev-ref HEAD)
-        submodule_version=$(cat VERSION)
+        submodule_version=$(cat ./VERSION)
 
         # Write results
         echo "$submodule_commit_url"
