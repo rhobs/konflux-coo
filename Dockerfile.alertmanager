@@ -15,6 +15,9 @@ ENV GOTOOLCHAIN=local
 ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
 ENV NO_DOCKER=true
+ENV GONOSUMCHECK=*
+ENV GONOSUMDB=*
+ENV GOWORK=off
 
 RUN GOLDFLAGS="-X github.com/prometheus/common/version.Version=${GIT_VERSION} \
     -X github.com/prometheus/common/version.Revision=${GIT_REVISION} \
