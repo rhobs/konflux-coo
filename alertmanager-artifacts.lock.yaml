@@ -1,0 +1,6 @@
+metadata:
+  version: "1.0"
+artifacts:
+  - download_url: "https://github.com/prometheus/alertmanager/releases/download/v0.32.1/alertmanager-web-ui-0.32.1.tar.gz"
+    checksum: "sha256:fca5b665281e603c055d812ac0359b027772c5e30c9a8cd0ca1367aac698cfa6"
+    filename: "alertmanager-web-ui.tar.gz"

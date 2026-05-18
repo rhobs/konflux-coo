@@ -3,23 +3,28 @@ FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.25
 WORKDIR /workspace
 
 COPY alertmanager/ .
+RUN cp /cachi2/output/deps/generic/alertmanager-web-ui.tar.gz ./ui/app
+RUN tar -xzf ./ui/app/alertmanager-web-ui.tar.gz -C ./ui/app/
 
 ARG GIT_VERSION=
 ARG GIT_REVISION=unknown
 ARG GIT_BRANCH=
 
-ENV GOFLAGS='-mod=mod -tags=netgo'
+ENV GOFLAGS='-mod=readonly -tags=netgo'
 ENV GOTOOLCHAIN=local
 ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
 ENV NO_DOCKER=true
+ENV GONOSUMCHECK=*
+ENV GONOSUMDB=*
+ENV GOWORK=off
 
 RUN GOLDFLAGS="-X github.com/prometheus/common/version.Version=${GIT_VERSION} \
     -X github.com/prometheus/common/version.Revision=${GIT_REVISION} \
     -X github.com/prometheus/common/version.Branch=${GIT_BRANCH} \
     -X github.com/prometheus/common/version.BuildDate=$(date -u +%Y%m%d-%H:%M:%S)" && \
-    GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -ldflags="$GOLDFLAGS" -o alertmanager github.com/prometheus/alertmanager/cmd/alertmanager && \
-    GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -ldflags="$GOLDFLAGS" -o amtool github.com/prometheus/alertmanager/cmd/amtool
+    GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="$GOLDFLAGS" -o alertmanager github.com/prometheus/alertmanager/cmd/alertmanager && \
+    GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="$GOLDFLAGS" -o amtool github.com/prometheus/alertmanager/cmd/amtool
 
 FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:12db9874bd753eb98b1ab3d840e75de5d6842ac0604fbd68c012adefe97140be
 

@@ -1,19 +1,20 @@
 [submodule "alertmanager"]
 	path = alertmanager
 	url = https://github.com/prometheus/alertmanager
-	branch = v0.31.0 # git submodules can't handle tags, but renovate can
+	# make sure to update the web assets fetched in artifacts.lock.yaml to match
+	branch = v0.32.1 # git submodules can't handle tags, but renovate can
 [submodule "prometheus"]
 	path = prometheus
 	url = https://github.com/prometheus/prometheus.git
-	branch = release-3.9
+	branch = release-3.11
 [submodule "obo-prometheus-operator"]
 	path = obo-prometheus-operator
 	url = https://github.com/rhobs/obo-prometheus-operator
-	branch = rhobs-rel-0.89.0-rhobs1
+	branch = rhobs-rel-0.90.1-rhobs1
 [submodule "observability-operator"]
 	path = observability-operator
 	url = https://github.com/rhobs/observability-operator
-	branch = release-1.4
+	branch = release-1.5
 [submodule "ui-logging-pf4"]
 	path = ui-logging-pf4
 	url = https://github.com/openshift/logging-view-plugin.git
@@ -53,7 +54,7 @@
 [submodule "thanos"]
 	path = thanos
 	url = https://github.com/openshift/thanos.git
-	branch = release-4.21
+	branch = release-4.22
 [submodule "korrel8r"]
 	path = korrel8r
 	url = https://github.com/korrel8r/korrel8r.git

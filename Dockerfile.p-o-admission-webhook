@@ -4,7 +4,7 @@ WORKDIR /workspace
 # Copy source files
 COPY obo-prometheus-operator/ .
 
-ENV GOFLAGS='-mod=mod'
+ENV GOFLAGS='-mod=readonly'
 ENV GOTOOLCHAIN=local
 ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
@@ -15,7 +15,7 @@ RUN VERSION="$(tr -d ' \t\n\r' < VERSION)" && \
   BUILD_REVISION="$(git rev-parse --short HEAD 2>/dev/null || true)" && \
   BUILD_USER="${BUILD_USER:-coo-image-build}" && \
   BUILD_BRANCH="$(git branch --show-current 2>/dev/null || true)" && \
-  GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=1 go build -mod=mod \
+  GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=1 go build \
   -ldflags="-s \
   -X github.com/prometheus/common/version.Revision=${BUILD_REVISION} \
   -X github.com/prometheus/common/version.BuildUser=${BUILD_USER} \

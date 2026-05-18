@@ -4,7 +4,7 @@ WORKDIR /workspace
 # Copy source files
 COPY obo-prometheus-operator/ .
 
-ENV GOFLAGS='-mod=mod'
+ENV GOFLAGS='-mod=readonly'
 ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
 
