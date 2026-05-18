@@ -21,6 +21,9 @@ ARG GIT_REVISION=unknown
 ARG GIT_BRANCH=
 
 ENV GOFLAGS='-mod=readonly -tags=builtinassets,netgo,stringlabels'
+ENV GONOSUMCHECK=*
+ENV GONOSUMDB=*
+ENV GOWORK=off
 ENV GOTOOLCHAIN=local
 ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
