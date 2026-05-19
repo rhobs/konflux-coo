@@ -47,6 +47,9 @@ spec:
         submodule=""
         submodule_sha=""
         submodule_url=""
+        submodule_commit_url=""
+        submodule_branch=""
+        submodule_version=""
 
         # Set submodule-name according to dockerfile
         echo "dockerfile_name=${dockerfile}"
