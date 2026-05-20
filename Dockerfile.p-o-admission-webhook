@@ -24,7 +24,7 @@ RUN VERSION="$(tr -d ' \t\n\r' < VERSION)" && \
   -X github.com/prometheus/common/version.Version=${VERSION}" \
   -o admission-webhook ./cmd/admission-webhook/
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:12db9874bd753eb98b1ab3d840e75de5d6842ac0604fbd68c012adefe97140be
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
 
 COPY --from=builder /workspace/admission-webhook /bin/admission-webhook
 COPY --from=builder /workspace/LICENSE      /licenses/.
