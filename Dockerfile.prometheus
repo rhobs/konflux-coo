@@ -8,7 +8,7 @@ COPY prometheus/ .
 
 RUN make assets-compress
 
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.24 AS builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.25 AS builder
 
 WORKDIR /workspace
 
@@ -16,15 +16,26 @@ WORKDIR /workspace
 
 COPY --from=web-builder /workspace/ .
 
-ENV GOFLAGS='-mod=mod -tags=builtinassets,netgo,stringlabels'
+ARG GIT_VERSION=
+ARG GIT_REVISION=unknown
+ARG GIT_BRANCH=
+
+ENV GOFLAGS='-mod=readonly -tags=builtinassets,netgo,stringlabels'
 ENV GOTOOLCHAIN=local
 ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
-# Build prometheus directly using Go
-RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./prometheus ./cmd/prometheus
-RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build $GOFLAGS -o ./promtool ./cmd/promtool
+ENV GONOSUMCHECK=*
+ENV GONOSUMDB=*
+ENV GOWORK=off
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
+RUN GOLDFLAGS="-X github.com/prometheus/common/version.Version=${GIT_VERSION} \
+    -X github.com/prometheus/common/version.Revision=${GIT_REVISION} \
+    -X github.com/prometheus/common/version.Branch=${GIT_BRANCH} \
+    -X github.com/prometheus/common/version.BuildDate=$(date -u +%Y%m%d-%H:%M:%S)" && \
+    GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="$GOLDFLAGS" -o ./prometheus ./cmd/prometheus && \
+    GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="$GOLDFLAGS" -o ./promtool ./cmd/promtool
+
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
 
 COPY --from=builder /workspace/prometheus                            /bin/prometheus
 COPY --from=builder /workspace/promtool                              /bin/promtool
@@ -42,21 +53,20 @@ WORKDIR    /prometheus
 VOLUME     ["/prometheus"]
 ENTRYPOINT ["/bin/prometheus"]
 CMD        [ "--config.file=/etc/prometheus/prometheus.yml", \
-             "--storage.tsdb.path=/prometheus" ]
+    "--storage.tsdb.path=/prometheus" ]
 
-ARG VERSION=v3.9.1
 LABEL com.redhat.component="coo-prometheus-container" \
-      name="cluster-observability-operator/prometheus-rhel9" \
-      cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
-      version="${VERSION}" \
-      release="${VERSION}" \
-      vendor="Red Hat, Inc." \
-      distribution-scope="public" \
-      url="https://github.com/prometheus/prometheus" \
-      summary="Prometheus for Cluster Observability Operator" \
-      io.openshift.expose-services="" \
-      io.openshift.tags="monitoring" \
-      io.k8s.display-name="COO Prometheus" \
-      io.k8s.description="Prometheus is a CNCF project that collects metrics, evaluates rules and triggers alerts." \
-      maintainer="team-monitoring@redhat.com" \
-      description="Prometheus for Cluster Observability Operator"
+    name="cluster-observability-operator/prometheus-rhel9" \
+    cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
+    version="${GIT_VERSION}" \
+    release="${GIT_VERSION}" \
+    vendor="Red Hat, Inc." \
+    distribution-scope="public" \
+    url="https://github.com/prometheus/prometheus" \
+    summary="Prometheus for Cluster Observability Operator" \
+    io.openshift.expose-services="" \
+    io.openshift.tags="monitoring" \
+    io.k8s.display-name="COO Prometheus" \
+    io.k8s.description="Prometheus is a CNCF project that collects metrics, evaluates rules and triggers alerts." \
+    maintainer="team-monitoring@redhat.com" \
+    description="Prometheus for Cluster Observability Operator"

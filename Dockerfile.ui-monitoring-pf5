@@ -37,7 +37,7 @@ ENV CGO_ENABLED=1
 
 RUN make build-backend
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
 
 RUN mkdir /licenses
 COPY ui-monitoring-pf5/LICENSE /licenses/.
@@ -53,7 +53,7 @@ ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/d
 ARG VERSION=v0.4.0
 LABEL com.redhat.component="coo-monitoring-console-plugin" \
       name="cluster-observability-operator/monitoring-console-plugin-pf5-rhel9" \
-      cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
       version="${VERSION}" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \

@@ -4,13 +4,14 @@ WORKDIR /workspace
 # Copy source files
 COPY obo-prometheus-operator/ .
 
-ENV GOFLAGS='-mod=mod'
-ENV CGO_ENABLED=0
+ENV GOFLAGS='-mod=readonly'
+ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
 
-# Build
-RUN make prometheus-config-reloader
+# CGO required for FIPS/check-payload; upstream Makefile uses CGO_ENABLED=0 — build here instead
+RUN go build -tags strictfipsruntime -ldflags "-s -w" -o prometheus-config-reloader ./cmd/prometheus-config-reloader
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
 
 COPY --from=builder workspace/prometheus-config-reloader /bin/prometheus-config-reloader
 COPY --from=builder /workspace/LICENSE      /licenses/.
@@ -22,7 +23,7 @@ ENTRYPOINT ["/bin/prometheus-config-reloader"]
 ARG VERSION=v0.89.0
 LABEL com.redhat.component="coo-po-prometheus-config-reloader" \
       name="cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9" \
-      cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
       version="${VERSION}" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \

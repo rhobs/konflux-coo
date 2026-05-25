@@ -1,5 +1,5 @@
 # Builder
-FROM registry.redhat.io/ubi9/ubi-minimal@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183 as builder
+FROM registry.redhat.io/ubi9/ubi-minimal@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede as builder
 
 USER root
 
@@ -13,7 +13,7 @@ COPY /observability-operator/LICENSE LICENSE
 COPY /bundle-patches/render_templates .
 
 # Get yq from konflux CI
-FROM quay.io/konflux-ci/yq@sha256:f89dc33e79bc802d67bc983459d4a0e4cf84f8b178faa690dccc9236615e48f0 AS parser
+FROM quay.io/konflux-ci/yq@sha256:ac514eef5aef9f33615871cb19794edb8ad94dcb531b5065f4dc64ab1f5faae5 AS parser
 
 # Run template rendering
 FROM builder as final
@@ -51,22 +51,22 @@ LABEL operators.operatorframework.io.metrics.project_layout=unknown
 LABEL operators.operatorframework.io.test.mediatype.v1=scorecard+v1
 LABEL operators.operatorframework.io.test.config.v1=tests/scorecard/
 
-ARG VERSION=v1.4.0
+ARG VERSION=v1.5.0
 LABEL com.redhat.component="coo-bundle" \
-      name="cluster-observability-operator/cluster-observability-operator-bundle" \
-      cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
-      version="${VERSION}" \
-      release="${VERSION}" \
-      vendor="Red Hat, Inc." \
-      distribution-scope="public" \
-      url="https://github.com/rhobs/observability-operator" \
-      summary="Cluster Observability Operator Bundle" \
-      com.redhat.openshift.versions="v4.12" \
-      io.openshift.tags="openshift,observability,monitoring" \
-      io.k8s.display-name="Cluster Observability Operator Bundle" \
-      io.k8s.description="Cluster Observability Operator Bundle" \
-      maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
-      description="Cluster Observability Operator Bundle"
+    name="cluster-observability-operator/cluster-observability-operator-bundle" \
+    cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
+    version="${VERSION}" \
+    release="${VERSION}" \
+    vendor="Red Hat, Inc." \
+    distribution-scope="public" \
+    url="https://github.com/rhobs/observability-operator" \
+    summary="Cluster Observability Operator Bundle" \
+    com.redhat.openshift.versions="v4.12" \
+    io.openshift.tags="openshift,observability,monitoring" \
+    io.k8s.display-name="Cluster Observability Operator Bundle" \
+    io.k8s.description="Cluster Observability Operator Bundle" \
+    maintainer="OpenShift Monitoring team <team-monitoring-incluster@redhat.com>" \
+    description="Cluster Observability Operator Bundle"
 
 COPY --from=final /workspace/bundle/manifests /manifests/
 COPY --from=final /workspace/bundle/metadata /metadata/

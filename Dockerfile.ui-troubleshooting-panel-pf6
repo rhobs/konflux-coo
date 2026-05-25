@@ -1,0 +1,60 @@
+FROM registry.redhat.io/ubi9/nodejs-22:latest AS web-builder
+
+WORKDIR /opt/app-root
+
+USER 0
+
+ENV HUSKY=0
+COPY ui-troubleshooting-panel-pf6/web/package*.json web/
+COPY ui-troubleshooting-panel-pf6/Makefile Makefile
+RUN make install-frontend-ci
+
+COPY ui-troubleshooting-panel-pf6/web/ web/
+RUN make build-frontend
+
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.25 as go-builder
+
+WORKDIR /opt/app-root
+
+COPY ui-troubleshooting-panel-pf6/Makefile Makefile
+COPY ui-troubleshooting-panel-pf6/go.mod go.mod
+COPY ui-troubleshooting-panel-pf6/go.sum go.sum
+
+RUN make install-backend
+
+COPY ui-troubleshooting-panel-pf6/cmd/ cmd/
+COPY ui-troubleshooting-panel-pf6/pkg/ pkg/
+
+ENV GOFLAGS='-mod=mod'
+ENV GOEXPERIMENT=strictfipsruntime
+ENV CGO_ENABLED=1
+
+RUN make build-backend BUILD_OPTS="-tags strictfipsruntime"
+
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
+
+RUN mkdir /licenses
+COPY ui-troubleshooting-panel-pf6/LICENSE /licenses/.
+
+USER 1001
+
+COPY --from=web-builder /opt/app-root/web/dist /opt/app-root/web/dist
+COPY --from=go-builder /opt/app-root/plugin-backend /opt/app-root
+
+ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/dist"]
+
+ARG VERSION=v0.4.0
+LABEL com.redhat.component="coo-troubleshooting-panel-console-plugin" \
+      name="cluster-observability-operator/troubleshooting-panel-console-plugin-pf6-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/openshift/troubleshooting-panel-console-plugin" \
+      summary="OpenShift console plugin to troubleshoot by correlating observability signals" \
+      io.openshift.tags="openshift,observability-ui,korrel8r,correlation" \
+      io.k8s.display-name="OpenShift console troubleshooting panel plugin" \
+      io.k8s.description="OpenShift console plugin to troubleshoot by correlating observability signals" \
+      maintainer="Observability UI Team <team-observability-ui@redhat.com>" \
+      description="OpenShift console plugin to troubleshoot by correlating observability signals"

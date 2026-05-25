@@ -10,7 +10,7 @@ ENV GOEXPERIMENT=strictfipsruntime
 
 RUN go build -tags strictfipsruntime,openssl ./cmd/korrel8r
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
 WORKDIR /
 
 COPY --from=builder /workspace/korrel8r /bin/korrel8r
@@ -23,7 +23,7 @@ ENTRYPOINT [ "/bin/korrel8r", "web" ]
 ARG VERSION=release-coo-1.4
 LABEL com.redhat.component="coo-korrel8r-container" \
       name="cluster-observability-operator/korrel8r-rhel9" \
-      cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
       version="${VERSION}" \
       release="${VERSION}" \
       vendor="Red Hat, Inc." \

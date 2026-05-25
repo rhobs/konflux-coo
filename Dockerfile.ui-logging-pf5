@@ -31,7 +31,7 @@ ENV CGO_ENABLED=1
 
 RUN make build-backend BUILD_OPTS="-tags strictfipsruntime"
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
 
 RUN mkdir /licenses
 COPY ui-logging-pf5/LICENSE /licenses/.
@@ -46,7 +46,7 @@ ENTRYPOINT ["/opt/app-root/plugin-backend", "-config-path", "/opt/app-root/confi
 
 ARG VERSION=v6.1.0
 LABEL com.redhat.component="coo-logging-console-plugin" \
-      name="cluster-observability-operator/logging-console-plugin-rhel9" \
+      name="cluster-observability-operator/logging-console-plugin-pf5-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
       version="${VERSION}" \
       release="${VERSION}" \

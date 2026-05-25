@@ -20,14 +20,23 @@ spec:
     - name: labels
       type: array
       description: LABELS array for buildah
+    - name: revision
+      type: string
+      description: The submodule commit SHA.
+    - name: branch
+      type: string
+      description: The submodule branch name.
+    - name: version
+      type: string
+      description: The submodule version derived from git describe.
   steps:
     - name: use-trusted-artifact
-      image: quay.io/konflux-ci/build-trusted-artifacts:latest@sha256:ab064e9763b62d99da5ee9653370da86ffd9d3e770e1aad7a935e88b64a0b6ac
+      image: quay.io/konflux-ci/build-trusted-artifacts:latest@sha256:13ccf533248a98558cc7705e148c1c92e29f95ad67b5c0f4a9df5f57e051d276
       args:
         - use
         - $(params.SOURCE-ARTIFACT)=/tekton/home/source
     - name: get-submodule-sha
-      image: quay.io/konflux-ci/buildah-task:4c470b5a153c4acd14bf4f8731b5e36c61d7faafe09c2bf376bb81ce84aa5709
+      image: quay.io/konflux-ci/buildah-task@sha256:4c470b5a153c4acd14bf4f8731b5e36c61d7faafe09c2bf376bb81ce84aa5709
       workingDir: /tekton/home/source
       script: |
         #!/bin/bash
@@ -38,6 +47,9 @@ spec:
         submodule=""
         submodule_sha=""
         submodule_url=""
+        submodule_commit_url=""
+        submodule_branch=""
+        submodule_version=""
 
         # Set submodule-name according to dockerfile
         echo "dockerfile_name=${dockerfile}"
@@ -50,8 +62,17 @@ spec:
         submodule_url=$(git remote get-url origin)
         submodule_commit_url=${submodule_url%.git}/commit/${submodule_sha}
 
+        # Get branch and version info
+        submodule_branch=$(git rev-parse --abbrev-ref HEAD)
+        if [ -f VERSION ]; then
+            submodule_version=$(cat ./VERSION)
+        fi
+
         # Write results
         echo "$submodule_commit_url"
         printf '["commit.id=%s", "commit.url=%s"]' "${submodule_sha}" "${submodule_commit_url}" > $(results.labels.path)
+        printf '%s' "${submodule_sha}" > $(results.revision.path)
+        printf '%s' "${submodule_branch}" > $(results.branch.path)
+        printf '%s' "${submodule_version}" > $(results.version.path)
 
         echo -e "\nSubmodule commit SHAs extracted successfully"

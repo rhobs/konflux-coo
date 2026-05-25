@@ -10,14 +10,21 @@ WORKDIR /app
 COPY perses/ .
 
 ENV GOFLAGS="-mod=readonly"
+ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
+
 RUN go mod download
 
 RUN mkdir /plugins
 
-RUN make build-api
-RUN make build-cli
+# Run generate steps (assets compression, plugin installation)
+RUN make generate
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
+# CGO required for FIPS/check-payload; upstream Makefile uses CGO_ENABLED=0 — build here instead
+RUN go build -tags strictfipsruntime -ldflags "-s -w" -o ./bin/perses ./cmd/perses
+RUN go build -tags strictfipsruntime -ldflags "-s -w" -o ./bin/percli ./cmd/percli
+
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
 
 LABEL maintainer="Observability UI team <team-observability-ui@redhat.com>"
 
@@ -45,10 +52,10 @@ VOLUME     ["/perses"]
 ENTRYPOINT [ "/bin/perses" ]
 CMD        ["--config=/etc/perses/config.yaml", "--log.level=error"]
 
-ARG VERSION=v0.53.0
+ARG VERSION=v0.54.0
 LABEL com.redhat.component="coo-perses" \
     name="cluster-observability-operator/perses-rhel9" \
-      cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
     version="${VERSION}" \
     release="${VERSION}" \
     vendor="Red Hat, Inc." \

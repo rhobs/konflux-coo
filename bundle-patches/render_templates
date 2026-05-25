@@ -4,11 +4,11 @@ set -ex
 
 csv_file="$1"
 annotation_file="$2"
-PRODUCT_VERSION="1.4.0"
+PRODUCT_VERSION="1.5.0"
 X_VERSION="1"
-Y_VERSION="4"
+Y_VERSION="5"
 Z_VERSION="0"
-CSV_REPLACES_VERSION="1.3.1"
+CSV_REPLACES_VERSION="1.4.0"
 
 if [[ -z "$REGISTRY" ]]; then
     echo "Must provide REGISTRY in environment" 1>&2
@@ -36,47 +36,53 @@ yq -i '.metadata.labels += {"operatorframework.io/arch.s390x": "supported"}' "$c
 
 # Konflux Build Pipeline should automatically create PRs to update the SHA images but no always
 # Use 'update-component-images.sh' to update the render_templates file with the latest SHA images
-COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel9-operator@sha256:825521db20e18e3483c957fadfcb67660ce23a331071be04dc1ff279a0197dc5"
+COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel9-operator@sha256:496e1bfc6d525633673ef23d0d2901bf47534fe11f89cc0aa9e78e098285cfb9"
 
-COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:71841e360e35bb902f11618ed43bbf9c5e856ee3760131427784f358f9f9ef48"
+COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:34013ae05725e609a992dd95d5f91fce0f86e2955f394ed0a3547308b098830d"
 
-COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/alertmanager-rhel9@sha256:d0d0483db5a3bbf74ea77bdea15627874de9180ab783a047165b46e86547bde9"
+COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/alertmanager-rhel9@sha256:1598088492067acfa578c248cecb56e172aca5c14031c0791c52089f399cdbe7"
 
-COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/prometheus-rhel9@sha256:5c4d96b14f7ca44a0c4121a97576d53fbe240f3d48bbe6017ae8fd996ea7bf21"
+COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/prometheus-rhel9@sha256:5502d97cf05f2001d92d4fbd1c2ceadef2107df98e0c10246d8e97e2bcfd151c"
 
-COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/thanos-rhel9@sha256:02f40d14b5d88b928d4346633bf8bd51a671f6ec41a699dafb061e86d2a5b40c"
+COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/thanos-rhel9@sha256:457f89c9cb0a7c886c07c17fd2ddbb482c485433b9499c676401cb02c317c29a"
 
-COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel9@sha256:e0d0880ab9b2647dc62886ea4c2c9ff0b28ccc0406214718523abcdefc00496e"
+COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel9@sha256:dce59aaaf19cc68b8367b114869a23058c5efa2a36e87d0d2e19be0cc827d292"
 
-COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-rhel9-operator@sha256:c6bcee2d16446e5e0d76c0102e212941845483f813003abe32ca3e5639488ec4"
+COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-rhel9-operator@sha256:8dcccd913ba29078055f48080011810fc2db054101327ffcc6cc5a8d491b1b5f"
 
-COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/dashboards-console-plugin-rhel9@sha256:6fd39b1f7bc212451e623b35fd37d0a3d9cdc6b5a1b2021135d57f50a54f548f"
+COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/dashboards-console-plugin-rhel9@sha256:c4b698fd3a9eac58eccde1a21324a699e7ca8c24a3fae14063bc6600eeb6c032"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-rhel9@sha256:7ab6a793c01fbba69aa8c755f9b51295a653f9849263c889bf4be3da6be84614"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-rhel9@sha256:62c06f317047b0e82a24b11ac09090c3b1427eb08ff9f5e2d261e57d62d155c3"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-pf5-rhel9@sha256:8b46db48f84ad55653eb3923ca4b579e96d9f7f8d62f2e8ee5a102b623acec4a"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-pf5-rhel9@sha256:8a636fe732ef3ddc81fba93253d991870a3f1b3130e47d5e30cc69d331750aca"
 
-COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-pf4-rhel9@sha256:8701e31bf8d3cfc3ea900c070db096e7b9adb7fae4c4d82159995df2494bb9f8"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF6_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-pf6-rhel9@sha256:2a9a0ffeb300b72e30c060e34a9d3d3cd2c4291132b4bb850608575140af74a8"
 
-COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-rhel9@sha256:d05c3fbaf8e7ba01b4fb82489901a4e9f1e1b9c76f27dd2777c5dc5af68946b3"
+COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/distributed-tracing-console-plugin-pf4-rhel9@sha256:c187beff7a3536f1a97b1cf146896bdaf7de0f0fba416c1c7ecc93030fc0811b"
 
-COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-pf4-rhel9@sha256:5cf9b9c18ca50d9c2ef042cce21ebc676b9629933e1583ac30f595db9ebbf268"
+COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-rhel9@sha256:00968a0e3f1957d3aeef1292306ee8249952ecc1c3260baf2c7e2374f942ee1c"
 
-COO_CONSOLE_LOGGING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-pf5-rhel9@sha256:61e8070f0def0c82b87d42a30aecfb677f775158c9ea2b53e77949523cc7f091"
+COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-pf4-rhel9@sha256:ab269653bb18d7de019f6ac680a827524aa5b590cbc1025ce802ce450d3ddcf3"
 
-COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/troubleshooting-panel-console-plugin-rhel9@sha256:8eae79df3f366a6846c8eeee88aed7e62179637e4bad34de1bf38a96d27e875f"
+COO_CONSOLE_LOGGING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-pf5-rhel9@sha256:ec97b4289adbb161a0616a632c0bb1861e08feb379c9c5fac1a14343f0f5cd91"
 
-COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-rhel9@sha256:ba7bf04f91dfed3f98e4a3c18bb1050e07148abdd77a8dd644d4d81d383120bc"
+COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/troubleshooting-panel-console-plugin-rhel9@sha256:9724ea0ca89b16b3548b289e853b241cfa552bd82a2d1c6ac358a2e0016fc9ae"
 
-COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-pf5-rhel9@sha256:bd1cba84c997c60d11ca7b3eb295b89a384ed46d83e17e940be1989836ff911a"
+COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_PF6_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/troubleshooting-panel-console-plugin-pf6-rhel9@sha256:2ee4fa2f1cb136b5787a099cc5c0875059e7af26b8dcc54084f1d68b21dea0c3"
 
-COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/korrel8r-rhel9@sha256:398a5517d992317f0f6bde2479353fef8bf1d3a621b239700ec5f0493a345351"
+COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-rhel9@sha256:33e67f758d57ec44f082d41d3ef7ac443e12c078acb139735788ce90c5308c65"
 
-COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-rhel9@sha256:c285b33ffd720677df67a6dc68b97399697f7d134dcb271d69034279d426a9ee"
+COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-pf5-rhel9@sha256:8d106e2c656da3572a2465017d69c0fbdecdbbaeab390fe4f66dccc103a7c8d0"
 
-COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9@sha256:0b878055d7d09a928e61ec837783c9946a5af58983c1647c5e8a9772aab8a402"
+COO_CONSOLE_MONITORING_PLUGIN_PF6_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/monitoring-console-plugin-pf6-rhel9@sha256:803e0286f7839d9a5d6bd76c05c4db35c72e1d93b3ebc7945f0b399008f3fdf3"
 
-COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9-operator@sha256:c3384fa7c6cc0799a119aa2fd24cecc1445ab1572dc389ee80d65665c23422aa"
+COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/korrel8r-rhel9@sha256:fcb328f3ef850e8d45417e77b8204ff19ecce415b98c7c909f8d52b1e78523ab"
+
+COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-rhel9@sha256:cf69461efc26911960ba05521556605333b39a07900f649c5117446e3229b98e"
+
+COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9@sha256:3bb52d2369a801aec104d2941fe442cb683bd2e8009e9ccfc53bc6fa0bebbb80"
+
+COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9-operator@sha256:414176c854fe386a3d0b219a7020f21c820f20a54a71a5c7ccd8157848fd8487"
 
 if [[ $REGISTRY == "registry.redhat.io" || $REGISTRY == "registry.stage.redhat.io" ]]; then
     COO_IMAGE_URL="$REGISTRY/${COO_IMAGE_URL:(58)}"
@@ -89,13 +95,16 @@ if [[ $REGISTRY == "registry.redhat.io" || $REGISTRY == "registry.stage.redhat.i
     COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL:(58)}"
     COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL:(58)}"
     COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL:(58)}"
+    COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF6_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF6_IMAGE_URL:(58)}"
     COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL="$REGISTRY/${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL:(58)}"
     COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL:(58)}"
     COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL="$REGISTRY/${COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL:(58)}"
     COO_CONSOLE_LOGGING_PLUGIN_PF5_IMAGE_URL="$REGISTRY/${COO_CONSOLE_LOGGING_PLUGIN_PF5_IMAGE_URL:(58)}"
     COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL:(58)}"
+    COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_PF6_IMAGE_URL="$REGISTRY/${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_PF6_IMAGE_URL:(58)}"
     COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL="$REGISTRY/${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL:(58)}"
     COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL="$REGISTRY/${COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL:(58)}"
+    COO_CONSOLE_MONITORING_PLUGIN_PF6_IMAGE_URL="$REGISTRY/${COO_CONSOLE_MONITORING_PLUGIN_PF6_IMAGE_URL:(58)}"
     COO_KORREL8R_IMAGE_URL="$REGISTRY/${COO_KORREL8R_IMAGE_URL:(58)}"
     COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="$REGISTRY/${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL:(58)}"
     COO_PERSES_IMAGE_URL="$REGISTRY/${COO_PERSES_IMAGE_URL:(58)}"
@@ -115,13 +124,16 @@ VALUE="${COO_PO_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"prometheus-
 VALUE="${COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-dashboards", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-tracing", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-tracing-pf5", "image": strenv(VALUE)}])' "$csv_file"
+VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF6_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-tracing-pf6", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF4_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-tracing-pf4", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-logging", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-logging-pf4", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_LOGGING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-logging-pf5", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-troubleshooting", "image": strenv(VALUE)}])' "$csv_file"
+VALUE="${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_PF6_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-troubleshooting-pf6", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-monitoring", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-monitoring-pf5", "image": strenv(VALUE)}])' "$csv_file"
+VALUE="${COO_CONSOLE_MONITORING_PLUGIN_PF6_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-monitoring-pf6", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_KORREL8R_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"korrel8r", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"cluster-health-analyzer", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_PERSES_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"perses", "image": strenv(VALUE)}])' "$csv_file"
@@ -133,6 +145,10 @@ sed -i -e "s|quay.io/rhobs/observability-operator.*|${COO_IMAGE_URL}|g" "$csv_fi
 sed -i -e "s|quay.io/rhobs/obo-prometheus-operator.*|${COO_PO_IMAGE_URL}|g" "$csv_file"
 sed -i -e "s|quay.io/rhobs/obo-admission-webhook.*|${COO_ADMISSION_WEBHOOK_IMAGE_URL}|g" "$csv_file"
 sed -i -e "s|quay.io/openshift-observability-ui/perses-operator.*|${COO_PERSES_OPERATOR_IMAGE_URL}|g" "$csv_file"
+
+# Add the watch TLS profile args to the perses operator container.
+yq -i '(.spec.install.spec.deployments[] | select(.name == "perses-operator").spec.template.spec.containers[] | select(.name == "perses-operator") | select(has("args") | not)) += {"args": []}' "$csv_file"
+yq -i '(.spec.install.spec.deployments[] | select(.name == "perses-operator").spec.template.spec.containers[] | select(.name == "perses-operator").args) += ["--tls-cluster-profile", "--tls-configure-operands"]' "$csv_file"
 
 # first add an empty env list to the obo operator container if it doesn't exist
 # already
@@ -165,6 +181,9 @@ VALUE="${COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL}" yq -i '(.spec.install.spec.de
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-distributed-tracing=$(RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN)"]' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN", "value": strenv(VALUE)}]' "$csv_file"
 
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-distributed-tracing-pf6=$(RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF6)"]' "$csv_file"
+VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF6_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF6", "value": strenv(VALUE)}]' "$csv_file"
+
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-distributed-tracing-pf5=$(RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5)"]' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5", "value": strenv(VALUE)}]' "$csv_file"
 
@@ -183,11 +202,17 @@ VALUE="${COO_CONSOLE_LOGGING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.install.spec.d
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-troubleshooting-panel=$(RELATED_IMAGE_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN)"]' "$csv_file"
 VALUE="${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN", "value": strenv(VALUE)}]' "$csv_file"
 
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-troubleshooting-panel-pf6=$(RELATED_IMAGE_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_PF6)"]' "$csv_file"
+VALUE="${COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_PF6_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_PF6", "value": strenv(VALUE)}]' "$csv_file"
+
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-monitoring=$(RELATED_IMAGE_CONSOLE_MONITORING_PLUGIN)"]' "$csv_file"
 VALUE="${COO_CONSOLE_MONITORING_PLUGIN_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_MONITORING_PLUGIN", "value": strenv(VALUE)}]' "$csv_file"
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-monitoring-pf5=$(RELATED_IMAGE_CONSOLE_MONITORING_PLUGIN_PF5)"]' "$csv_file"
 VALUE="${COO_CONSOLE_MONITORING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_MONITORING_PLUGIN_PF5", "value": strenv(VALUE)}]' "$csv_file"
+
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-monitoring-pf6=$(RELATED_IMAGE_CONSOLE_MONITORING_PLUGIN_PF6)"]' "$csv_file"
+VALUE="${COO_CONSOLE_MONITORING_PLUGIN_PF6_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_MONITORING_PLUGIN_PF6", "value": strenv(VALUE)}]' "$csv_file"
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=korrel8r=$(RELATED_IMAGE_KORREL8R)"]' "$csv_file"
 VALUE="${COO_KORREL8R_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_KORREL8R", "value": strenv(VALUE)}]' "$csv_file"

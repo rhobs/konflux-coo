@@ -1,0 +1,60 @@
+FROM registry.redhat.io/ubi9/nodejs-22:latest AS web-builder
+
+WORKDIR /opt/app-root
+
+USER 0
+
+ENV HUSKY=0
+COPY ui-distributed-tracing-pf6/web/package*.json web/
+COPY ui-distributed-tracing-pf6/Makefile Makefile
+RUN cd web && npm ci --omit=optional --ignore-scripts
+
+COPY ui-distributed-tracing-pf6/web/ web/
+RUN make build-frontend
+
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.25 as go-builder
+
+WORKDIR /opt/app-root
+
+COPY ui-distributed-tracing-pf6/Makefile Makefile
+COPY ui-distributed-tracing-pf6/go.mod go.mod
+COPY ui-distributed-tracing-pf6/go.sum go.sum
+
+RUN make install-backend
+
+COPY ui-distributed-tracing-pf6/cmd/ cmd/
+COPY ui-distributed-tracing-pf6/pkg/ pkg/
+
+ENV GOFLAGS='-mod=mod'
+ENV GOEXPERIMENT=strictfipsruntime
+ENV CGO_ENABLED=1
+
+RUN make build-backend BUILD_OPTS="-tags strictfipsruntime"
+
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
+
+RUN mkdir /licenses
+COPY ui-distributed-tracing-pf6/LICENSE /licenses/.
+
+USER 1001
+
+COPY --from=web-builder /opt/app-root/web/dist /opt/app-root/web/dist
+COPY --from=go-builder /opt/app-root/plugin-backend /opt/app-root
+
+ENTRYPOINT ["/opt/app-root/plugin-backend", "-static-path", "/opt/app-root/web/dist"]
+
+ARG VERSION=v1.0.0
+LABEL com.redhat.component="coo-distributed-tracing-console-plugin" \
+      name="cluster-observability-operator/distributed-tracing-console-plugin-pf6-rhel9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
+      version="${VERSION}" \
+      release="${VERSION}" \
+      vendor="Red Hat, Inc." \
+      distribution-scope="public" \
+      url="https://github.com/openshift/distributed-tracing-console-plugin" \
+      summary="OpenShift console plugin to view and explore traces" \
+      io.openshift.tags="openshift,observability-ui,distributed tracing" \
+      io.k8s.display-name="OpenShift console distributed tracing plugin" \
+      io.k8s.description="OpenShift console plugin to view and explore traces" \
+      maintainer="Observability UI Team <team-observability-ui@redhat.com>" \
+      description="OpenShift console plugin to view and explore traces"

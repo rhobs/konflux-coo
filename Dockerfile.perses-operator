@@ -10,9 +10,12 @@ WORKDIR /app
 
 COPY perses-operator/ .
 
-RUN make bin
+ENV CGO_ENABLED=1
+ENV GOEXPERIMENT=strictfipsruntime
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:83006d535923fcf1345067873524a3980316f51794f01d8655be55d6e9387183
+RUN make bin BUILD_OPTS="-tags strictfipsruntime"
+
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
 
 LABEL maintainer="Observability UI team <team-observability-ui@redhat.com>"
 
@@ -25,10 +28,10 @@ COPY --from=builder --chown=nobody:nobody /etc/mime.types   /etc/mime.types
 EXPOSE     8080
 ENTRYPOINT [ "/bin/manager" ]
 
-ARG VERSION=v0.3.0
+ARG VERSION=v0.4.0
 LABEL com.redhat.component="coo-perses-operator" \
     name="cluster-observability-operator/perses-rhel9-operator" \
-      cpe="cpe:/a:redhat:cluster_observability_operator:1.4::el9" \
+      cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
     version="${VERSION}" \
     release="${VERSION}" \
     vendor="Red Hat, Inc." \
