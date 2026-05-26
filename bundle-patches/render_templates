@@ -64,7 +64,7 @@ COO_CONSOLE_LOGGING_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-obse
 
 COO_CONSOLE_LOGGING_PLUGIN_PF4_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-pf4-rhel9@sha256:ab269653bb18d7de019f6ac680a827524aa5b590cbc1025ce802ce450d3ddcf3"
 
-COO_CONSOLE_LOGGING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-pf5-rhel9@sha256:ec97b4289adbb161a0616a632c0bb1861e08feb379c9c5fac1a14343f0f5cd91"
+COO_CONSOLE_LOGGING_PLUGIN_PF5_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/logging-console-plugin-pf5-rhel9@sha256:514954ccca49112210ec5c14fe2fbf4e912c3ada25d44a92229c744f3004e749"
 
 COO_CONSOLE_TROUBLESHOOTING_PANEL_PLUGIN_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/troubleshooting-panel-console-plugin-rhel9@sha256:9724ea0ca89b16b3548b289e853b241cfa552bd82a2d1c6ac358a2e0016fc9ae"
 
