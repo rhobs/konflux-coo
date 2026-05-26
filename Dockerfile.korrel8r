@@ -10,7 +10,7 @@ ENV GOEXPERIMENT=strictfipsruntime
 
 RUN go build -tags strictfipsruntime,openssl ./cmd/korrel8r
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:24650313873554b6ba16c1a1b6b9f9142604f6ab735113e1695faf2dd07fdede
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:907b68736aa798b2d38255b7aa070b2a70acb90803864a40f05d0ec47556ddd0
 WORKDIR /
 
 COPY --from=builder /workspace/korrel8r /bin/korrel8r
