@@ -13,7 +13,7 @@ COPY /observability-operator/LICENSE LICENSE
 COPY /bundle-patches/render_templates .
 
 # Get yq from konflux CI
-FROM quay.io/konflux-ci/yq@sha256:ac514eef5aef9f33615871cb19794edb8ad94dcb531b5065f4dc64ab1f5faae5 AS parser
+FROM quay.io/konflux-ci/yq@sha256:58996707d7186ddcd06326353d270ee72e27e8520440578839c1f105a6c53817 AS parser
 
 # Run template rendering
 FROM builder as final
