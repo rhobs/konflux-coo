@@ -18,7 +18,7 @@ RUN OC_PATH=$(which oc); \
     echo ${OC_PATH}; \
     cp ${OC_PATH} /tmp/oc
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:5b74fce9d6e629942a0c6dc0f546c193e70d7f974d999a48c948c53dd3d36362
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:ae09ecc3d754bc1726cbda3e2599cc7839e09fe1cc547ce173cf669b645be3cc
 WORKDIR /
 
 # skip, only needed for must gather
