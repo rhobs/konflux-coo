@@ -26,7 +26,7 @@ RUN GOLDFLAGS="-X github.com/prometheus/common/version.Version=${GIT_VERSION} \
     GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="$GOLDFLAGS" -o alertmanager github.com/prometheus/alertmanager/cmd/alertmanager && \
     GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="$GOLDFLAGS" -o amtool github.com/prometheus/alertmanager/cmd/amtool
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:5b74fce9d6e629942a0c6dc0f546c193e70d7f974d999a48c948c53dd3d36362
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:ae09ecc3d754bc1726cbda3e2599cc7839e09fe1cc547ce173cf669b645be3cc
 
 COPY --from=builder workspace/amtool       /bin/amtool
 COPY --from=builder workspace/alertmanager /bin/alertmanager
