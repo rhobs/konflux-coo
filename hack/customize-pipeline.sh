@@ -219,7 +219,7 @@ configure_trigger() {
         \"bundle-patches/***\".pathChanged() ||
         \"observability-operator/bundle/***\".pathChanged())"
         if [[ $action == "push" ]]; then
-            yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "hack/update-catalog.sh"}' "$file"
+            yq -i '.metadata.annotations += {"build.appstudio.openshift.io/build-nudge-files": "hack/update-catalog-1.5.0.sh"}' "$file"
             yq -i 'with(.spec.params; select(all_c(.name != "build-args")) | . += [{"name": "build-args", "value": ["REGISTRY=registry.redhat.io"]}])' "$file"
         fi
     else
