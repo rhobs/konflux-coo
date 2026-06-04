@@ -172,7 +172,7 @@ VALUE="${COO_PROMETHEUS_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | s
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=thanos=$(RELATED_IMAGE_THANOS)"]' "$csv_file"
 VALUE="${COO_THANOS_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_THANOS", "value": strenv(VALUE)}]' "$csv_file"
 
-sed -i -e 's|--images=perses=.*|"--images=perses=$(RELATED_IMAGE_PERSES)"|' "$csv_file"
+yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=perses=$(RELATED_IMAGE_PERSES)"]' "$csv_file"
 VALUE="${COO_PERSES_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_PERSES", "value": strenv(VALUE)}]' "$csv_file"
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-dashboards=$(RELATED_IMAGE_CONSOLE_DASHBOARDS_PLUGIN)"]' "$csv_file"
