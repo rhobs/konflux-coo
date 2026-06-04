@@ -25,7 +25,7 @@ USER 65532:65532
 
 ENTRYPOINT ["/bin/cluster-health-analyzer"]
 
-ARG VERSION=v1.1.0
+ARG VERSION=v1.1.1
 LABEL com.redhat.component="coo-cluster-health-analyzer" \
       name="cluster-observability-operator/cluster-health-analyzer-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \
