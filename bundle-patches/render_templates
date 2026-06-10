@@ -46,7 +46,7 @@ COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-ten
 
 COO_THANOS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/thanos-rhel9@sha256:c03fb2a9fd457f463f64e1392fba0396c835d76bc10414febdaa6bcc0a6f4a96"
 
-COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel9@sha256:1300e9c10f8b5542ef10ae4b2433c07ecee843095616a6c7a14147e0f5210705"
+COO_ADMISSION_WEBHOOK_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-admission-webhook-rhel9@sha256:8ff24126dfa33570d7511e7fe6eb991a286d6ffb31d556d68a222f8d60c53435"
 
 COO_PO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-rhel9-operator@sha256:fe4bc11197d4b3ba1efb0c6c9914f286bc67e35dac054d1a0027e18de6ecc311"
 
