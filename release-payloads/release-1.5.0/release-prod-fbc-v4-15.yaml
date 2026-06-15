@@ -1,0 +1,95 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: coo-fbc-v4-15-1
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: coo-fbc-v4-15-prod-release-plan
+  snapshot: coo-fbc-v4-15-20260610-202521-000
+  data:
+    releaseNotes:
+      type: RHBA
+      topic: "Cluster Observability Operator 1.5.0 release - fbc 4.15."
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.5.0 release
+      description: |
+        Stable and fast release channels for file-based catalogs
+        With this update, the single stable channel is replaced with two distinct release channels for component output optimization file-based catalogs:
+        * fast: Ships the latest bundle across all OpenShift versions. This matches the previous channel behavior.
+        * stable: Pins different bundle versions per OpenShift version, controlled by the `config/channels.yaml` file.
+        This change enhances the update process by allowing version-specific control, streamlining Konflux component updates with per-version update scripts, and improving organization with separate rendered catalog directories for each OCP version.
+        If you are currently on the stable channel and want to continue receiving rolling releases, you must switch to the fast channel.
+
+        COO-1840
+
+        OTEL semantic convention support in Perses dashboards
+        With this update, monitoring UI Plugin supports OpenTelemetry (OTEL) semantic convention metric naming in dashboards for Perses. Users can toggle between the OTEL semantic convention and the Prometheus naming schema to utilize normalized Prometheus metric names in the application performance monitoring (APM) dashboard. For example, the dashboard supports the `traces_span_metrics_calls_total` metric name for the `traces.span.metrics.calls` OTEL metric.
+        The dashboard metrics will now be named according to the OTEL standard, improving consistency and compatibility with other OTEL tools. As a result, users will benefit from a more seamless experience when using Perses dashboards with OTLP metrics.
+
+        COO-1614
+
+        API server TLS configuration watch controller
+        With this update, the Cluster Observability Operator includes a new controller that watches the cluster API server TLS configuration. When the configuration changes, the controller automatically exits or reconciles all managed resources. The controller can also convert the cluster TLS configuration into a Go TLS configuration.
+        Before this update, the operator lacked a dedicated controller to monitor and automatically reconcile changes in the cluster API server TLS configuration. This enhancement ensures that the Cluster Observability Operator can manage and support the API server TLS configuration in the cluster, preventing potential issues and maintaining a secure deployment.
+
+        COO-1548
+      issues:
+        fixed:
+          - id: COO-1840
+            source: redhat.atlassian.net
+          - id: COO-1614
+            source: redhat.atlassian.net
+          - id: COO-1548
+            source: redhat.atlassian.net
+          - id: COO-1690
+            source: redhat.atlassian.net
+          - id: COO-1493
+            source: redhat.atlassian.net
+          - id: COO-1742
+            source: redhat.atlassian.net
+          - id: COO-1741
+            source: redhat.atlassian.net
+          - id: COO-1740
+            source: redhat.atlassian.net
+          - id: COO-1739
+            source: redhat.atlassian.net
+          - id: COO-1735
+            source: redhat.atlassian.net
+      cves:
+        - key: CVE-2026-42035
+          component: distributed-tracing-console-plugin-pf4-1-5
+        - key: CVE-2026-42035
+          component: distributed-tracing-console-plugin-pf5-1-5
+        - key: CVE-2026-42035
+          component: distributed-tracing-console-plugin-pf6-1-5
+        - key: CVE-2026-42035
+          component: distributed-tracing-console-plugin-1-5
+        - key: CVE-2026-42035
+          component: monitoring-console-plugin-pf5-1-5
+        - key: CVE-2026-42035
+          component: monitoring-console-plugin-pf6-1-5
+        - key: CVE-2026-42035
+          component: monitoring-console-plugin-1-5
+        - key: CVE-2026-40895
+          component: distributed-tracing-console-plugin-pf4-1-5
+        - key: CVE-2026-40895
+          component: distributed-tracing-console-plugin-pf5-1-5
+        - key: CVE-2026-40895
+          component: distributed-tracing-console-plugin-pf6-1-5
+        - key: CVE-2026-40895
+          component: distributed-tracing-console-plugin-1-5
+        - key: CVE-2025-62718
+          component: distributed-tracing-console-plugin-pf4-1-5
+        - key: CVE-2025-62718
+          component: distributed-tracing-console-plugin-pf5-1-5
+        - key: CVE-2025-62718
+          component: distributed-tracing-console-plugin-pf6-1-5
+        - key: CVE-2025-62718
+          component: distributed-tracing-console-plugin-1-5
+        - key: CVE-2025-62718
+          component: monitoring-console-plugin-pf5-1-5
+        - key: CVE-2026-32282
+          component: perses-1-5
