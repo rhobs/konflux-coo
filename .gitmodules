@@ -2,7 +2,7 @@
 	path = alertmanager
 	url = https://github.com/rhobs/obo-alertmanager
 	# make sure to update the web assets fetched in artifacts.lock.yaml to match
-	branch = v0.32.2 # git submodules can't handle tags, but renovate can
+	branch = v0.33.0
 [submodule "prometheus"]
 	path = prometheus
 	url = https://github.com/prometheus/prometheus.git
