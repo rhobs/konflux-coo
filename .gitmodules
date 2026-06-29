@@ -5,8 +5,8 @@
 	branch = v0.32.2 # git submodules can't handle tags, but renovate can
 [submodule "prometheus"]
 	path = prometheus
-	url = https://github.com/prometheus/prometheus.git
-	branch = release-3.11
+	url = https://github.com/rhobs/obo-prometheus
+	branch = v3.11.3
 [submodule "obo-prometheus-operator"]
 	path = obo-prometheus-operator
 	url = https://github.com/rhobs/obo-prometheus-operator
