@@ -2,15 +2,15 @@
 apiVersion: appstudio.redhat.com/v1alpha1
 kind: Release
 metadata:
-  name: coo-fbc-v4-17-20260701-165911-000-2026-07-01-13-23
+  name: coo-fbc-v4-20-20260701-170645-000-2026-07-01-14-03
   namespace: cluster-observabilit-tenant
 spec:
-  releasePlan: coo-fbc-v4-17-staging-release-plan
-  snapshot: coo-fbc-v4-17-20260701-165911-000
+  releasePlan: coo-fbc-v4-20-prod-release-plan
+  snapshot: coo-fbc-v4-20-20260701-170645-000
   data:
     releaseNotes:
       type: RHBA
-      topic: "Cluster Observability Operator 1.5.1 release - fbc 4.17 - staging."
+      topic: "Cluster Observability Operator 1.5.1 release - fbc 4.20."
       references:
         - https://access.redhat.com/security/updates/classification
         - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
