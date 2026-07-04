@@ -1,7 +1,7 @@
 [submodule "alertmanager"]
 	path = alertmanager
 	url = https://github.com/prometheus/alertmanager
-	branch = v0.31.0 # git submodules can't handle tags, but renovate can
+	branch = v0.33.1
 [submodule "prometheus"]
 	path = prometheus
 	url = https://github.com/prometheus/prometheus.git
