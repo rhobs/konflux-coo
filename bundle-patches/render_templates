@@ -34,6 +34,11 @@ yq -i '.metadata.labels += {"operatorframework.io/arch.arm64": "supported"}' "$c
 yq -i '.metadata.labels += {"operatorframework.io/arch.ppc64le": "supported"}' "$csv_file"
 yq -i '.metadata.labels += {"operatorframework.io/arch.s390x": "supported"}' "$csv_file"
 
+# Add NetworkPolicy RBAC for Conforma policy: olm.required_network_policy_rbac_for_operands
+# Required for OCP 5.0 compliance. Conforma checks the CSV declares RBAC for
+# networking.k8s.io/networkpolicies with create, delete, and patch.
+yq -i '(.spec.install.spec.clusterPermissions[0].rules) += [{"apiGroups": ["networking.k8s.io"], "resources": ["networkpolicies"], "verbs": ["create", "delete", "patch"]}]' "$csv_file"
+
 # Konflux Build Pipeline should automatically create PRs to update the SHA images but no always
 # Use 'update-component-images.sh' to update the render_templates file with the latest SHA images
 COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel9-operator@sha256:f03fda8e469303575d31e139bda45a4f87b4542477cfa37b87be7d656db83971"
