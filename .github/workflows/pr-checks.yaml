@@ -2,16 +2,19 @@ name: Pre-submit tests
 on:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     name: Run linters
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - run: make --always-make lint
   verify:
     name: Run verification steps
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - run: make --always-make verify
