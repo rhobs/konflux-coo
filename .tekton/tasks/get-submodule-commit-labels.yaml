@@ -31,7 +31,7 @@ spec:
       description: The submodule version derived from git describe.
   steps:
     - name: use-trusted-artifact
-      image: quay.io/konflux-ci/build-trusted-artifacts:latest@sha256:09c323a74915b57c3eeb28114820d0842e94779dec66bd9f645c959c5b2ea730
+      image: quay.io/konflux-ci/build-trusted-artifacts:latest@sha256:57468215a12094521c7abfdfd1d6b67e79a39fda059e348d6430a91e06e67c78
       args:
         - use
         - $(params.SOURCE-ARTIFACT)=/tekton/home/source
