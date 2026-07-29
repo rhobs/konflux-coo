@@ -15,7 +15,7 @@ ENV GOEXPERIMENT=strictfipsruntime
 ARG TARGETOS TARGETARCH
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH go build -mod=vendor -tags=netgo,slicelabels -o /go/bin/thanos ./cmd/thanos
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:2e8edce823a48e51858f1fad3ff4cbf6875ce8a3f86b9eecf298bc2050c8652a
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:2a98ec380ad75004992b8538380a5003da64442f0a69237ed236859e023c71d0
 WORKDIR /
 
 COPY --from=builder /go/bin/thanos /bin/thanos
