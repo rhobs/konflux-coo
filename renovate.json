@@ -10,5 +10,9 @@
         "managerFilePatterns": [
             "/^Dockerfile\\.[a-zA-Z0-9\\.-]+$/"
         ]
+    },
+    "dependencyDashboard": true,
+    "vulnerabilityAlerts": {
+       "enabled": false
     }
 }
