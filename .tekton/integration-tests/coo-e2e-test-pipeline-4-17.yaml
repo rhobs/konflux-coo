@@ -151,11 +151,8 @@ spec:
                 mountPath: /credentials
             image: registry.redhat.io/openshift4/ose-cli:latest
             script: |
-              echo "Kubeconfig file"
-              cat $KUBECONFIG
-
-              echo "Install operator-sdk and dependencies"
-              dnf -y install jq python3-pip
+              echo ">> Installing operator-sdk and its dependencies"
+              dnf -qy install jq python3-pip
               export OPERATOR_SDK_VERSION=1.36.1
               export ARCH=$(case $(uname -m) in x86_64) echo -n amd64 ;; aarch64) echo -n arm64 ;; *) echo -n $(uname -m) ;; esac)
               export OPERATOR_SDK_DL_URL=https://github.com/operator-framework/operator-sdk/releases/download/v${OPERATOR_SDK_VERSION}
@@ -163,16 +160,16 @@ spec:
               chmod +x /usr/local/bin/operator-sdk
               operator-sdk version
 
-              echo "Create namespace to install COO"
+              echo ">> Creating the $(params.namespace) namespace to install COO"
               oc create namespace $(params.namespace)
               oc label namespaces $(params.namespace) openshift.io/cluster-monitoring=true --overwrite=true
 
-              echo "Get the bundle image"
+              echo ">> Retrieving the bundle image reference"
               echo ${KONFLUX_COMPONENT_NAME}
               export BUNDLE_IMAGE="$(jq -r --arg component_name "$KONFLUX_COMPONENT_NAME" '.components[] | select(.name == $component_name) | .containerImage' <<< "$SNAPSHOT")"
               echo "${BUNDLE_IMAGE}"
 
-              echo "Install COO"
+              echo ">> Installing COO"
               coo_install_ns=$(params.namespace)
               operator-sdk run bundle --timeout=5m --namespace "${coo_install_ns}" "$BUNDLE_IMAGE" --verbose
               oc wait -n "${coo_install_ns}" --for=condition=Available deploy/obo-prometheus-operator --timeout=300s
@@ -229,14 +226,12 @@ spec:
                 value: "/credentials/$(steps.get-kubeconfig.results.kubeconfig)"
             image: registry.redhat.io/openshift4/ose-cli:latest
             script: |
-              echo "Kubeconfig file"
-              cat $KUBECONFIG
               COO_TESTS_BRANCH=$(params.COO_TESTS_BRANCH)
 
-              echo "Intall dependencies"
-              dnf -y install jq vim unzip git make
+              echo ">> Installing dependencies"
+              dnf -qy install jq vim unzip git make
 
-              echo "Install GO"
+              echo "Installing Go"
               curl -Lo /go.tar.gz https://go.dev/dl/go1.25.5.linux-amd64.tar.gz
               tar -C /usr/local -xzf /go.tar.gz
               export PATH=$PATH:/usr/local/go/bin
@@ -251,14 +246,14 @@ spec:
                 && chmod -R 777 /tmp/go/bin $GOPATH $GOCACHE
               go version
 
-              echo "Install kubectl and oc"
+              echo ">> Installing kubectl and oc"
               cd /tmp/ \
               && curl -L -o oc.tar.gz https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest/openshift-client-linux-amd64-rhel8.tar.gz \
               && tar -xvzf oc.tar.gz \
               && chmod +x kubectl oc \
               && mv oc kubectl /usr/local/bin/
 
-              echo "Run e2e tests"
+              echo ">> Running e2e tests from $COO_TESTS_BRANCH branch"
               git clone https://github.com/rhobs/observability-operator.git /tmp/coo-tests
               cd /tmp/coo-tests
               git checkout $COO_TESTS_BRANCH
@@ -266,5 +261,4 @@ spec:
 
               # Execute coo e2e tests
               coo_install_ns=$(params.namespace)
-              echo "/tmp/coo-tests/test/run-e2e.sh --no-deploy --ns \"$coo_install_ns\" --ci"
-              /tmp/coo-tests/test/run-e2e.sh --no-deploy --ns "$coo_install_ns" --ci
+              TEST_TIMEOUT=30m /tmp/coo-tests/test/run-e2e.sh --no-deploy --ns "$coo_install_ns" --ci
