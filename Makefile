@@ -4,6 +4,7 @@ all: verify lint
 .PHONY: verify
 verify:
 	./hack/verify-render-templates.sh
+	./hack/verify-dockerfile-versions.sh
 
 .PHONY: lint
 lint: lint-pipelines
