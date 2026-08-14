@@ -72,3 +72,4 @@ COPY --from=final /workspace/bundle/manifests /manifests/
 COPY --from=final /workspace/bundle/metadata /metadata/
 COPY --from=final /workspace/bundle/tests/scorecard /tests/scorecard/
 COPY --from=final /workspace/LICENSE /licenses/.
+
