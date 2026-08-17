@@ -19,39 +19,39 @@
 [submodule "ui-logging-pf4"]
 	path = ui-logging-pf4
 	url = https://github.com/openshift/logging-view-plugin.git
-	branch = release-coo-ocp-4.12
+	branch = release-coo-1.5-ocp-4.12
 [submodule "ui-logging-pf5"]
 	path = ui-logging-pf5
 	url = https://github.com/openshift/logging-view-plugin.git
-	branch = release-coo-ocp-4.15
+	branch = release-coo-1.5-ocp-4.15
 [submodule "ui-logging"]
 	path = ui-logging
 	url = https://github.com/openshift/logging-view-plugin.git
-	branch = release-coo-ocp-4.22
+	branch = release-coo-1.5-ocp-4.22
 [submodule "ui-dashboards"]
 	path = ui-dashboards
 	url = https://github.com/openshift/console-dashboards-plugin.git
-	branch = release-coo-ocp-4.12
+	branch = release-coo-1.5-ocp-4.12
 [submodule "ui-troubleshooting-panel-pf6"]
 	path = ui-troubleshooting-panel-pf6
 	url = https://github.com/openshift/troubleshooting-panel-console-plugin.git
-	branch = release-coo-ocp-4.19
+	branch = release-coo-1.5-ocp-4.19
 [submodule "ui-troubleshooting-panel"]
 	path = ui-troubleshooting-panel
 	url = https://github.com/openshift/troubleshooting-panel-console-plugin.git
-	branch = release-coo-ocp-4.22
+	branch = release-coo-1.5-ocp-4.22
 [submodule "ui-monitoring-pf5"]
 	path = ui-monitoring-pf5
 	url = https://github.com/openshift/monitoring-plugin.git
-	branch = release-coo-ocp-4.15
+	branch = release-coo-1.5-ocp-4.15
 [submodule "ui-monitoring-pf6"]
 	path = ui-monitoring-pf6
 	url = https://github.com/openshift/monitoring-plugin.git
-	branch = release-coo-ocp-4.19
+	branch = release-coo-1.5-ocp-4.19
 [submodule "ui-monitoring"]
 	path = ui-monitoring
 	url = https://github.com/openshift/monitoring-plugin.git
-	branch = release-coo-ocp-4.22
+	branch = release-coo-1.5-ocp-4.22
 [submodule "thanos"]
 	path = thanos
 	url = https://github.com/openshift/thanos.git
@@ -75,16 +75,16 @@
 [submodule "ui-distributed-tracing-pf4"]
 	path = ui-distributed-tracing-pf4
 	url = https://github.com/openshift/distributed-tracing-console-plugin.git
-	branch = release-coo-ocp-4.12
+	branch = release-coo-1.5-ocp-4.12
 [submodule "ui-distributed-tracing-pf5"]
 	path = ui-distributed-tracing-pf5
 	url = https://github.com/openshift/distributed-tracing-console-plugin.git
-	branch = release-coo-ocp-4.15
+	branch = release-coo-1.5-ocp-4.15
 [submodule "ui-distributed-tracing-pf6"]
 	path = ui-distributed-tracing-pf6
 	url = https://github.com/openshift/distributed-tracing-console-plugin.git
-	branch = release-coo-ocp-4.19
+	branch = release-coo-1.5-ocp-4.19
 [submodule "ui-distributed-tracing"]
 	path = ui-distributed-tracing
 	url = https://github.com/openshift/distributed-tracing-console-plugin.git
-	branch = release-coo-ocp-4.22
+	branch = release-coo-1.5-ocp-4.22
