@@ -3,15 +3,15 @@
 	url = https://github.com/rhobs/obo-alertmanager
 	# Whenever updating the branch ref, make sure to update the web assets
 	# fetched via alertmanager-artifacts.lock.yaml to an equivalent tarball.
-	branch = release-0.32
+	branch = release-0.34
 [submodule "prometheus"]
 	path = prometheus
 	url = https://github.com/rhobs/obo-prometheus
-	branch = release-3.11
+	branch = release-3.14
 [submodule "obo-prometheus-operator"]
 	path = obo-prometheus-operator
 	url = https://github.com/rhobs/obo-prometheus-operator
-	branch = rhobs-rel-0.91.0-rhobs1
+	branch = rhobs-rel-0.93.1-rhobs1
 [submodule "observability-operator"]
 	path = observability-operator
 	url = https://github.com/rhobs/observability-operator
