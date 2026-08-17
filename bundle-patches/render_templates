@@ -80,7 +80,7 @@ COO_KORREL8R_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenan
 
 COO_CLUSTER_HEALTH_ANALYZER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-health-analyzer-rhel9@sha256:8df9de9c266e834ee432c5ef2861eb3a72e39ead79a89b3f16a1d4589e212ec6"
 
-COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9@sha256:dbd4a9b9be9c918f6c40827d0dec0d735edf8bc2adf59f39be967459338d77d7"
+COO_PERSES_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9@sha256:a4baf6c60ff2d41c3136b04502e86fad461e2c88a92a1cbf5d05098ffdb89e06"
 
 COO_PERSES_OPERATOR_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/perses-rhel9-operator@sha256:51d069982f6b0d38e92c9f93e2562d2c07701165a21c9842d07708f8107c5fd0"
 
