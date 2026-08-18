@@ -5,6 +5,9 @@ packages:
   - mailcap
   - python3
   - python3-pyyaml
+  - openssl-libs
+  - ca-certificates
+  - tzdata
 arches:
   - x86_64
   - aarch64

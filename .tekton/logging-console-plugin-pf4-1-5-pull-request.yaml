@@ -53,6 +53,7 @@ spec:
           path: ./ui-logging-pf4
         - type: npm
           path: ./ui-logging-pf4/web
+        - type: rpm
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
