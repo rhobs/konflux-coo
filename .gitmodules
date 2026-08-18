@@ -55,7 +55,7 @@
 [submodule "thanos"]
 	path = thanos
 	url = https://github.com/openshift/thanos.git
-	branch = release-4.22
+	branch = release-5.0
 [submodule "korrel8r"]
 	path = korrel8r
 	url = https://github.com/korrel8r/korrel8r.git

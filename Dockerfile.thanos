@@ -1,4 +1,4 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.25 as builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_1.26 as builder
 
 WORKDIR /workspace
 
@@ -24,7 +24,7 @@ COPY --from=builder /workspace/LICENSE /licenses/.
 USER nobody
 ENTRYPOINT [ "/bin/thanos" ]
 
-ARG VERSION=v0.41.0
+ARG VERSION=v0.42.4
 LABEL com.redhat.component="coo-thanos-container" \
       name="cluster-observability-operator/thanos-rhel9" \
       cpe="cpe:/a:redhat:cluster_observability_operator:1.5::el9" \

@@ -49,9 +49,9 @@ spec:
       value:
         - type: gomod
           path: ./prometheus
-        - type: npm
+        - type: pnpm
           path: ./prometheus/web/ui
-        - type: npm
+        - type: pnpm
           path: ./prometheus/web/ui/react-app
   taskRunSpecs:
     - pipelineTaskName: build-images
