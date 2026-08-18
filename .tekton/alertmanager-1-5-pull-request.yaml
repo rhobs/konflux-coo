@@ -54,6 +54,7 @@ spec:
         - type: generic
           path: ./
           lockfile: ./alertmanager-artifacts.lock.yaml
+        - type: rpm
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.

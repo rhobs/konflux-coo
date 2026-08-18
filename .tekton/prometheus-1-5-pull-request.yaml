@@ -55,6 +55,7 @@ spec:
           path: ./prometheus/web/ui
         - type: npm
           path: ./prometheus/web/ui/react-app
+        - type: rpm
   taskRunSpecs:
     - pipelineTaskName: build-images
       stepSpecs:

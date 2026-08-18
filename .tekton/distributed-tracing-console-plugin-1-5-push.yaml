@@ -51,6 +51,7 @@ spec:
           path: ./ui-distributed-tracing
         - type: npm
           path: ./ui-distributed-tracing/web
+        - type: rpm
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
