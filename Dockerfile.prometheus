@@ -6,6 +6,8 @@ WORKDIR /workspace
 
 COPY prometheus/ .
 
+RUN npx get-pnpm
+
 RUN make assets-compress
 
 FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.25 AS builder
