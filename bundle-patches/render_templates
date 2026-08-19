@@ -38,7 +38,7 @@ yq -i '.metadata.labels += {"operatorframework.io/arch.s390x": "supported"}' "$c
 # Use 'update-component-images.sh' to update the render_templates file with the latest SHA images
 COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/cluster-observability-rhel9-operator@sha256:a346c07a30e04ca1e7a85a99c6582d61bbc735bf51d4edf905417f8bb8bbc90e"
 
-COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:6a1c4b2b7ff3ca41882c8130eed4690299b13afd616b067a592d480bb9b846e0"
+COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:79d5e47384690b0f92f52a9f80435e96ba0b34cae38827fa95d14d5f895b012d"
 
 COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/alertmanager-rhel9@sha256:b350d8d9b93a15e0322711a523882cf1e2a6e405eb62e0d451182cc3e3f09621"
 
