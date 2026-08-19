@@ -53,7 +53,6 @@ declare -A DOCKERFILE_TO_SUBMODULE=(
     [perses]=perses
     [perses-operator]=perses-operator
     [cluster-health-analyzer]=cluster-health-analyzer
-    [ui-dashboards]=ui-dashboards
     [ui-logging]=ui-logging
     [ui-logging-pf4]=ui-logging-pf4
     [ui-logging-pf5]=ui-logging-pf5

@@ -121,7 +121,6 @@ VALUE="${COO_PROMETHEUS_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"pro
 VALUE="${COO_THANOS_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"thanos", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_ADMISSION_WEBHOOK_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"prometheus-operator-admission-webhook", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_PO_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"prometheus-operator", "image": strenv(VALUE)}])' "$csv_file"
-VALUE="${COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-dashboards", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-tracing", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF5_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-tracing-pf5", "image": strenv(VALUE)}])' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_PF6_IMAGE_URL}" yq -i '(.spec.relatedImages += [{"name":"ui-tracing-pf6", "image": strenv(VALUE)}])' "$csv_file"
@@ -174,9 +173,6 @@ VALUE="${COO_THANOS_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | selec
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=perses=$(RELATED_IMAGE_PERSES)"]' "$csv_file"
 VALUE="${COO_PERSES_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_PERSES", "value": strenv(VALUE)}]' "$csv_file"
-
-yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-dashboards=$(RELATED_IMAGE_CONSOLE_DASHBOARDS_PLUGIN)"]' "$csv_file"
-VALUE="${COO_CONSOLE_DASHBOARDS_PLUGIN_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_DASHBOARDS_PLUGIN", "value": strenv(VALUE)}]' "$csv_file"
 
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").args) +=  ["--images=ui-distributed-tracing=$(RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN)"]' "$csv_file"
 VALUE="${COO_CONSOLE_DISTRIBUTED_TRACING_PLUGIN_IMAGE_URL}" yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator").env) += [{"name":"RELATED_IMAGE_CONSOLE_DISTRIBUTED_TRACING_PLUGIN", "value": strenv(VALUE)}]' "$csv_file"

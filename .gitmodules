@@ -28,10 +28,6 @@
 	path = ui-logging
 	url = https://github.com/openshift/logging-view-plugin.git
 	branch = release-coo-1.5-ocp-4.22
-[submodule "ui-dashboards"]
-	path = ui-dashboards
-	url = https://github.com/openshift/console-dashboards-plugin.git
-	branch = release-coo-1.5-ocp-4.12
 [submodule "ui-troubleshooting-panel-pf6"]
 	path = ui-troubleshooting-panel-pf6
 	url = https://github.com/openshift/troubleshooting-panel-console-plugin.git
