@@ -1,7 +1,7 @@
 #!/bin/bash
 # run like so:
 # ./hack/customize-pipeline.sh <pipeline file to customize> [more files]
-branch="release-1.5"
+branch="release-1.6"
 
 add_submodule_tasks() {
     local file="$1"
