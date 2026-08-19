@@ -51,10 +51,9 @@ spec:
       value:
         - type: gomod
           path: ./prometheus
-        - type: npm
-          path: ./prometheus/web/ui
-        - type: npm
-          path: ./prometheus/web/ui/react-app
+        - type: generic
+          path: ./
+          lockfile: ./prometheus-artifacts.lock.yaml
   taskRunSpecs:
     - pipelineTaskName: build-images
       stepSpecs:

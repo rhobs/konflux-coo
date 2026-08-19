@@ -1,0 +1,9 @@
+# When bumping the Prometheus version, update both the download_url and the
+# checksum below to match the new prometheus-web-ui-<version>.tar.gz release
+# asset (see https://github.com/prometheus/prometheus/releases).
+metadata:
+  version: "1.0"
+artifacts:
+  - download_url: "https://github.com/prometheus/prometheus/releases/download/v3.14.0/prometheus-web-ui-3.14.0.tar.gz"
+    checksum: "sha256:be18623c5891d32572998070de0d48522c966b737d9204aa41e0e88d6318e029"
+    filename: "prometheus-web-ui.tar.gz"
