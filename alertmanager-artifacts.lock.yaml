@@ -1,3 +1,6 @@
+# When bumping the Alertmanager version, update both the download_url and the
+# checksum below to match the new alertmanager-web-ui-<version>.tar.gz release
+# asset (see https://github.com/prometheus/alertmanager/releases).
 metadata:
   version: "1.0"
 artifacts:
