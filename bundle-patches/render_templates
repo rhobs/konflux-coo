@@ -40,7 +40,7 @@ COO_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster
 
 COO_CONF_RELOADER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/obo-prometheus-operator-prometheus-config-reloader-rhel9@sha256:6a1c4b2b7ff3ca41882c8130eed4690299b13afd616b067a592d480bb9b846e0"
 
-COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/alertmanager-rhel9@sha256:b350d8d9b93a15e0322711a523882cf1e2a6e405eb62e0d451182cc3e3f09621"
+COO_ALERTMANAGER_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/alertmanager-rhel9@sha256:ca213df6048e9497d08fd30645653fb3cd3586cc3e24f566ed13c0d292f20cdd"
 
 COO_PROMETHEUS_IMAGE_URL="quay.io/redhat-user-workloads/cluster-observabilit-tenant/cluster-observability-operator/prometheus-rhel9@sha256:0c44357a4b7d8664ffb982404c35bb9f72aa1288ddf2e0fce9cabe5e3a5f1f63"
 
