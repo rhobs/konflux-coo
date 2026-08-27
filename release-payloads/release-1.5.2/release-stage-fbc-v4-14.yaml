@@ -1,0 +1,90 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: coo-fbc-v4-14-20260701-170123-000-2026-07-01-13-23
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: coo-fbc-v4-14-staging-release-plan
+  snapshot: coo-fbc-v4-14-20260701-170123-000
+  data:
+    releaseNotes:
+      type: RHSA
+      topic: "Cluster Observability Operator 1.5.2 release - fbc 4.14 - staging."
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.5.2 release
+      description: |
+        This is a bug fix release following v1.5.1
+      issues:
+        fixed:
+          - id: COO-1964
+            source: redhat.atlassian.net
+          - id: COO-2184
+            source: redhat.atlassian.net
+      cves:
+        - key: CVE-2026-41178
+          component: alertmanager-1-5
+        - key: CVE-2026-41178
+          component: cluster-health-analyzer-1-5
+        - key: CVE-2026-29181
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-35469
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-39829
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-39830
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-39831
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-39832
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-41178
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-42508
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-46595
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-46597
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-46600
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-13676
+          component: monitoring-console-plugin-1-5
+        - key: CVE-2026-13676
+          component: monitoring-console-plugin-pf5-1-5
+        - key: CVE-2026-13676
+          component: monitoring-console-plugin-pf6-1-5
+        - key: CVE-2026-73643
+          component: monitoring-console-plugin-pf6-1-5
+        - key: CVE-2026-41178
+          component: obo-prometheus-operator-1-5
+        - key: CVE-2026-41178
+          component: obo-prometheus-operator-admission-webhook-1-5
+        - key: CVE-2026-41178
+          component: obo-prometheus-operator-prometheus-config-reloader-1-5
+        - key: CVE-2026-27145
+          component: perses-1-5
+        - key: CVE-2026-32281
+          component: perses-1-5
+        - key: CVE-2026-41178
+          component: perses-1-5
+        - key: CVE-2026-44740
+          component: perses-1-5
+        - key: CVE-2026-55677
+          component: perses-1-5
+        - key: CVE-2026-56852
+          component: perses-1-5
+        - key: CVE-2026-44740
+          component: perses-operator-1-5
+        - key: CVE-2026-46600
+          component: perses-operator-1-5
+        - key: CVE-2026-55677
+          component: perses-operator-1-5
+        - key: CVE-2026-32285
+          component: prometheus-1-5
+        - key: CVE-2026-41178
+          component: prometheus-1-5
+        - key: CVE-2026-46600
+          component: thanos-1-5
