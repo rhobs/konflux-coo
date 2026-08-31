@@ -34,9 +34,9 @@ update_all_fbc() {
     local release_dir="$1"
     local env="$2"
     
-    local file_pattern="release-stage-fbc-v4-*"
+    local file_pattern="release-stage-fbc-v*"
     if [[ "$env" == "prod" ]]; then
-        file_pattern="release-prod-fbc-v4-*"
+        file_pattern="release-prod-fbc-v*"
     fi
     
     for f in "$release_dir"/$file_pattern; do
