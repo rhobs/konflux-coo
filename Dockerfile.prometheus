@@ -35,7 +35,7 @@ RUN GOLDFLAGS="-X github.com/prometheus/common/version.Version=${GIT_VERSION} \
     GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="$GOLDFLAGS" -o ./prometheus ./cmd/prometheus && \
     GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="$GOLDFLAGS" -o ./promtool ./cmd/promtool
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:8eb2830d0936237fc13a1f2f7e45aecf90d69043380ad167fad0343632937f41
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:d235f607e1d6d833f031db107dc42206e4dd4d5aa9142c43d3771fb7f9bea76a
 
 COPY --from=builder /workspace/prometheus                            /bin/prometheus
 COPY --from=builder /workspace/promtool                              /bin/promtool
