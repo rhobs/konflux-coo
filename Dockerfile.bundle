@@ -1,5 +1,5 @@
 # Builder
-FROM registry.redhat.io/ubi9/ubi-minimal@sha256:d235f607e1d6d833f031db107dc42206e4dd4d5aa9142c43d3771fb7f9bea76a as builder
+FROM registry.redhat.io/ubi9/ubi-minimal@sha256:984df0a2b8d9011d419b0ad260b25f6b74b7ce69ab0595b75522e30f8849f27f as builder
 
 USER root
 
