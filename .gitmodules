@@ -6,8 +6,8 @@
 	branch = release-0.34
 [submodule "prometheus"]
 	path = prometheus
-	url = https://github.com/rhobs/obo-prometheus
-	branch = release-3.14
+	url = https://github.com/openshift/prometheus
+	branch = release-coo-1.5
 [submodule "obo-prometheus-operator"]
 	path = obo-prometheus-operator
 	url = https://github.com/rhobs/obo-prometheus-operator
