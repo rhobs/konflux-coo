@@ -11,7 +11,7 @@ ENV GOEXPERIMENT=strictfipsruntime
 # CGO required for FIPS/check-payload; upstream Makefile uses CGO_ENABLED=0 — build here instead
 RUN go build -tags strictfipsruntime -ldflags "-s -w" -o prometheus-config-reloader ./cmd/prometheus-config-reloader
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:984df0a2b8d9011d419b0ad260b25f6b74b7ce69ab0595b75522e30f8849f27f
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:8ebe2ad8fdf3cab3e5a53c1edc69194c98209cfadab24b884f4ad9ebcf7bbbfc
 
 COPY --from=builder workspace/prometheus-config-reloader /bin/prometheus-config-reloader
 COPY --from=builder /workspace/LICENSE      /licenses/.
