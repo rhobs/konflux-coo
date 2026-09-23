@@ -1,9 +1,9 @@
 [submodule "alertmanager"]
 	path = alertmanager
-	url = https://github.com/rhobs/obo-alertmanager
+	url = https://github.com/openshift/alertmanager
 	# Whenever updating the branch ref, make sure to update the web assets
 	# fetched via alertmanager-artifacts.lock.yaml to an equivalent tarball.
-	branch = release-0.34
+	branch = release-coo-1.5
 [submodule "prometheus"]
 	path = prometheus
 	url = https://github.com/rhobs/obo-prometheus
