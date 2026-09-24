@@ -191,6 +191,10 @@ spec:
             value: $(params.output-image).git
           - name: ociArtifactExpiresAfter
             value: $(params.image-expires-after)
+          - name: depth
+            value: "0"
+          - name: fetchTags
+            value: "true"
         runAfter:
           - init
         taskRef:
