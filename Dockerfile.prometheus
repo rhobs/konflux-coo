@@ -1,4 +1,4 @@
-FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.25 AS builder
+FROM brew.registry.redhat.io/rh-osbs/openshift-golang-builder:rhel_9_golang_1.26 AS builder
 
 WORKDIR /workspace
 
@@ -16,13 +16,12 @@ ARG GIT_VERSION=
 ARG GIT_REVISION=unknown
 ARG GIT_BRANCH=
 
-ENV GOFLAGS='-mod=readonly -tags=builtinassets,netgo,stringlabels'
+ENV GOFLAGS='-mod=vendor -tags=builtinassets,netgo,stringlabels'
 ENV GOTOOLCHAIN=local
 ENV CGO_ENABLED=1
 ENV GOEXPERIMENT=strictfipsruntime
 ENV GONOSUMCHECK=*
 ENV GONOSUMDB=*
-ENV GOWORK=off
 
 RUN GOLDFLAGS="-X github.com/prometheus/common/version.Version=${GIT_VERSION} \
     -X github.com/prometheus/common/version.Revision=${GIT_REVISION} \
