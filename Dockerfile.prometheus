@@ -12,7 +12,7 @@ RUN cp /cachi2/output/deps/generic/prometheus-web-ui.tar.gz ./web/ui/
 RUN tar -xzf ./web/ui/prometheus-web-ui.tar.gz -C ./web/ui/
 RUN make assets-compress PREBUILT_ASSETS_STATIC_DIR=web/ui/static
 
-ARG GIT_VERSION=
+ARG GIT_VERSION=3.14.0
 ARG GIT_REVISION=unknown
 ARG GIT_BRANCH=
 
