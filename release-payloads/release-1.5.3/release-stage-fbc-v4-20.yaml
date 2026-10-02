@@ -1,0 +1,106 @@
+---
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: Release
+metadata:
+  name: coo-fbc-v4-20-20261001-160711-000-2026-10-01-20-30
+  namespace: cluster-observabilit-tenant
+spec:
+  releasePlan: coo-fbc-v4-20-staging-release-plan
+  snapshot: coo-fbc-v4-20-20261001-160711-000
+  data:
+    releaseNotes:
+      type: RHSA
+      topic: "Cluster Observability Operator 1.5.3 release - fbc 4.20 - staging."
+      references:
+        - https://access.redhat.com/security/updates/classification
+        - https://docs.openshift.com/container-platform/latest/observability/cluster_observability_operator/cluster-observability-operator-release-notes.html
+      synopsis: Red Hat build of Cluster Observability Operator 1.5.3 release
+      description: |
+        This is a bug fix release following v1.5.2
+      issues:
+        fixed:
+          - id: COO-1795
+            source: redhat.atlassian.net
+      cves:
+        - key: CVE-2026-56864
+          component: alertmanager-1-5
+        - key: CVE-2026-56865
+          component: alertmanager-1-5
+        - key: CVE-2026-42504
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-56864
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-56865
+          component: cluster-observability-operator-1-5
+        - key: CVE-2026-92000
+          component: distributed-tracing-console-plugin-1-5
+        - key: CVE-2026-39244
+          component: distributed-tracing-console-plugin-pf4-1-5
+        - key: CVE-2026-92000
+          component: distributed-tracing-console-plugin-pf4-1-5
+        - key: CVE-2026-39244
+          component: distributed-tracing-console-plugin-pf5-1-5
+        - key: CVE-2026-92000
+          component: distributed-tracing-console-plugin-pf5-1-5
+        - key: CVE-2026-39244
+          component: distributed-tracing-console-plugin-pf6-1-5
+        - key: CVE-2026-92000
+          component: distributed-tracing-console-plugin-pf6-1-5
+        - key: CVE-2026-100690
+          component: korrel8r-1-5
+        - key: CVE-2026-19534
+          component: logging-console-plugin-pf4-1-5
+        - key: CVE-2026-84961
+          component: logging-console-plugin-pf4-1-5
+        - key: CVE-2026-19534
+          component: monitoring-console-plugin-1-5
+        - key: CVE-2026-59887
+          component: monitoring-console-plugin-1-5
+        - key: CVE-2026-84961
+          component: monitoring-console-plugin-1-5
+        - key: CVE-2026-92000
+          component: monitoring-console-plugin-1-5
+        - key: CVE-2026-19534
+          component: monitoring-console-plugin-pf5-1-5
+        - key: CVE-2026-59887
+          component: monitoring-console-plugin-pf5-1-5
+        - key: CVE-2026-84961
+          component: monitoring-console-plugin-pf5-1-5
+        - key: CVE-2026-92000
+          component: monitoring-console-plugin-pf5-1-5
+        - key: CVE-2026-19534
+          component: monitoring-console-plugin-pf6-1-5
+        - key: CVE-2026-59887
+          component: monitoring-console-plugin-pf6-1-5
+        - key: CVE-2026-84961
+          component: monitoring-console-plugin-pf6-1-5
+        - key: CVE-2026-92000
+          component: monitoring-console-plugin-pf6-1-5
+        - key: CVE-2026-63199
+          component: perses-1-5
+        - key: CVE-2026-71556
+          component: perses-1-5
+        - key: CVE-2026-84445
+          component: perses-1-5
+        - key: CVE-2026-71556
+          component: perses-operator-1-5
+        - key: CVE-2026-45623
+          component: prometheus-1-5
+        - key: CVE-2026-73086
+          component: prometheus-1-5
+        - key: CVE-2026-84445
+          component: prometheus-1-5
+        - key: CVE-2026-41178
+          component: thanos-1-5
+        - key: CVE-2026-75899
+          component: troubleshooting-panel-console-plugin-1-5
+        - key: CVE-2026-75931
+          component: troubleshooting-panel-console-plugin-1-5
+        - key: CVE-2026-75975
+          component: troubleshooting-panel-console-plugin-1-5
+        - key: CVE-2026-76172
+          component: troubleshooting-panel-console-plugin-1-5
+        - key: CVE-2026-84292
+          component: troubleshooting-panel-console-plugin-1-5
+        - key: CVE-2026-84394
+          component: troubleshooting-panel-console-plugin-1-5
