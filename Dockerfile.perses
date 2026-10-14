@@ -24,7 +24,7 @@ RUN make generate
 RUN go build -tags strictfipsruntime -ldflags "-s -w" -o ./bin/perses ./cmd/perses
 RUN go build -tags strictfipsruntime -ldflags "-s -w" -o ./bin/percli ./cmd/percli
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:1d7c5517a4a1a8e2688620b39ee980e82505ca1ab7ae5541b5463120ae9b3897
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:c4c285d42941ebb2bd4da878479008e1e4536bb599aad1dbe568f89de9053661
 
 LABEL maintainer="Observability UI team <team-observability-ui@redhat.com>"
 
