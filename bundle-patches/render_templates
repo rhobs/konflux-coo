@@ -150,6 +150,9 @@ sed -i -e "s|quay.io/openshift-observability-ui/perses-operator.*|${COO_PERSES_O
 yq -i '(.spec.install.spec.deployments[] | select(.name == "perses-operator").spec.template.spec.containers[] | select(.name == "perses-operator") | select(has("args") | not)) += {"args": []}' "$csv_file"
 yq -i '(.spec.install.spec.deployments[] | select(.name == "perses-operator").spec.template.spec.containers[] | select(.name == "perses-operator").args) += ["--tls-cluster-profile", "--tls-configure-operands"]' "$csv_file"
 
+# Set default perses image
+yq -i '(.spec.install.spec.deployments[] | select(.name == "perses-operator").spec.template.spec.containers[] | select(.name == "perses-operator").args) += ["--perses-default-base-image='$COO_PERSES_IMAGE_URL'"]' "$csv_file"
+
 # first add an empty env list to the obo operator container if it doesn't exist
 # already
 yq -i '(.spec.install.spec.deployments[] | select(.name == "observability-operator").spec.template.spec.containers[] | select(.name == "operator") | select(has("env") | not)) += {"env": []}' "$csv_file"
