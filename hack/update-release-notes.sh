@@ -149,23 +149,23 @@ else
     JQL="fixVersion = ${VERSION_ID} ${STATUS_FILTER}"
     echo "Querying Jira: ${JQL}" >&2
 
-    start_at=0
+    next_token=""
     : > "$issues_json"
     while :; do
         body=$(jq -nc \
             --arg jql "$JQL" \
-            --argjson startAt "$start_at" \
+            --arg token "$next_token" \
             --arg rnf "$RN_TYPE_FIELD" \
-            '{jql:$jql, startAt:$startAt, maxResults:100,
-              fields:["key","issuetype","labels","status",$rnf]}')
+            '{jql:$jql, maxResults:100,
+              fields:["key","issuetype","labels","status",$rnf]} +
+             (if $token == "" then {} else {nextPageToken:$token} end)')
         page=$(curl -sSf -u "${JIRA_EMAIL}:${JIRA_API_TOKEN}" \
             -H "Accept: application/json" -H "Content-Type: application/json" \
             -X POST "${JIRA_URL}/rest/api/3/search/jql" -d "$body")
-        echo "$page" | jq -c '.issues[]' >> "$issues_json"
-        total=$(echo "$page" | jq -r '.total // 0')
-        got=$(echo "$page" | jq -r '.issues | length')
-        start_at=$((start_at + got))
-        [[ "$got" -eq 0 || "$start_at" -ge "$total" ]] && break
+        jq -c '.issues[]' <<< "$page" >> "$issues_json"
+        [[ "$(jq -r '.isLast' <<< "$page")" == "true" ]] && break
+        next_token=$(jq -er '.nextPageToken | select(type == "string" and length > 0)' <<< "$page") || \
+            die "Jira search response is missing nextPageToken before the last page"
     done
 fi
 
