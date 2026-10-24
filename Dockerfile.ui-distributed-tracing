@@ -31,7 +31,7 @@ ENV CGO_ENABLED=1
 
 RUN make build-backend BUILD_OPTS="-tags strictfipsruntime"
 
-FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:d235f607e1d6d833f031db107dc42206e4dd4d5aa9142c43d3771fb7f9bea76a
+FROM registry.redhat.io/ubi9/ubi-minimal:latest@sha256:2d4c4551af6831dcd26bbf86108c4385de5183ec8fe6b5868f6f9640fe47f4ed
 
 RUN mkdir /licenses
 COPY ui-distributed-tracing/LICENSE /licenses/.
